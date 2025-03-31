@@ -14,7 +14,7 @@ var builder = RockHopperTestApplicationBuilder
     .AddTestingFramework<Program>();
 
 using var testApplication = await builder.BuildAsync();
-_ = await testApplication.RunAsync();
+Environment.ExitCode = await testApplication.RunAsync();
 ```
 
 Next create a new interface called _ICalculator_ and add the following contents:

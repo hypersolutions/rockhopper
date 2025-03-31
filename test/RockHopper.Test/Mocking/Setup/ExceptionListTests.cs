@@ -16,7 +16,7 @@ public class ExceptionListTests
         
         var value = _exceptionList.GetNext();
 
-        value.ShouldBeNull();//(testException);
+        value.ShouldBe(testException);
     }
     
     [Test]

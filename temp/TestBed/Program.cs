@@ -11,4 +11,4 @@ var builder = RockHopperTestApplicationBuilder
     .AddTransient<ITestSetup, TestSetup>();
 
 using var testApplication = await builder.BuildAsync();
-_ = await testApplication.RunAsync();
+Environment.ExitCode = await testApplication.RunAsync();

@@ -5,4 +5,4 @@ var builder = RockHopperTestApplicationBuilder
     .AddTestingFramework(typeof(Program).Assembly);
 
 using var testApplication = await builder.BuildAsync();
-_ = await testApplication.RunAsync();
+Environment.ExitCode = await testApplication.RunAsync();
