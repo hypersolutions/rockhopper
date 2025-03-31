@@ -11,4 +11,10 @@
       <ProjectReference Include="..\..\src\RockHopper\RockHopper.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="RockHopper.IntTest.testconfig.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
