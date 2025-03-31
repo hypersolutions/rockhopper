@@ -44,4 +44,4 @@ jobs:
         shell: bash
         run: |
           cd test/RockHopper.Test
-          dotnet run --no-restore --no-build
+          dotnet run --no-restore --no-build --configuration Release
