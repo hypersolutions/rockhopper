@@ -1,0 +1,20 @@
+﻿<Solution>
+  <Folder Name="/analyzer/">
+    <Project Path="analyzer\RockHopper.Analyzer\RockHopper.Analyzer.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/scale/">
+    <Project Path="scale\ClassLibrary1SourceProject\ClassLibrary1SourceProject.csproj" Type="Classic C#" />
+    <Project Path="scale\RockHopperScaleTest\RockHopperScaleTest.csproj" Type="Classic C#" />
+    <Project Path="scale\TestGeneratorHelper\TestGeneratorHelper.csproj" Type="Classic C#" />
+    <Project Path="scale\XUnitScaleTest\XUnitScaleTest.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\RockHopper\RockHopper.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/temp/">
+    <Project Path="temp\TestBed\TestBed.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test\RockHopper.Test\RockHopper.Test.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

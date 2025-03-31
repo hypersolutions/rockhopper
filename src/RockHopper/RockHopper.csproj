@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageId>RockHopper</PackageId>
+        <PackageVersion>1.0.0</PackageVersion>
+        <Title>RockHopper</Title>
+        <Authors>Hyper Solutions</Authors>
+        <Description>Integrated test, mock and assetion framework built upon the Microsoft Testing Platform</Description>
+        <PackageTags>Unit test, test, unit, mock, assertion</PackageTags>
+        <PackageProjectUrl>https://www.github.com/hypersolutions/rockhopper</PackageProjectUrl>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Castle.Core" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
+        <PackageReference Include="Microsoft.Testing.Extensions.TrxReport.Abstractions" />
+        <PackageReference Include="Microsoft.Testing.Platform" />
+    </ItemGroup>
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>RockHopper.Test</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="$(MSBuildProjectDirectory)\..\..\analyzer\RockHopper.Analyzer2\bin\$(Configuration)\netstandard2.0\RockHopper.Analyzer.dll"
+              Pack="true" PackagePath="analyzers/dotnet/roslyn4.7/cs" Visible="false" />
+    </ItemGroup>
+
+</Project>

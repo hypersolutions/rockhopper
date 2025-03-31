@@ -1,0 +1,8 @@
+{
+  "SomeConfig": "Hello",
+  "TestData": {
+    "X": 120,
+    "Y": 30,
+    "R": 150
+  }
+}
