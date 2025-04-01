@@ -1,9 +1,8 @@
 ﻿using RockHopper.Assertions;
-using RockHopper.Assertions.Exceptions;
 
 namespace RockHopper.Test.Assertions;
 
-public class ShouldBeComparableLessThanTests
+public class ShouldBeComparableLessThanTests : ShouldBaseTest
 {
     [Test]
     public void ByteLessThan_ShouldBeLessThan_NotThrowException()
@@ -11,7 +10,7 @@ public class ShouldBeComparableLessThanTests
         const byte expected = 20;
         const byte actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<byte>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [(byte)0])]
@@ -21,17 +20,7 @@ public class ShouldBeComparableLessThanTests
         const byte expected = 10;
         var actual = (byte)(expected + delta);
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<byte>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<byte>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -40,7 +29,7 @@ public class ShouldBeComparableLessThanTests
         const short expected = 20;
         const short actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<short>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [(short)0])]
@@ -50,17 +39,7 @@ public class ShouldBeComparableLessThanTests
         const short expected = 10;
         var actual = (short)(expected + delta);
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<short>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<short>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -69,7 +48,7 @@ public class ShouldBeComparableLessThanTests
         const int expected = 20;
         const int actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<int>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0])]
@@ -79,17 +58,7 @@ public class ShouldBeComparableLessThanTests
         const int expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<int>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<int>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -98,7 +67,7 @@ public class ShouldBeComparableLessThanTests
         const uint expected = 20;
         const uint actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<uint>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0u])]
@@ -108,17 +77,7 @@ public class ShouldBeComparableLessThanTests
         const uint expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<uint>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<uint>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -127,7 +86,7 @@ public class ShouldBeComparableLessThanTests
         const long expected = 20;
         const long actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<long>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0])]
@@ -137,17 +96,7 @@ public class ShouldBeComparableLessThanTests
         const long expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<long>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<long>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -156,7 +105,7 @@ public class ShouldBeComparableLessThanTests
         const ulong expected = 20;
         const ulong actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<ulong>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0ul])]
@@ -166,17 +115,7 @@ public class ShouldBeComparableLessThanTests
         const ulong expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<ulong>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<ulong>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -185,7 +124,7 @@ public class ShouldBeComparableLessThanTests
         const float expected = 20;
         const float actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<float>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0f])]
@@ -195,17 +134,7 @@ public class ShouldBeComparableLessThanTests
         const float expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<float>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<float>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -214,7 +143,7 @@ public class ShouldBeComparableLessThanTests
         const double expected = 20;
         const double actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<double>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0d])]
@@ -224,17 +153,7 @@ public class ShouldBeComparableLessThanTests
         const double expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<double>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<double>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
     
     [Test]
@@ -243,7 +162,7 @@ public class ShouldBeComparableLessThanTests
         const decimal expected = 20;
         const decimal actual = 10;
         
-        actual.ShouldBeLessThan(expected);
+        ShouldNotThrow<decimal>(() => actual.ShouldBeLessThan(expected));
     }
     
     [Test(InlineArgs = [0])]
@@ -253,16 +172,6 @@ public class ShouldBeComparableLessThanTests
         const decimal expected = 10;
         var actual = expected + delta;
         
-        try
-        {
-            actual.ShouldBeLessThan(expected);
-        }
-        catch (Exception error) when (error is ExpectedAndActualException<decimal>)
-        {
-            // Passed
-            return;
-        }
-
-        throw new ExpectedAndActualException<decimal>(expected, actual, "Failed to throw expected exception.");
+        ShouldThrow(() => actual.ShouldBeLessThan(expected), expected, actual);
     }
 }
