@@ -1,5 +1,6 @@
 using System.Reflection;
 using RockHopper.Engine.TestNodes;
+using RockHopper.Exceptions;
 using RockHopper.Extensions;
 
 namespace RockHopper.Engine;
@@ -40,7 +41,7 @@ internal sealed class TestNodeExecutor
             
             testClassInstance = Activator.CreateInstance(_testNode.TestClassType);
 
-            var args = _testNode.Args?.Length > 0 ? _testNode.Args : [];
+            var args = ConvertArgs(_testNode.Method, _testNode.Args);
             
             if (_testNode.IsAwaitable)
             {
@@ -59,6 +60,30 @@ internal sealed class TestNodeExecutor
             {
                 await testClassInstance.Dispose();
             }
+        }
+    }
+
+    private static object?[] ConvertArgs(MethodInfo method, object?[]? args)
+    {
+        try
+        {
+            var updatedArgs = new List<object?>();
+
+            if (args is null || args.Length == 0) return [];
+
+            var parameters = method.GetParameters();
+
+            for (var i = 0; i < args.Length; i++)
+            {
+                var value = Convert.ChangeType(args[i], parameters[i].ParameterType);
+                updatedArgs.Add(value);
+            }
+
+            return updatedArgs.ToArray();
+        }
+        catch (Exception error)
+        {
+            throw new TestException($"Unable to change an argument value to the parameter type for {method.Name}.", error);
         }
     }
 }

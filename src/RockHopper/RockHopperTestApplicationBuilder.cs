@@ -112,7 +112,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
                 new BannerCapability(ServiceProviderExtensions.GetRequiredService<IPlatformInformation>(serviceProvider))),
             (_, serviceProvider) => new TestingFramework(extension, serviceProvider, Services.BuildServiceProvider(), assemblies));
         
-        TestHost.AddTestApplicationLifecycleCallbacks(serviceProvider
-            => new DisplayTestApplicationLifecycleCallbacks(serviceProvider.GetOutputDevice()));
+        //TestHost.AddTestApplicationLifecycleCallbacks(serviceProvider
+        //    => new DisplayTestApplicationLifecycleCallbacks(serviceProvider.GetOutputDevice()));
     }
 }

@@ -28,4 +28,49 @@ public static class ShouldBeComparableExtensions
         if (actual?.CompareTo(expected) <= 0)
             throw new ExpectedAndActualException<T>(expected, actual, customErrorMessage);
     }
+    
+    /// <summary>
+    /// Checks that the actual value is greater than or equal to the expected value.
+    /// </summary>
+    /// <param name="actual">Actual value</param>
+    /// <param name="expected">Expected value</param>
+    /// <param name="customErrorMessage">Custom error message</param>
+    /// <typeparam name="T">Type to assert</typeparam>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void ShouldBeGreaterThanOrEqualTo<T>(this T? actual, T? expected, string? customErrorMessage = null) 
+        where T : IComparable<T>?
+    {
+        if (actual?.CompareTo(expected) < 0)
+            throw new ExpectedAndActualException<T>(expected, actual, customErrorMessage);
+    }
+    
+    /// <summary>
+    /// Checks that the actual value is less than the expected value.
+    /// </summary>
+    /// <param name="actual">Actual value</param>
+    /// <param name="expected">Expected value</param>
+    /// <param name="customErrorMessage">Custom error message</param>
+    /// <typeparam name="T">Type to assert</typeparam>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void ShouldBeLessThan<T>(this T? actual, T? expected, string? customErrorMessage = null) 
+        where T : IComparable<T>?
+    {
+        if (actual?.CompareTo(expected) >= 0)
+            throw new ExpectedAndActualException<T>(expected, actual, customErrorMessage);
+    }
+    
+    /// <summary>
+    /// Checks that the actual value is less than or equal to the expected value.
+    /// </summary>
+    /// <param name="actual">Actual value</param>
+    /// <param name="expected">Expected value</param>
+    /// <param name="customErrorMessage">Custom error message</param>
+    /// <typeparam name="T">Type to assert</typeparam>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void ShouldBeLessThanOrEqualTo<T>(this T? actual, T? expected, string? customErrorMessage = null) 
+        where T : IComparable<T>?
+    {
+        if (actual?.CompareTo(expected) > 0)
+            throw new ExpectedAndActualException<T>(expected, actual, customErrorMessage);
+    }
 }
