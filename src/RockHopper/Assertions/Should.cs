@@ -24,7 +24,11 @@ public static class Should
         {
             return error;
         }
-
+        catch (Exception)
+        {
+            // We got here so we should throw an exception to fail the test
+        }
+        
         throw new ExpectedErrorNotThrownException<TException>(customErrorMessage);
     }
     

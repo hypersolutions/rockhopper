@@ -16,8 +16,8 @@ public class ShouldTests
         void Action() => throw new Exception("Test exception");
     }
     
-    /*[Test]
-    public void ActionThatThrowsUnexpectedError_Throw_ReturnsNotThrownException()
+    [Test]
+    public void ActionThatThrowsUnexpectedError_Throw_ThrowsNotThrownException()
     {
         try
         {
@@ -31,5 +31,5 @@ public class ShouldTests
         return;
 
         void Action() => throw new InvalidOperationException("Test exception");
-    }*/
+    }
 }
