@@ -26,4 +26,20 @@ public static class ShouldBeEnumerableExtensions
             throw new ExpectedAndActualException<int>(1, list.Length, customErrorMessage);
         }
     }
+
+    /// <summary>
+    /// Checks that n entries are expected.
+    /// </summary>
+    /// <param name="list">List of items</param>
+    /// <param name="count">Number of entries expected</param>
+    /// <param name="customErrorMessage">Custom error message</param>
+    /// <typeparam name="T">List type</typeparam>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void ShouldContainCount<T>(this T[] list, int count, string? customErrorMessage = null)
+    {
+        if (list.Length != count)
+        {
+            throw new ExpectedAndActualException<int>(count, list.Length, customErrorMessage);
+        }
+    }
 }
