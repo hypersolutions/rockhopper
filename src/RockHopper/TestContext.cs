@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using RockHopper.Engine.TestNodes;
 using RockHopper.Exceptions;
 using RockHopper.Mocking;
 
@@ -69,22 +71,29 @@ public static class TestContext
     
     internal static void VerifyAll() => Current.VerifyAllMocks();
 
-    internal static void AddFixture(IClassFixture fixture) => Current.AddClassFixture(fixture);
-    
-    internal static void AddFixture(ISharedFixture fixture) => Current.AddSharedFixture(fixture);
-    
-    internal static void AddFixture(IAssemblyFixture fixture) => Current.AddAssemblyFixture(fixture);
-
-    internal static void InitCurrent(
-        IServiceProvider serviceProvider, 
-        ITestOutput testOutput, 
-        ITestConfiguration configuration,
-        CancellationToken cancellationToken)
+    internal static void InitCurrent(PlatformTestNode testNode, RockHopper.Engine.ExecutionContext context)
     {
-        Current.TestServiceProvider = serviceProvider;
-        Current.TestOutputPipe = testOutput;
-        Current.TestConfiguration = configuration;
-        Current.TestCancellationToken = cancellationToken;
+        Current.TestServiceProvider = context.ServiceProvider;
+        Current.TestOutputPipe = context.TestOutput;
+        Current.TestConfiguration = context.Configuration;
+        Current.TestCancellationToken = context.CancellationToken;
+        
+        if (context.ClassFixture is not null)
+        {
+            Current.AddClassFixture(context.ClassFixture);
+        }
+        
+        var fixtureAttribute = testNode.TestClassType.GetCustomAttribute<FixtureAttribute>();
+
+        if (fixtureAttribute?.Shared is not null)
+        {
+            Current.AddSharedFixture(context.GetSharedFixture(fixtureAttribute.Shared));
+        }
+
+        foreach (var assemblyFixture in context.AssemblyFixtures)
+        {
+            Current.AddAssemblyFixture(assemblyFixture);
+        }
     }
     
     private sealed class TestInfo

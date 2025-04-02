@@ -3,6 +3,8 @@ using Shouldly;
 using NSubstitute;
 using ClassLibrary1SourceProject;
 
+//[assembly: CollectionBehavior(DisableTestParallelization = true)]
+
 namespace XUnitScaleTest;
 
 public class AddNegativeNumbersTests1

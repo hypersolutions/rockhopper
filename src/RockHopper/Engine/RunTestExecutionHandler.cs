@@ -56,7 +56,8 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
                 {
                     if (initialTestNode.IsSkipped)
                     {
-                        var skippedTestNode = initialTestNode.TransitionToSkipped(initialTestNode.SkipMessage ?? "Test has been skipped");
+                        var message = initialTestNode.SkipMessage ?? "Test has been skipped";
+                        var skippedTestNode = initialTestNode.TransitionToSkipped(message);
                         await PublishAsync(skippedTestNode);
                         continue;
                     }

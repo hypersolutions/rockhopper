@@ -57,6 +57,7 @@ public static class XUnitTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -116,6 +117,7 @@ public static class XUnitTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -175,6 +177,7 @@ public static class XUnitTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -234,6 +237,7 @@ public static class XUnitTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");

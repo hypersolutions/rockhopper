@@ -20,24 +20,7 @@ internal sealed class TestNodeExecutor
         
         try
         {
-            TestContext.InitCurrent(context.ServiceProvider, context.TestOutput, context.Configuration, context.CancellationToken);
-
-            if (context.ClassFixture is not null)
-            {
-                TestContext.AddFixture(context.ClassFixture);
-            }
-
-            var fixtureAttribute = _testNode.TestClassType.GetCustomAttribute<FixtureAttribute>();
-
-            if (fixtureAttribute?.Shared is not null)
-            {
-                TestContext.AddFixture(context.GetSharedFixture(fixtureAttribute.Shared));
-            }
-
-            foreach (var assemblyFixture in context.AssemblyFixtures)
-            {
-                TestContext.AddFixture(assemblyFixture);
-            }
+            TestContext.InitCurrent(_testNode, context);
             
             testClassInstance = Activator.CreateInstance(_testNode.TestClassType);
 
@@ -67,19 +50,11 @@ internal sealed class TestNodeExecutor
     {
         try
         {
-            var updatedArgs = new List<object?>();
-
             if (args is null || args.Length == 0) return [];
 
             var parameters = method.GetParameters();
 
-            for (var i = 0; i < args.Length; i++)
-            {
-                var value = Convert.ChangeType(args[i], parameters[i].ParameterType);
-                updatedArgs.Add(value);
-            }
-
-            return updatedArgs.ToArray();
+            return args.Select((t, i) => Convert.ChangeType(t, parameters[i].ParameterType)).ToArray();
         }
         catch (Exception error)
         {

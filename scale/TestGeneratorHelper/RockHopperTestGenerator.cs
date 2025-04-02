@@ -48,6 +48,7 @@ public static class RockHopperTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -98,6 +99,7 @@ public static class RockHopperTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -148,6 +150,7 @@ public static class RockHopperTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");
@@ -198,6 +201,7 @@ public static class RockHopperTestGenerator
                 testClassCodeBuilder.AppendLine("");
                 testClassCodeBuilder.AppendLine("        result.ShouldBe(r);");
                 testClassCodeBuilder.AppendLine("    }");
+                testClassCodeBuilder.AppendLine();
             }
 
             testClassCodeBuilder.AppendLine("}");

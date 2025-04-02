@@ -1,9 +1,10 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace RockHopper.Analyzer;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.CSharp)] // TODO: Understand this better
 public class UnusedMethodAnalyzer : DiagnosticAnalyzer
 {
     private static readonly LocalizableString _title = GetResource(nameof(Resources.RH001Title));
@@ -14,8 +15,7 @@ public class UnusedMethodAnalyzer : DiagnosticAnalyzer
     private const string Category = "CodeQuality";
     private const string TestAttributeName = "TestAttribute";
 
-    public override System.Collections.Immutable.ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics 
-        => System.Collections.Immutable.ImmutableArray.Create(_diagnosticDescriptor);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [_diagnosticDescriptor];
 
     public override void Initialize(AnalysisContext context)
     {
