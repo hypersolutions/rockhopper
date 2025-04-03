@@ -100,7 +100,9 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
                 }
 
                 if (classFixture is not null)
+                {
                     await classFixture.Dispose();
+                }
             });
 
             await SharedFixtures.DisposeAsync(sharedFixtureInfoList);

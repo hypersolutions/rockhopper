@@ -8,7 +8,9 @@ var builder = RockHopperTestApplicationBuilder
     .AddSharedFixture<TestSharedFixture>()
     .AddAssemblyFixture<TestAssemblyFixture>()
     .AddSingleton<IAssemblySetup, AssemblySetup>()
-    .AddTransient<ITestSetup, TestSetup>();
+    .AddTransient<ITestSetup, TestSetup>()
+    .AddSingleton<IPreTestHook, PreTestHook>()
+    .AddSingleton<IPostTestHook, PostTestHook>();
 
 using var testApplication = await builder.BuildAsync();
 Environment.ExitCode = await testApplication.RunAsync();

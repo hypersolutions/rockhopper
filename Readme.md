@@ -34,6 +34,10 @@ dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --covera
 dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --report-trx-filename test.trx --coverage
 ```
 
+## Hooks
+
+Hooks allow you to add functionality before and after all tests. See the [Hooks](Readme.Hooks.md) guide.
+
 ## Useful
 
 1. GitHub for project: https://github.com/hypersolutions/rockhopper/

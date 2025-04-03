@@ -13,6 +13,7 @@ using Microsoft.Testing.Platform.TestHostControllers;
 using RockHopper.Engine;
 using RockHopper.Engine.Capabilities;
 using RockHopper.Engine.Options;
+using RockHopper.Extensions;
 
 #pragma warning disable TPEXP
 
@@ -117,7 +118,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
                 new BannerCapability(ServiceProviderExtensions.GetRequiredService<IPlatformInformation>(serviceProvider))),
             (_, serviceProvider) => new TestingFramework(_extension, serviceProvider, Services.BuildServiceProvider(), assemblies));
         
-        //TestHost.AddTestApplicationLifecycleCallbacks(serviceProvider
-        //    => new DisplayTestApplicationLifecycleCallbacks(serviceProvider.GetOutputDevice()));
+        TestHost.AddTestApplicationLifecycleCallbacks(serviceProvider
+            => new ApplicationLifecycleCallbacks(_extension, serviceProvider.GetOutputDevice(), Services.BuildServiceProvider()));
     }
 }
