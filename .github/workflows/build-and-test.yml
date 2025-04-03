@@ -44,6 +44,6 @@ jobs:
         shell: bash
         run: |
           cd test/RockHopper.Test
-          dotnet run --no-restore --no-build --configuration Release
+          dotnet run --no-restore --no-build --configuration Release --report-trx --report-trx-filename test.trx --coverage
           cd ../RockHopper.IntTest
-          dotnet run --no-restore --no-build --configuration Release
+          dotnet run --no-restore --no-build --configuration Release --report-trx --report-trx-filename test.trx --coverage

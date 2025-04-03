@@ -54,6 +54,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
         _builder.RegisterTestFramework(capabilitiesFactory, adapterFactory);
         _builder.CommandLine.AddProvider(() => new ParallelTestCommandProvider(_extension));
         _builder.AddTrxReportProvider();
+        _builder.AddCodeCoverageProvider();
         return this;
     }
 

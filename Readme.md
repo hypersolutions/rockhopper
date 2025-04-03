@@ -22,15 +22,16 @@ There are the following extensions:
 
 - Maximum parallel tests
 - TRX support
+- Code coverage
 
 ```bash
-dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx
+dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --coverage
 ```
 
 **OR**
 
 ```bash
-dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --report-trx-filename test.trx
+dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --report-trx-filename test.trx --coverage
 ```
 
 ## Useful
