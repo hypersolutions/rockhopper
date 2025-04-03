@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Testing.Extensions;
 using Microsoft.Testing.Platform.Builder;
 using Microsoft.Testing.Platform.Capabilities.TestFramework;
 using Microsoft.Testing.Platform.CommandLine;
@@ -52,6 +53,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
     {
         _builder.RegisterTestFramework(capabilitiesFactory, adapterFactory);
         _builder.CommandLine.AddProvider(() => new ParallelTestCommandProvider(_extension));
+        _builder.AddTrxReportProvider();
         return this;
     }
 
