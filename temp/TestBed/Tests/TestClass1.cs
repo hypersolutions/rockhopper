@@ -9,11 +9,11 @@ namespace TestBed.Tests;
 [Fixture(Class = typeof(TestClassFixture), Shared = typeof(TestSharedFixture))]
 public class TestClass1
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<Calculator> _calculator = TestContext.Mock<Calculator>();
-    private readonly TestClassFixture _fixture = TestContext.Fixture<TestClassFixture>();
-    private readonly TestSharedFixture _fixture2 = TestContext.Fixture<TestSharedFixture>();
-    private readonly ITestSetup _testSetup = TestContext.Service<ITestSetup>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<Calculator> _calculator = TestContext.Current.Mock<Calculator>();
+    private readonly TestClassFixture _fixture = TestContext.Current.Fixture<TestClassFixture>();
+    private readonly TestSharedFixture _fixture2 = TestContext.Current.Fixture<TestSharedFixture>();
+    private readonly ITestSetup _testSetup = TestContext.Current.GetService<ITestSetup>();
 
     public TestClass1()
     {
@@ -37,7 +37,7 @@ public class TestClass1
     {
         _calculator.Setup(c => c.Add(10, 20)).Returns(30).OccursOnce();
 
-        TestContext.TestOutput.WriteLine("Let's add some numbers!");
+        TestContext.Current.Output.WriteLine("Let's add some numbers!");
         
         var result = _calculatorService.AddNumbers(10, 20);
         

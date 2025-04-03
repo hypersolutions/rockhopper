@@ -7,8 +7,8 @@ namespace RockHopperScaleTest;
 
 public class SubtractNegativeNumbersTests1
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -103,8 +103,8 @@ public class SubtractNegativeNumbersTests1
 }
 public class SubtractNegativeNumbersTests2
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -199,8 +199,8 @@ public class SubtractNegativeNumbersTests2
 }
 public class SubtractNegativeNumbersTests3
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -295,8 +295,8 @@ public class SubtractNegativeNumbersTests3
 }
 public class SubtractNegativeNumbersTests4
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -391,8 +391,8 @@ public class SubtractNegativeNumbersTests4
 }
 public class SubtractNegativeNumbersTests5
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -487,8 +487,8 @@ public class SubtractNegativeNumbersTests5
 }
 public class SubtractNegativeNumbersTests6
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -583,8 +583,8 @@ public class SubtractNegativeNumbersTests6
 }
 public class SubtractNegativeNumbersTests7
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -679,8 +679,8 @@ public class SubtractNegativeNumbersTests7
 }
 public class SubtractNegativeNumbersTests8
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -775,8 +775,8 @@ public class SubtractNegativeNumbersTests8
 }
 public class SubtractNegativeNumbersTests9
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -871,8 +871,8 @@ public class SubtractNegativeNumbersTests9
 }
 public class SubtractNegativeNumbersTests10
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -967,8 +967,8 @@ public class SubtractNegativeNumbersTests10
 }
 public class SubtractNegativeNumbersTests11
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1063,8 +1063,8 @@ public class SubtractNegativeNumbersTests11
 }
 public class SubtractNegativeNumbersTests12
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1159,8 +1159,8 @@ public class SubtractNegativeNumbersTests12
 }
 public class SubtractNegativeNumbersTests13
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1255,8 +1255,8 @@ public class SubtractNegativeNumbersTests13
 }
 public class SubtractNegativeNumbersTests14
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1351,8 +1351,8 @@ public class SubtractNegativeNumbersTests14
 }
 public class SubtractNegativeNumbersTests15
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1447,8 +1447,8 @@ public class SubtractNegativeNumbersTests15
 }
 public class SubtractNegativeNumbersTests16
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1543,8 +1543,8 @@ public class SubtractNegativeNumbersTests16
 }
 public class SubtractNegativeNumbersTests17
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1639,8 +1639,8 @@ public class SubtractNegativeNumbersTests17
 }
 public class SubtractNegativeNumbersTests18
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1735,8 +1735,8 @@ public class SubtractNegativeNumbersTests18
 }
 public class SubtractNegativeNumbersTests19
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1831,8 +1831,8 @@ public class SubtractNegativeNumbersTests19
 }
 public class SubtractNegativeNumbersTests20
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -1927,8 +1927,8 @@ public class SubtractNegativeNumbersTests20
 }
 public class SubtractNegativeNumbersTests21
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2023,8 +2023,8 @@ public class SubtractNegativeNumbersTests21
 }
 public class SubtractNegativeNumbersTests22
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2119,8 +2119,8 @@ public class SubtractNegativeNumbersTests22
 }
 public class SubtractNegativeNumbersTests23
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2215,8 +2215,8 @@ public class SubtractNegativeNumbersTests23
 }
 public class SubtractNegativeNumbersTests24
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2311,8 +2311,8 @@ public class SubtractNegativeNumbersTests24
 }
 public class SubtractNegativeNumbersTests25
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2407,8 +2407,8 @@ public class SubtractNegativeNumbersTests25
 }
 public class SubtractNegativeNumbersTests26
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2503,8 +2503,8 @@ public class SubtractNegativeNumbersTests26
 }
 public class SubtractNegativeNumbersTests27
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2599,8 +2599,8 @@ public class SubtractNegativeNumbersTests27
 }
 public class SubtractNegativeNumbersTests28
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2695,8 +2695,8 @@ public class SubtractNegativeNumbersTests28
 }
 public class SubtractNegativeNumbersTests29
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2791,8 +2791,8 @@ public class SubtractNegativeNumbersTests29
 }
 public class SubtractNegativeNumbersTests30
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2887,8 +2887,8 @@ public class SubtractNegativeNumbersTests30
 }
 public class SubtractNegativeNumbersTests31
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -2983,8 +2983,8 @@ public class SubtractNegativeNumbersTests31
 }
 public class SubtractNegativeNumbersTests32
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3079,8 +3079,8 @@ public class SubtractNegativeNumbersTests32
 }
 public class SubtractNegativeNumbersTests33
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3175,8 +3175,8 @@ public class SubtractNegativeNumbersTests33
 }
 public class SubtractNegativeNumbersTests34
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3271,8 +3271,8 @@ public class SubtractNegativeNumbersTests34
 }
 public class SubtractNegativeNumbersTests35
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3367,8 +3367,8 @@ public class SubtractNegativeNumbersTests35
 }
 public class SubtractNegativeNumbersTests36
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3463,8 +3463,8 @@ public class SubtractNegativeNumbersTests36
 }
 public class SubtractNegativeNumbersTests37
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3559,8 +3559,8 @@ public class SubtractNegativeNumbersTests37
 }
 public class SubtractNegativeNumbersTests38
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3655,8 +3655,8 @@ public class SubtractNegativeNumbersTests38
 }
 public class SubtractNegativeNumbersTests39
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3751,8 +3751,8 @@ public class SubtractNegativeNumbersTests39
 }
 public class SubtractNegativeNumbersTests40
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3847,8 +3847,8 @@ public class SubtractNegativeNumbersTests40
 }
 public class SubtractNegativeNumbersTests41
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -3943,8 +3943,8 @@ public class SubtractNegativeNumbersTests41
 }
 public class SubtractNegativeNumbersTests42
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4039,8 +4039,8 @@ public class SubtractNegativeNumbersTests42
 }
 public class SubtractNegativeNumbersTests43
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4135,8 +4135,8 @@ public class SubtractNegativeNumbersTests43
 }
 public class SubtractNegativeNumbersTests44
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4231,8 +4231,8 @@ public class SubtractNegativeNumbersTests44
 }
 public class SubtractNegativeNumbersTests45
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4327,8 +4327,8 @@ public class SubtractNegativeNumbersTests45
 }
 public class SubtractNegativeNumbersTests46
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4423,8 +4423,8 @@ public class SubtractNegativeNumbersTests46
 }
 public class SubtractNegativeNumbersTests47
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4519,8 +4519,8 @@ public class SubtractNegativeNumbersTests47
 }
 public class SubtractNegativeNumbersTests48
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4615,8 +4615,8 @@ public class SubtractNegativeNumbersTests48
 }
 public class SubtractNegativeNumbersTests49
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]
@@ -4711,8 +4711,8 @@ public class SubtractNegativeNumbersTests49
 }
 public class SubtractNegativeNumbersTests50
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test(InlineArgs = [-10, 9, -19])]
     [Test(InlineArgs = [-9, 8, -17])]

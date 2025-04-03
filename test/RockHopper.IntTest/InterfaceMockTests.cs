@@ -6,8 +6,8 @@ namespace RockHopper.IntTest;
 
 public class InterfaceMockTests
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
 
     [Test]
     public void TwoNumbers_AddNumbers_ReturnsSum()

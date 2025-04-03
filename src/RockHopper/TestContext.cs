@@ -13,7 +13,10 @@ public static class TestContext
 {
     private static readonly AsyncLocal<TestInfo> _testInfo = new();
 
-    private static TestInfo Current
+    /// <summary>
+    /// Gets the current test context instance.
+    /// </summary>
+    public static TestInfo Current
     {
         get
         {
@@ -25,94 +28,86 @@ public static class TestContext
             return _testInfo.Value!;
         }
     }
-
-    /// <summary>
-    /// Provides a output to log messages to.
-    /// </summary>
-    public static ITestOutput TestOutput => Current.TestOutputPipe;
-
-    /// <summary>
-    /// Provides access to configuration.
-    /// </summary>
-    public static ITestConfiguration Configuration => Current.TestConfiguration;
-
-    /// <summary>
-    /// Gets the cancellation token for the test.
-    /// </summary>
-    public static CancellationToken CancellationToken => Current.TestCancellationToken;
-    
-    /// <summary>
-    /// Get the subject constructed by the test framework.
-    /// </summary>
-    /// <typeparam name="TSubject">Subject type</typeparam>
-    /// <returns>Created subject with dependencies mocked</returns>
-    public static TSubject Subject<TSubject>() => Current.CreateSubject<TSubject>();
-
-    /// <summary>
-    /// Gets a mock that was injected into the subject upon creation.
-    /// </summary>
-    /// <typeparam name="TMock">Mock type</typeparam>
-    /// <returns>Mock instance</returns>
-    public static Mock<TMock> Mock<TMock>() where TMock : class => Current.GetMock<TMock>();
-    
-    /// <summary>
-    /// Gets a class or shared fixture.
-    /// </summary>
-    /// <typeparam name="TFixture">Fixture type</typeparam>
-    /// <returns>Fixture instance</returns>
-    public static TFixture Fixture<TFixture>() where TFixture : class => Current.GetFixture<TFixture>();
-
-    /// <summary>
-    /// Gets a registered service to be used in a test.
-    /// </summary>
-    /// <typeparam name="TService">Service to get</typeparam>
-    /// <returns>Service instance or throws exception if not found</returns>
-    public static TService Service<TService>() where TService : class => Current.TestServiceProvider.GetRequiredService<TService>();
     
     internal static void VerifyAll() => Current.VerifyAllMocks();
 
     internal static void InitCurrent(PlatformTestNode testNode, RockHopper.Engine.ExecutionContext context)
     {
-        Current.TestServiceProvider = context.ServiceProvider;
-        Current.TestOutputPipe = context.TestOutput;
-        Current.TestConfiguration = context.Configuration;
-        Current.TestCancellationToken = context.CancellationToken;
+        Current.Services = context.ServiceProvider;
+        Current.Output = context.TestOutput;
+        Current.Configuration = context.Configuration;
+        Current.CancellationToken = context.CancellationToken;
         
         if (context.ClassFixture is not null)
         {
-            Current.AddClassFixture(context.ClassFixture);
+            Current.AddFixture(context.ClassFixture);
         }
         
         var fixtureAttribute = testNode.TestClassType.GetCustomAttribute<FixtureAttribute>();
 
         if (fixtureAttribute?.Shared is not null)
         {
-            Current.AddSharedFixture(context.GetSharedFixture(fixtureAttribute.Shared));
+            Current.AddFixture(context.GetSharedFixture(fixtureAttribute.Shared));
         }
 
         foreach (var assemblyFixture in context.AssemblyFixtures)
         {
-            Current.AddAssemblyFixture(assemblyFixture);
+            Current.AddFixture(assemblyFixture);
         }
     }
     
-    private sealed class TestInfo
+    /// <summary>
+    /// Test context details.
+    /// </summary>
+    public sealed class TestInfo
     {
-        private readonly List<Mock> _mocks = [];
-        private readonly List<object> _fixtures = [];
+        private List<IFixture>? _fixtures;
+        private List<Mock>? _mocks;
 
-        public ITestOutput TestOutputPipe { get; set; } = null!;
-
-        public ITestConfiguration TestConfiguration { get; set; } = null!;
+        internal TestInfo()
+        {
+        }
         
-        public IServiceProvider TestServiceProvider { get; set; } = null!;
+        /// <summary>
+        /// Gets the test output.
+        /// </summary>
+        public ITestOutput Output { get; set; } = null!;
 
-        public CancellationToken TestCancellationToken { get; set; } = CancellationToken.None;
+        /// <summary>
+        /// Gets the test cancellation token.
+        /// </summary>
+        public CancellationToken CancellationToken { get; set; } = CancellationToken.None;
+
+        internal ITestConfiguration Configuration { get; set; } = null!;
         
-        public TSubject CreateSubject<TSubject>()
+        internal IServiceProvider Services { get; set; } = null!;
+        
+        /// <summary>
+        /// Gets a required service from the registered services.
+        /// </summary>
+        /// <typeparam name="TService">Service to get</typeparam>
+        /// <returns>Service instance</returns>
+        public TService GetService<TService>() where TService : notnull => Services.GetRequiredService<TService>();
+
+        /// <summary>
+        /// Gets a config value from the test config file.
+        /// </summary>
+        /// <param name="key">Key of config value such as Abc:Xyz - match JSON path</param>
+        /// <typeparam name="TConfigValue">Value for key</typeparam>
+        /// <returns>Config value</returns>
+        public TConfigValue? GetConfig<TConfigValue>(string key) => Configuration.Get<TConfigValue>(key);
+        
+        /// <summary>
+        /// Gets the test subject with the dependencies mocked.
+        /// </summary>
+        /// <typeparam name="TSubject">Test subject to create</typeparam>
+        /// <returns>Created test subject with mock dependencies</returns>
+        /// <exception cref="TestException">Failed to create the test subject</exception>
+        public TSubject Subject<TSubject>()
         {
             var subjectType = typeof(TSubject);
             var ctor = subjectType.GetConstructors().First();
+            _mocks ??= [];
 
             foreach (var parameter in ctor.GetParameters())
             {
@@ -126,36 +121,39 @@ public static class TestContext
                    ?? throw new TestException($"Unable to create an instance of the subject of type {subjectType}.");
         }
     
-        public Mock<TMock> GetMock<TMock>() where TMock : class
+        /// <summary>
+        /// Gets a mock for the created test subject.
+        /// </summary>
+        /// <typeparam name="TMock">Mock type</typeparam>
+        /// <returns>Mock injected into test service</returns>
+        /// <exception cref="TestException">Failed to find mock</exception>
+        public Mock<TMock> Mock<TMock>() where TMock : class
         {
-            var mock = _mocks.FirstOrDefault(m => m.GetInstance() is TMock) 
+            var mock = _mocks?.FirstOrDefault(m => m.GetInstance() is TMock) 
                        ?? throw new TestException($"Unable to find a mock for {typeof(TMock)}.");
 
             return (Mock<TMock>)mock;
         }
 
-        public TFixture GetFixture<TFixture>() where TFixture : class
+        /// <summary>
+        /// Gets a class, shared or assembly fixture.
+        /// </summary>
+        /// <typeparam name="TFixture">Test fixture</typeparam>
+        /// <returns></returns>
+        /// <exception cref="TestException">Failed to get the fixture</exception>
+        public TFixture Fixture<TFixture>() where TFixture : IFixture
         {
-            var fixture = _fixtures.FirstOrDefault(f => f is TFixture) 
+            var fixture = _fixtures?.FirstOrDefault(f => f is TFixture) 
                           ?? throw new TestException($"Unable to find a fixture for {typeof(TFixture)}.");
 
             return (TFixture)fixture;
         }
 
-        public void VerifyAllMocks() => _mocks.ForEach(m => m.VerifyAll());
+        internal void VerifyAllMocks() => _mocks?.ForEach(m => m.VerifyAll());
 
-        public void AddClassFixture(IClassFixture fixture)
+        internal void AddFixture(IFixture fixture)
         {
-            _fixtures.Add(fixture);
-        }
-        
-        public void AddSharedFixture(ISharedFixture fixture)
-        {
-            _fixtures.Add(fixture);
-        }
-        
-        public void AddAssemblyFixture(IAssemblyFixture fixture)
-        {
+            _fixtures ??= [];
             _fixtures.Add(fixture);
         }
     }

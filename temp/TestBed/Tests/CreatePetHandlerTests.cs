@@ -7,9 +7,9 @@ namespace TestBed.Tests;
 
 public class CreatePetHandlerTests
 {
-    private readonly CreatePetHandler _handler = TestContext.Subject<CreatePetHandler>();
-    private readonly Mock<ICommand<Pet>> _command = TestContext.Mock<ICommand<Pet>>();
-    private readonly Mock<Config> _config = TestContext.Mock<Config>();
+    private readonly CreatePetHandler _handler = TestContext.Current.Subject<CreatePetHandler>();
+    private readonly Mock<ICommand<Pet>> _command = TestContext.Current.Mock<ICommand<Pet>>();
+    private readonly Mock<Config> _config = TestContext.Current.Mock<Config>();
 
     [Test]
     public void WithNameAndType_Save_CreatesPet()

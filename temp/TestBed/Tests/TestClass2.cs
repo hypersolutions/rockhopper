@@ -8,11 +8,11 @@ namespace TestBed.Tests;
 [Fixture(Class = typeof(TestClassFixture), Shared = typeof(TestSharedFixture))]
 public class TestClass2
 {
-    private readonly CalculatorService2 _calculatorService = TestContext.Subject<CalculatorService2>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
-    private readonly TestClassFixture _fixture = TestContext.Fixture<TestClassFixture>();
-    private readonly TestSharedFixture _fixture2 = TestContext.Fixture<TestSharedFixture>();
-    private readonly TestAssemblyFixture _fixture3 = TestContext.Fixture<TestAssemblyFixture>();
+    private readonly CalculatorService2 _calculatorService = TestContext.Current.Subject<CalculatorService2>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
+    private readonly TestClassFixture _fixture = TestContext.Current.Fixture<TestClassFixture>();
+    private readonly TestSharedFixture _fixture2 = TestContext.Current.Fixture<TestSharedFixture>();
+    private readonly TestAssemblyFixture _fixture3 = TestContext.Current.Fixture<TestAssemblyFixture>();
     
     public TestClass2()
     {

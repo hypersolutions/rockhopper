@@ -7,8 +7,8 @@ namespace RockHopper.IntTest;
 
 public class PerTestSetupTeardownTests : IDisposable
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
     private readonly int _constructorCount;
 
     public PerTestSetupTeardownTests()

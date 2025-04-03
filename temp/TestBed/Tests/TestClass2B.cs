@@ -7,8 +7,8 @@ namespace TestBed.Tests;
 
 public class TestClass2B
 {
-    private readonly CalculatorService2 _calculatorService = TestContext.Subject<CalculatorService2>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly CalculatorService2 _calculatorService = TestContext.Current.Subject<CalculatorService2>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
     
     [Test]
     public void TwoNumbers_Add_ReturnsSum()

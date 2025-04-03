@@ -26,7 +26,7 @@ internal sealed class ExecutionContext
     
     internal IList<ISharedFixture> SharedFixtures { get; }
     
-    public IList<IAssemblyFixture> AssemblyFixtures { get; }
+    internal IList<IAssemblyFixture> AssemblyFixtures { get; }
 
     internal ITestOutput TestOutput { get; }
 

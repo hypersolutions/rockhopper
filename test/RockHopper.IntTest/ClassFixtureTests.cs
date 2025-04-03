@@ -7,9 +7,9 @@ namespace RockHopper.IntTest;
 [Fixture(Class = typeof(TwoNumbersClassFixture))]
 public class ClassFixtureTests
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
-    private readonly TwoNumbersClassFixture _classFixture = TestContext.Fixture<TwoNumbersClassFixture>();
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
+    private readonly TwoNumbersClassFixture _classFixture = TestContext.Current.Fixture<TwoNumbersClassFixture>();
 
     [Test]
     public void TwoFixtureNumbers_AddNumbers_ReturnsSum()

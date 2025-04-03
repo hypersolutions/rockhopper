@@ -6,8 +6,8 @@ namespace RockHopper.IntTest;
 
 public class MemberDataTests
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<Calculator> _calculator = TestContext.Mock<Calculator>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<Calculator> _calculator = TestContext.Current.Mock<Calculator>();
 
     [Test(MemberArgs = nameof(Data))]
     public void TwoNumbers_AddNumbers_ReturnsSum(int first, int second, int expectedResult)

@@ -23,9 +23,9 @@ public static class RockHopperTestGenerator
             testClassCodeBuilder.AppendLine($"public class AddPositiveNumbersTests{a}");
             testClassCodeBuilder.AppendLine("{");
             testClassCodeBuilder.AppendLine(
-                "    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();");
+                "    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();");
             testClassCodeBuilder.AppendLine(
-                "    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();");
+                "    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();");
             testClassCodeBuilder.AppendLine();
 
             for (var b = 1; b <= testMethodCount; b++)
@@ -74,9 +74,9 @@ public static class RockHopperTestGenerator
             testClassCodeBuilder.AppendLine($"public class AddNegativeNumbersTests{a}");
             testClassCodeBuilder.AppendLine("{");
             testClassCodeBuilder.AppendLine(
-                "    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();");
+                "    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();");
             testClassCodeBuilder.AppendLine(
-                "    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();");
+                "    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();");
             testClassCodeBuilder.AppendLine();
 
             for (var b = 1; b <= testMethodCount; b++)
@@ -125,9 +125,9 @@ public static class RockHopperTestGenerator
             testClassCodeBuilder.AppendLine($"public class SubtractPositiveNumbersTests{a}");
             testClassCodeBuilder.AppendLine("{");
             testClassCodeBuilder.AppendLine(
-                "    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();");
+                "    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();");
             testClassCodeBuilder.AppendLine(
-                "    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();");
+                "    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();");
             testClassCodeBuilder.AppendLine();
 
             for (var b = 1; b <= testMethodCount; b++)
@@ -176,9 +176,9 @@ public static class RockHopperTestGenerator
             testClassCodeBuilder.AppendLine($"public class SubtractNegativeNumbersTests{a}");
             testClassCodeBuilder.AppendLine("{");
             testClassCodeBuilder.AppendLine(
-                "    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();");
+                "    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();");
             testClassCodeBuilder.AppendLine(
-                "    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();");
+                "    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();");
             testClassCodeBuilder.AppendLine();
 
             for (var b = 1; b <= testMethodCount; b++)

@@ -7,9 +7,9 @@ namespace TestBed.Tests;
 
 public class CreateUserHandlerTests
 {
-    private readonly CreateUserHandler _handler = TestContext.Subject<CreateUserHandler>();
-    private readonly Mock<ICommand<User>> _command = TestContext.Mock<ICommand<User>>();
-    private readonly Mock<Config> _config = TestContext.Mock<Config>();
+    private readonly CreateUserHandler _handler = TestContext.Current.Subject<CreateUserHandler>();
+    private readonly Mock<ICommand<User>> _command = TestContext.Current.Mock<ICommand<User>>();
+    private readonly Mock<Config> _config = TestContext.Current.Mock<Config>();
 
     [Test]
     public void WithName_Save_CreatesUser()

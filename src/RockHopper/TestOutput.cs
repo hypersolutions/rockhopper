@@ -7,15 +7,15 @@ namespace RockHopper;
 
 internal sealed class TestOutput : ITestOutput
 {
-    public StringBuilder Output { get; } = new();
-
-    public void WriteLine(string message) => Output.AppendLine(message);
+    private readonly StringBuilder _output = new();
+    
+    public void WriteLine(string message) => _output.AppendLine(message);
 
     internal void AppendToTestNode(TestNode testNode)
     {
-        if (Output.Length > 0)
+        if (_output.Length > 0)
         {
-            testNode.Properties.Add(new StandardOutputProperty(Output.ToString()));
+            testNode.Properties.Add(new StandardOutputProperty(_output.ToString()));
         }
     }
 }

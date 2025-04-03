@@ -8,8 +8,8 @@ namespace RockHopper.Test.Engine.Options;
 
 public class ParallelTestCommandProviderTests
 {
-    private readonly ParallelTestCommandProvider _provider = TestContext.Subject<ParallelTestCommandProvider>();
-    private readonly Mock<IExtension> _extension = TestContext.Mock<IExtension>();
+    private readonly ParallelTestCommandProvider _provider = TestContext.Current.Subject<ParallelTestCommandProvider>();
+    private readonly Mock<IExtension> _extension = TestContext.Current.Mock<IExtension>();
 
     [Test]
     public void FromExtension_Uid_ReturnsValue()

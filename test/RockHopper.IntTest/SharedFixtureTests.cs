@@ -7,9 +7,9 @@ namespace RockHopper.IntTest;
 [Fixture(Shared = typeof(TwoNumbersSharedFixture))]
 public class SharedFixtureTests1
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<Calculator> _calculator = TestContext.Mock<Calculator>();
-    private readonly TwoNumbersSharedFixture _sharedFixture = TestContext.Fixture<TwoNumbersSharedFixture>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<Calculator> _calculator = TestContext.Current.Mock<Calculator>();
+    private readonly TwoNumbersSharedFixture _sharedFixture = TestContext.Current.Fixture<TwoNumbersSharedFixture>();
 
     [Test]
     public void TwoFixtureNumbers_AddNumbers_ReturnsSum()
@@ -39,9 +39,9 @@ public class SharedFixtureTests1
 [Fixture(Shared = typeof(TwoNumbersSharedFixture))]
 public class SharedFixtureTests2
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
-    private readonly TwoNumbersSharedFixture _sharedFixture = TestContext.Fixture<TwoNumbersSharedFixture>();
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
+    private readonly TwoNumbersSharedFixture _sharedFixture = TestContext.Current.Fixture<TwoNumbersSharedFixture>();
 
     [Test]
     public void TwoFixtureNumbers_AddNumbers_ReturnsSum()

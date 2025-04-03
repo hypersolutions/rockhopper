@@ -6,9 +6,9 @@ namespace RockHopper.IntTest;
 
 public class AssemblyFixtureTests1
 {
-    private readonly CalculatorService _calculatorService = TestContext.Subject<CalculatorService>();
-    private readonly Mock<Calculator> _calculator = TestContext.Mock<Calculator>();
-    private readonly TwoNumbersAssemblyFixture _sharedFixture = TestContext.Fixture<TwoNumbersAssemblyFixture>();
+    private readonly CalculatorService _calculatorService = TestContext.Current.Subject<CalculatorService>();
+    private readonly Mock<Calculator> _calculator = TestContext.Current.Mock<Calculator>();
+    private readonly TwoNumbersAssemblyFixture _sharedFixture = TestContext.Current.Fixture<TwoNumbersAssemblyFixture>();
 
     [Test]
     public void TwoFixtureNumbers_AddNumbers_ReturnsSum()
@@ -37,9 +37,9 @@ public class AssemblyFixtureTests1
 
 public class AssemblyFixtureTests2
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
-    private readonly TwoNumbersAssemblyFixture _sharedFixture = TestContext.Fixture<TwoNumbersAssemblyFixture>();
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
+    private readonly TwoNumbersAssemblyFixture _sharedFixture = TestContext.Current.Fixture<TwoNumbersAssemblyFixture>();
 
     [Test]
     public void TwoFixtureNumbers_AddNumbers_ReturnsSum()

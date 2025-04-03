@@ -8,8 +8,8 @@ namespace TestBed.Tests;
 
 public class AsyncCalculatorTests
 {
-    private readonly AsyncCalculatorService _calculatorService = TestContext.Subject<AsyncCalculatorService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
+    private readonly AsyncCalculatorService _calculatorService = TestContext.Current.Subject<AsyncCalculatorService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
     
     [Test(Skip = "Test the skip")]
     public async Task SkippedTwoNumbers_AddNumbersAsync_ReturnsSum()
@@ -34,9 +34,9 @@ public class AsyncCalculatorTests
     [Test(Description = "Adds two numbers together loaded from config")]
     public async Task TwoNumbersFromConfig_AddNumbersAsync_ReturnsSum()
     {
-        var x = TestContext.Configuration.Get<int>("TestData:X");
-        var y = TestContext.Configuration.Get<int>("TestData:Y");
-        var r = TestContext.Configuration.Get<int>("TestData:R");
+        var x = TestContext.Current.GetConfig<int>("TestData:X");
+        var y = TestContext.Current.GetConfig<int>("TestData:Y");
+        var r = TestContext.Current.GetConfig<int>("TestData:R");
         _calculator.Setup(c => c.Add(x, y)).Returns(r).OccursOnce();
         
         var result = await _calculatorService.AddNumbersAsync(x, y);
@@ -89,7 +89,7 @@ public class AsyncCalculatorTests
     public async Task TwoNumbersWithInvalidArgDataType_Add_ReturnsSum(int x, int y, double r)
     {
         _calculator.Setup(c => c.Add(x, y)).Returns((int)r).OccursOnce();
-        await Task.Delay(1, TestContext.CancellationToken); // Use cancellation token
+        await Task.Delay(1, TestContext.Current.CancellationToken); // Use cancellation token
         
         var result = await _calculatorService.AddNumbersAsync(x, y);
         

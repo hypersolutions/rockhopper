@@ -6,12 +6,12 @@ namespace RockHopper.IntTest;
 
 public class DataFromConfigurationTests
 {
-    private readonly CalculatorAltService _calculatorService = TestContext.Subject<CalculatorAltService>();
-    private readonly Mock<ICalculator> _calculator = TestContext.Mock<ICalculator>();
-    private readonly int _firstNumber = TestContext.Configuration.Get<int>("TestData:X");
-    private readonly int _secondNumber = TestContext.Configuration.Get<int>("TestData:Y");
-    private readonly int _sumResult = TestContext.Configuration.Get<int>("TestData:Sum");
-    private readonly int _differenceResult = TestContext.Configuration.Get<int>("TestData:Difference");
+    private readonly CalculatorAltService _calculatorService = TestContext.Current.Subject<CalculatorAltService>();
+    private readonly Mock<ICalculator> _calculator = TestContext.Current.Mock<ICalculator>();
+    private readonly int _firstNumber = TestContext.Current.GetConfig<int>("TestData:X");
+    private readonly int _secondNumber = TestContext.Current.GetConfig<int>("TestData:Y");
+    private readonly int _sumResult = TestContext.Current.GetConfig<int>("TestData:Sum");
+    private readonly int _differenceResult = TestContext.Current.GetConfig<int>("TestData:Difference");
 
     public DataFromConfigurationTests()
     {

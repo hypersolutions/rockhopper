@@ -7,8 +7,8 @@ namespace TestBed.Tests;
 
 public class TestClass3
 {
-    private readonly ConfigContainer _configContainer = TestContext.Subject<ConfigContainer>();
-    private readonly Mock<IConfig> _config = TestContext.Mock<IConfig>();
+    private readonly ConfigContainer _configContainer = TestContext.Current.Subject<ConfigContainer>();
+    private readonly Mock<IConfig> _config = TestContext.Current.Mock<IConfig>();
 
     [Test]
     public void IncorrectConnection_Connect_ReturnsFalse()
