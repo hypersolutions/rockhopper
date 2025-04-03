@@ -34,10 +34,12 @@ internal sealed class ApplicationLifecycleCallbacks : ITestApplicationLifecycleC
         await LogMessageAsync("RockHopper will run any registered pre-test hooks...");
 
         var preTestHooks = _serviceProvider.GetServices<IPreTestHook>();
-
+        HookContext? context = null;
+        
         foreach (var preTestHook in preTestHooks)
         {
-            await preTestHook.ExecuteAsync(this, _outputDevice);
+            context ??= new HookContext(this, _outputDevice);
+            await preTestHook.ExecuteAsync(context);
         }
         
         await LogMessageAsync("Pre-test hooks complete.");
@@ -48,10 +50,12 @@ internal sealed class ApplicationLifecycleCallbacks : ITestApplicationLifecycleC
         await LogMessageAsync("RockHopper will run any registered post-test hooks...");
 
         var postTestHooks = _serviceProvider.GetServices<IPostTestHook>();
+        HookContext? context = null;
 
         foreach (var postTestHook in postTestHooks)
         {
-            await postTestHook.ExecuteAsync(this, _outputDevice);
+            context ??= new HookContext(this, _outputDevice);
+            await postTestHook.ExecuteAsync(context);
         }
         
         await LogMessageAsync("Post-test hooks complete.");
