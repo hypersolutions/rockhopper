@@ -22,7 +22,7 @@
         </AssemblyAttribute>
     </ItemGroup>
     <ItemGroup>
-        <None Include="$(MSBuildProjectDirectory)\..\..\analyzer\RockHopper.Analyzer2\bin\$(Configuration)\netstandard2.0\RockHopper.Analyzer.dll"
+        <None Include="$(MSBuildProjectDirectory)\..\..\analyzer\RockHopper.Analyzer\bin\$(Configuration)\netstandard2.0\RockHopper.Analyzer.dll"
               Pack="true" PackagePath="analyzers/dotnet/roslyn4.7/cs" Visible="false" />
     </ItemGroup>
 

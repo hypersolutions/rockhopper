@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
+using Microsoft.Testing.Platform.CommandLine;
 using Microsoft.Testing.Platform.Configurations;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestFramework;
 using RockHopper.Engine.Fixtures;
+using RockHopper.Engine.Options;
 using RockHopper.Extensions;
 
 namespace RockHopper.Engine;
@@ -12,6 +14,7 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
     private readonly MessageContext _messageContext;
     private readonly IServiceProvider _provider;
     private readonly IConfiguration _configuration;
+    private readonly ICommandLineOptions _commandLineOptions;
     private readonly Assembly[] _assemblies;
 
     internal RunTestExecutionHandler(
@@ -20,12 +23,14 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
         ExecuteRequestContext context,
         IServiceProvider provider,
         IConfiguration configuration,
+        ICommandLineOptions commandLineOptions,
         params Assembly[] assemblies) 
         : base(dataProducer, context)
     {
         _messageContext = messageContext;
         _provider = provider;
         _configuration = configuration;
+        _commandLineOptions = commandLineOptions;
         _assemblies = assemblies;
     }
 
@@ -42,9 +47,11 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
             var groupedTestNodes = testNodes.GroupBy(n => n.TestClassType);
 
             var configuration = new TestConfigurationProvider(_configuration);
+
+            var dop = GetParallelTestCount();
             
             // TODO: Handle cancel of test run
-            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = dop };
 
             await Parallel.ForEachAsync(groupedTestNodes, parallelOptions, async (groupedTestNode, ct) =>
             {
@@ -109,5 +116,17 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
         {
             Complete();
         }
+    }
+
+    private int GetParallelTestCount()
+    {
+        var dop = 1;
+            
+        if (_commandLineOptions.TryGetOptionArgumentList(ParallelTestCommandProvider.MaxParallelTests, out var values))
+        {
+            dop = int.Parse(values[0]);
+        }
+
+        return dop;
     }
 }

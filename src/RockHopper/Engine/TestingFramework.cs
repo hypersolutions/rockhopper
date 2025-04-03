@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.Testing.Platform.CommandLine;
 using Microsoft.Testing.Platform.Extensions;
 using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.OutputDevice;
@@ -13,6 +14,7 @@ internal sealed class TestingFramework : ITestFramework, IOutputDeviceDataProduc
     private readonly IExtension _extension;
     private readonly IServiceProvider _serviceProvider;
     private readonly IServiceProvider _services;
+    private readonly ICommandLineOptions _commandLineOptions;
     private readonly Assembly[] _assemblies;
     private readonly MessageContext _messageContext;
     
@@ -25,6 +27,7 @@ internal sealed class TestingFramework : ITestFramework, IOutputDeviceDataProduc
         _extension = extension;
         _serviceProvider = serviceProvider;
         _services = services;
+        _commandLineOptions = serviceProvider.GetRequiredService<ICommandLineOptions>();
         _assemblies = assemblies;
         _messageContext = new MessageContext(this, serviceProvider.GetOutputDevice());
     }
@@ -59,7 +62,8 @@ internal sealed class TestingFramework : ITestFramework, IOutputDeviceDataProduc
             case RunTestExecutionRequest:
             {
                 var handler = new RunTestExecutionHandler(
-                    _messageContext, this, context, _services, _serviceProvider.GetConfiguration(), _assemblies);
+                    _messageContext, this, context, _services, _serviceProvider.GetConfiguration(), 
+                    _commandLineOptions, _assemblies);
                 await handler.HandleAsync();
                 break;
             }

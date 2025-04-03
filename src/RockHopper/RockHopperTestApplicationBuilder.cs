@@ -11,7 +11,7 @@ using Microsoft.Testing.Platform.TestHost;
 using Microsoft.Testing.Platform.TestHostControllers;
 using RockHopper.Engine;
 using RockHopper.Engine.Capabilities;
-using RockHopper.Extensions;
+using RockHopper.Engine.Options;
 
 #pragma warning disable TPEXP
 
@@ -20,10 +20,12 @@ namespace RockHopper;
 public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicationBuilder
 {
     private readonly ITestApplicationBuilder _builder;
+    private readonly TestExtension _extension;
 
     private RockHopperTestApplicationBuilder(ITestApplicationBuilder builder)
     {
         _builder = builder;
+        _extension = new TestExtension();
     }
 
     public IServiceCollection Services { get; } = new ServiceCollection();
@@ -49,6 +51,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
         Func<ITestFrameworkCapabilities, IServiceProvider, ITestFramework> adapterFactory)
     {
         _builder.RegisterTestFramework(capabilitiesFactory, adapterFactory);
+        _builder.CommandLine.AddProvider(() => new ParallelTestCommandProvider(_extension));
         return this;
     }
 
@@ -105,12 +108,11 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
     
     private void RegisterTestFrameworkForAssemblies(params Assembly[] assemblies)
     {
-        var extension = new TestExtension();
         RegisterTestFramework(
             serviceProvider  => new TestFrameworkCapabilities(
                 new TrxReportCapability(), 
                 new BannerCapability(ServiceProviderExtensions.GetRequiredService<IPlatformInformation>(serviceProvider))),
-            (_, serviceProvider) => new TestingFramework(extension, serviceProvider, Services.BuildServiceProvider(), assemblies));
+            (_, serviceProvider) => new TestingFramework(_extension, serviceProvider, Services.BuildServiceProvider(), assemblies));
         
         //TestHost.AddTestApplicationLifecycleCallbacks(serviceProvider
         //    => new DisplayTestApplicationLifecycleCallbacks(serviceProvider.GetOutputDevice()));

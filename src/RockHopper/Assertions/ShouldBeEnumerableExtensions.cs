@@ -19,11 +19,13 @@ public static class ShouldBeEnumerableExtensions
     /// <param name="customErrorMessage">Custom error message</param>
     /// <typeparam name="T">List type</typeparam>
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void ShouldBeSingle<T>(this T[] list, string? customErrorMessage = null)
+    public static void ShouldBeSingle<T>(this IEnumerable<T> list, string? customErrorMessage = null)
     {
-        if (list.Length != 1)
+        var count = list.Count();
+        
+        if (count != 1)
         {
-            throw new ExpectedAndActualException<int>(1, list.Length, customErrorMessage);
+            throw new ExpectedAndActualException<int>(1, count, customErrorMessage);
         }
     }
 
