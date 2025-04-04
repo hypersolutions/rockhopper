@@ -40,6 +40,8 @@ internal sealed class RunTestExecutionHandler : TestExecutionHandler
         {
             var testNodes = TestNodeFactory.Create(_assemblies);
 
+            testNodes = Filter.Filter(testNodes);
+            
             var assemblyFixtures = await AssemblyFixtures.BuildAsync(_provider);
 
             var sharedFixtureInfoList = await SharedFixtures.BuildAsync(testNodes, _provider);

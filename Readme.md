@@ -38,6 +38,10 @@ dotnet run --no-build --no-restore --max-parallel-tests 10 --report-trx --report
 
 Hooks allow you to add functionality before and after all tests. See the [Hooks](Readme.Hooks.md) guide.
 
+## Filtering
+
+Filtering of tests is supported using a standard pattern. See the [Filtering](Readme.Filtering.md) guide.
+
 ## Useful
 
 1. GitHub for project: https://github.com/hypersolutions/rockhopper/

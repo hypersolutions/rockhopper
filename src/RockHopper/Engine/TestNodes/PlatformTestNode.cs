@@ -66,4 +66,9 @@ internal sealed class PlatformTestNode : TestNode
     {
         await _testNodeExecutor.ExecuteTestAsync(context);
     }
+
+    internal string GetFullName()
+    {
+        return $"/{TestClassType.Assembly.GetName().Name}/{TestClassType.Namespace}/{TestClassType.Name}/{Method.Name}";
+    }
 }

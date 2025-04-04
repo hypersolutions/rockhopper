@@ -6,6 +6,7 @@ using Microsoft.Testing.Platform.Capabilities.TestFramework;
 using Microsoft.Testing.Platform.CommandLine;
 using Microsoft.Testing.Platform.Configurations;
 using Microsoft.Testing.Platform.Extensions.TestFramework;
+using Microsoft.Testing.Platform.Helpers;
 using Microsoft.Testing.Platform.Logging;
 using Microsoft.Testing.Platform.Services;
 using Microsoft.Testing.Platform.TestHost;
@@ -56,6 +57,7 @@ public sealed class RockHopperTestApplicationBuilder : IRockHopperTestApplicatio
         _builder.CommandLine.AddProvider(() => new ParallelTestCommandProvider(_extension));
         _builder.AddTrxReportProvider();
         _builder.AddCodeCoverageProvider();
+        _builder.AddTreeNodeFilterService(_extension);
         return this;
     }
 

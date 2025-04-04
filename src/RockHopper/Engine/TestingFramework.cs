@@ -6,6 +6,7 @@ using Microsoft.Testing.Platform.Extensions.OutputDevice;
 using Microsoft.Testing.Platform.Extensions.TestFramework;
 using Microsoft.Testing.Platform.Requests;
 using Microsoft.Testing.Platform.Services;
+#pragma warning disable TPEXP
 
 namespace RockHopper.Engine;
 

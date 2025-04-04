@@ -1,5 +1,6 @@
 ﻿using Microsoft.Testing.Platform.Extensions.Messages;
 using Microsoft.Testing.Platform.Extensions.TestFramework;
+using RockHopper.Engine.Filtering;
 using RockHopper.Engine.TestNodes;
 
 namespace RockHopper.Engine;
@@ -15,6 +16,8 @@ internal abstract class TestExecutionHandler
         _context = context;
     }
 
+    protected TestFilter Filter => TestFilter.GetTestFilter(_context);
+    
     protected async Task PublishAsync(PlatformTestNode testNode)
     {
         var data = new TestNodeUpdateMessage(_context.Request.Session.SessionUid, testNode);
