@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main', 'mock-seperation']
   pull_request:
     paths:
       - '.github/**'
@@ -44,6 +44,10 @@ jobs:
         shell: bash
         run: |
           cd test/RockHopper.Test
-          dotnet run --no-restore --no-build --configuration Release --report-trx --report-trx-filename test.trx --coverage
-          cd ../RockHopper.IntTest
-          dotnet run --no-restore --no-build --configuration Release --report-trx --report-trx-filename test.trx --coverage
+          dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.Assertions.Test
+          dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.Mocking.Test
+          dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.XUnit.Test
+          dotnet run --no-restore --no-build --configuration Release

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>RockHopper.XUnit</PackageId>
+        <PackageVersion>1.0.0</PackageVersion>
+        <Title>RockHopper.XUnit</Title>
+        <Authors>Hyper Solutions</Authors>
+        <Description>Extends XUnit.v3 to add support for class under test creation and assertions</Description>
+        <PackageTags>Unit test, test, unit, mock, assertion</PackageTags>
+        <PackageProjectUrl>https://www.github.com/hypersolutions/rockhopper</PackageProjectUrl>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="xunit.v3.extensibility.core" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RockHopper.Mocking\RockHopper.Mocking.csproj" />
+    </ItemGroup>
+    
+</Project>
