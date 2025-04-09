@@ -4,7 +4,13 @@ namespace RockHopper.XUnit;
 
 internal static class ServiceProviderContext
 {
-    internal static IServiceProvider Provider { get; private set; } = null!;
+    static ServiceProviderContext()
+    {
+        var services = new ServiceCollection();
+        Provider = services.BuildServiceProvider();
+    }
+    
+    internal static IServiceProvider Provider { get; private set; }
     
     internal static void Build(IServiceCollection services)
     {
