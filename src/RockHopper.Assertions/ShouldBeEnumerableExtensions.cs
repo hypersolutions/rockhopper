@@ -13,6 +13,23 @@ namespace RockHopper.Assertions;
 public static class ShouldBeEnumerableExtensions
 {
     /// <summary>
+    /// Checks that no entries are expected.
+    /// </summary>
+    /// <param name="list">List of items</param>
+    /// <param name="customErrorMessage">Custom error message</param>
+    /// <typeparam name="T">List type</typeparam>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void ShouldBeEmpty<T>(this IEnumerable<T> list, string? customErrorMessage = null)
+    {
+        var actualCount = list.Count();
+        
+        if (actualCount != 0)
+        {
+            throw new ExpectedAndActualException<int>(0, actualCount, customErrorMessage);
+        }
+    }
+    
+    /// <summary>
     /// Checks that only one entry is expected.
     /// </summary>
     /// <param name="list">List of items</param>
@@ -21,11 +38,11 @@ public static class ShouldBeEnumerableExtensions
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void ShouldBeSingle<T>(this IEnumerable<T> list, string? customErrorMessage = null)
     {
-        var count = list.Count();
+        var actualCount = list.Count();
         
-        if (count != 1)
+        if (actualCount != 1)
         {
-            throw new ExpectedAndActualException<int>(1, count, customErrorMessage);
+            throw new ExpectedAndActualException<int>(1, actualCount, customErrorMessage);
         }
     }
 
@@ -33,15 +50,17 @@ public static class ShouldBeEnumerableExtensions
     /// Checks that n entries are expected.
     /// </summary>
     /// <param name="list">List of items</param>
-    /// <param name="count">Number of entries expected</param>
+    /// <param name="expectedCount">Number of entries expected</param>
     /// <param name="customErrorMessage">Custom error message</param>
     /// <typeparam name="T">List type</typeparam>
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void ShouldContainCount<T>(this T[] list, int count, string? customErrorMessage = null)
+    public static void ShouldContainCount<T>(this IEnumerable<T> list, int expectedCount, string? customErrorMessage = null)
     {
-        if (list.Length != count)
+        var actualCount = list.Count();
+        
+        if (actualCount != expectedCount)
         {
-            throw new ExpectedAndActualException<int>(count, list.Length, customErrorMessage);
+            throw new ExpectedAndActualException<int>(expectedCount, actualCount, customErrorMessage);
         }
     }
 }

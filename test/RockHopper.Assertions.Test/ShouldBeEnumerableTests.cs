@@ -3,6 +3,22 @@ namespace RockHopper.Assertions.Test;
 public class ShouldBeEnumerableTests : ShouldBaseTest
 {
     [Fact]
+    public void NonEmptyArray_ShouldBeEmpty_ThrowsException()
+    {
+        int[] expected = [1, 2];
+        
+        ShouldThrow(() => expected.ShouldBeEmpty(), 0, 2);
+    }
+    
+    [Fact]
+    public void EmptyArray_ShouldBeEmpty_NotThrowException()
+    {
+        int[] expected = [];
+        
+        ShouldNotThrow<int>(() => expected.ShouldBeEmpty());
+    }
+    
+    [Fact]
     public void EmptyArray_ShouldBeSingle_ThrowsException()
     {
         int[] expected = [];

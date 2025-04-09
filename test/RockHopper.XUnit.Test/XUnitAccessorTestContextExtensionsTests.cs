@@ -1,0 +1,122 @@
+using RockHopper.Assertions;
+using RockHopper.Exceptions;
+using RockHopper.Mocking.Exceptions;
+using RockHopper.XUnit.Test.TestSupport;
+
+namespace RockHopper.XUnit.Test;
+
+public class XUnitAccessorTestContextExtensionsTests
+{
+    private readonly ITestContextAccessor _accessor;
+
+    public XUnitAccessorTestContextExtensionsTests(ITestContextAccessor accessor)
+    {
+        _accessor = accessor;
+    }
+    
+    [Fact]
+    public void SubjectWithDependency_CreateSubject_ReturnsNonNullInstance()
+    {
+        var calculatorService = _accessor.Current.CreateSubject<CalculatorService>();
+        
+        calculatorService.ShouldNotBeNull();
+    }
+    
+    [Fact]
+    public void MockWithoutCreatingSubject_GetMock_ThrowsException()
+    {
+        var exception = Should.Throw<TestException>(() => TestContext.Current.GetMock<Calculator>());
+        
+        exception.Message.ShouldBe("No test mocks exist. You need to call the CreateSubject first.");
+    }
+    
+    [Fact]
+    public void SubjectWithDependency_GetMock_ReturnsNonNullMock()
+    {
+        TestContext.Current.CreateSubject<CalculatorService>();
+        
+        var calculator = TestContext.Current.GetMock<Calculator>();
+        
+        calculator.ShouldNotBeNull();
+    }
+    
+    [Fact]
+    public void SubjectWithDependency_CreateSubject_ReturnsSameInstanceForTest()
+    {
+        var calculatorService1 = TestContext.Current.CreateSubject<CalculatorService>();
+        
+        var calculatorService2 = TestContext.Current.CreateSubject<CalculatorService>();
+        
+        calculatorService1.ShouldBe(calculatorService2);
+    }
+    
+    [Fact]
+    public void SubjectWithDependency_GetMock_ReturnsSameInstanceForTest()
+    {
+        TestContext.Current.CreateSubject<CalculatorService>();
+        var calculator1 = TestContext.Current.GetMock<Calculator>();
+        
+        var calculator2 = TestContext.Current.GetMock<Calculator>();
+        
+        calculator1.ShouldBe(calculator2);
+    }
+    
+    [Fact]
+    public void AllMocksUsed_VerifyAll_CallsMockedCalculator()
+    {
+        var calculatorService = TestContext.Current.CreateSubject<CalculatorService>();
+        var calculator = TestContext.Current.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(1, 2)).Returns(3);
+        calculator.Setup(c => c.Add(10, 20)).Returns(30);
+        calculatorService.AddNumbers(1, 2);
+        calculatorService.AddNumbers(10, 20);
+        
+        Should.NotThrow<VerificationException>(() => TestContext.Current.VerifyAll());
+    }
+    
+    [Fact]
+    public void UnusedMock_VerifyAll_ThrowsException()
+    {
+        var calculatorService = TestContext.Current.CreateSubject<CalculatorService>();
+        var calculator = TestContext.Current.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(10, 20)).Returns(30);
+        calculator.Setup(c => c.Add(1, 2)).Returns(30);
+        calculatorService.AddNumbers(10, 20);
+        
+        Should.Throw<VerificationException>(() => TestContext.Current.VerifyAll());
+    }
+    
+    [Fact]
+    public void ReusingAllMocksBetweenVerifies_VerifyAll_Succeeds()
+    {
+        var calculatorService = TestContext.Current.CreateSubject<CalculatorService>();
+        var calculator = TestContext.Current.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(1, 2)).Returns(3);
+        calculator.Setup(c => c.Add(10, 20)).Returns(30);
+        calculatorService.AddNumbers(1, 2);
+        calculatorService.AddNumbers(10, 20);
+        
+        TestContext.Current.VerifyAll();
+        
+        calculatorService.AddNumbers(1, 2);
+        calculatorService.AddNumbers(10, 20);
+        
+        Should.NotThrow<VerificationException>(() => TestContext.Current.VerifyAll());
+    }
+    
+    [Fact]
+    public void NotReusingAllMocksBetweenVerifies_VerifyAll_ThrowsException()
+    {
+        var calculatorService = TestContext.Current.CreateSubject<CalculatorService>();
+        var calculator = TestContext.Current.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(1, 2)).Returns(3);
+        calculator.Setup(c => c.Add(10, 20)).Returns(30);
+        calculatorService.AddNumbers(1, 2);
+        calculatorService.AddNumbers(10, 20);
+        TestContext.Current.VerifyAll();
+        
+        calculatorService.AddNumbers(1, 2);
+        
+        Should.Throw<VerificationException>(() => TestContext.Current.VerifyAll());
+    }
+}

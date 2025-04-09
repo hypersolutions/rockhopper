@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: ['main', 'mock-separation-xunit']
+    branches: ['main']
   pull_request:
     paths:
       - '.github/**'

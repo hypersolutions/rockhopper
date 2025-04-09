@@ -1,4 +1,5 @@
-﻿using RockHopper.Exceptions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RockHopper.Exceptions;
 using RockHopper.Mocking;
 using Xunit;
 // ReSharper disable UnusedParameter.Global - Contract
@@ -50,5 +51,38 @@ public static class XUnitTestContextExtensions
     public static void VerifyAll(this ITestContext context)
     {
         _testInfo.Value?.VerifyAllMocks();
+    }
+
+    /// <summary>
+    /// Gets a service registered with the service provider.
+    /// </summary>
+    /// <param name="context">Extended XUnit context</param>
+    /// <typeparam name="TService">Service to get</typeparam>
+    /// <returns>Service instance if found else null</returns>
+    public static TService? GetService<TService>(this ITestContext context)
+    {
+        return ServiceProviderContext.Provider.GetService<TService>();
+    }
+    
+    /// <summary>
+    /// Gets a list of services registered with the service provider.
+    /// </summary>
+    /// <param name="context">Extended XUnit context</param>
+    /// <typeparam name="TService">Service to get</typeparam>
+    /// <returns>Service instance list</returns>
+    public static IEnumerable<TService> GetServices<TService>(this ITestContext context)
+    {
+        return ServiceProviderContext.Provider.GetServices<TService>();
+    }
+    
+    /// <summary>
+    /// Gets a required service registered with the service provider.
+    /// </summary>
+    /// <param name="context">Extended XUnit context</param>
+    /// <typeparam name="TService">Service to get</typeparam>
+    /// <returns>Service instance else throws an exception</returns>
+    public static TService GetRequiredService<TService>(this ITestContext context) where TService : notnull
+    {
+        return ServiceProviderContext.Provider.GetRequiredService<TService>();
     }
 }
