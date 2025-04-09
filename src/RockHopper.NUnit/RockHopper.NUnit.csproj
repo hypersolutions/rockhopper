@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="NUnit" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\RockHopper.Mocking\RockHopper.Mocking.csproj" />
+    </ItemGroup>
+
+</Project>

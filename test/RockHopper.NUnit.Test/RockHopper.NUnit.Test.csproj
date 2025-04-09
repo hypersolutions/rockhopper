@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <EnableNUnitRunner>true</EnableNUnitRunner>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NUnit" />
+      <PackageReference Include="NUnit.Analyzers">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="NUnit3TestAdapter" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\RockHopper.Assertions\RockHopper.Assertions.csproj" />
+      <ProjectReference Include="..\..\src\RockHopper.NUnit\RockHopper.NUnit.csproj" />
+    </ItemGroup>
+
+</Project>

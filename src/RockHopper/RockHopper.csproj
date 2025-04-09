@@ -18,6 +18,9 @@
             <_Parameter1>RockHopper.Mocking</_Parameter1>
         </AssemblyAttribute>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>RockHopper.NUnit</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
             <_Parameter1>RockHopper.XUnit</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
