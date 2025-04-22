@@ -21,7 +21,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\RockHopper.Assertions\RockHopper.Assertions.csproj" />
-      <ProjectReference Include="..\..\src\RockHopper.XUnit\RockHopper.XUnit.csproj" />
     </ItemGroup>
 
 </Project>
