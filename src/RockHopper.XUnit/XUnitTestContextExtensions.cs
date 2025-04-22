@@ -24,7 +24,7 @@ public static class XUnitTestContextExtensions
     {
         _testInfo.Value ??= new SubjectInfo();
 
-        return _testInfo.Value.Subject<TSubject>();
+        return _testInfo.Value.GetSubject<TSubject>(SubjectBuilderFlags.Constructor, new DefaultConstructorSelector());
     }
     
     /// <summary>
@@ -41,7 +41,7 @@ public static class XUnitTestContextExtensions
             throw new TestException("No test mocks exist. You need to call the CreateSubject first.");
         }
 
-        return _testInfo.Value.Mock<TMock>();
+        return _testInfo.Value.GetMock<TMock>();
     }
 
     /// <summary>
