@@ -18,20 +18,3 @@ public sealed class TestRepository
         return _dbContext.Save(entity, _config.Connection);
     }
 }
-
-public interface ITestDbContext
-{
-    bool Save<TEntity>(TEntity entity, string connection);
-}
-
-public abstract class TestConfig
-{
-    public abstract string Connection { get; }
-}
-
-public interface ITestLogger
-{
-    void Log(string message);
-}
-
-public sealed class TestUser;

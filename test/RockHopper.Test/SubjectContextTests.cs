@@ -1,4 +1,5 @@
 ﻿using RockHopper.Assertions;
+using RockHopper.Enums;
 using RockHopper.Exceptions;
 using RockHopper.Test.Support;
 
