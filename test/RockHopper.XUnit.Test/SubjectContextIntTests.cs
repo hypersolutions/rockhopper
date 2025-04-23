@@ -44,6 +44,17 @@ public class SubjectContextIntTests
     }
     
     [Fact]
+    public async Task SubjectRequestPerTask_GetMock_ReturnsDifferentInstanceForTest()
+    {
+        SubjectContext.Current.CreateSubject<CalculatorService>();
+        var calculator1 = await Task.FromResult(() => SubjectContext.Current.GetMock<Calculator>());
+        
+        var calculator2 = await Task.FromResult(() => SubjectContext.Current.GetMock<Calculator>());
+        
+        calculator1.ShouldNotBe(calculator2);
+    }
+    
+    [Fact]
     public void SubjectWithDependency_GetMock_ReturnsSameInstanceForTest()
     {
         SubjectContext.Current.CreateSubject<CalculatorService>();
