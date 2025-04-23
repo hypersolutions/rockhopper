@@ -2,7 +2,7 @@
 
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'refactor-subject-context']
   pull_request:
     paths:
       - '.github/**'
@@ -46,4 +46,8 @@ jobs:
           cd test/RockHopper.Test
           dotnet run --no-restore --no-build --configuration Release
           cd ../RockHopper.Assertions.Test
+          dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.XUnit.Test
+          dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.NUnit.Test
           dotnet run --no-restore --no-build --configuration Release

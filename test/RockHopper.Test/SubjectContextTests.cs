@@ -16,6 +16,26 @@ public class SubjectContextTests
     }
     
     [Fact]
+    public void RequestCtorMockForDefaultParameters_GetMock_ReturnsMockInstance()
+    {
+        _ = SubjectContext.Current.CreateSubject<TestRepository>();
+        
+        var dbContext = SubjectContext.Current.GetMock<ITestDbContext>();
+        
+        dbContext.ShouldNotBeNull();
+    }
+    
+    [Fact]
+    public void RequestPropMockForDefaultParameters_GetMock_ReturnsNull()
+    {
+        _ = SubjectContext.Current.CreateSubject<TestRepository>();
+
+        var exception = Should.Throw<TestException>(() => SubjectContext.Current.GetMock<ITestLogger>());
+        
+        exception.Message.ShouldBe($"Unable to find a mock for {typeof(ITestLogger)}.");
+    }
+    
+    [Fact]
     public void DefaultParameters_CreateSubject_ReturnsInstanceWithNullPropertyInjected()
     {
         var repository = SubjectContext.Current.CreateSubject<TestRepository>();
@@ -55,5 +75,25 @@ public class SubjectContextTests
         
         repository.ShouldNotBeNull();
         repository.Logger.ShouldNotBeNull();
+    }
+    
+    [Fact]
+    public void SameSubjectRequest_CreateSubject_ReturnsSameInstanceForTest()
+    {
+        var testRepository1 = SubjectContext.Current.CreateSubject<TestRepository>();
+        
+        var testRepository2 = SubjectContext.Current.CreateSubject<TestRepository>();
+        
+        testRepository1.ShouldBe(testRepository2);
+    }
+    
+    [Fact]
+    public async Task SubjectRequestPerTask_CreateSubject_ReturnsDifferentInstanceForTest()
+    {
+        var testRepository1 = await Task.FromResult(() => SubjectContext.Current.CreateSubject<TestRepository>());
+        
+        var testRepository2 = await Task.FromResult(() => SubjectContext.Current.CreateSubject<TestRepository>());
+        
+        testRepository1.ShouldNotBe(testRepository2);
     }
 }
