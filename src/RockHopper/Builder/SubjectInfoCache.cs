@@ -27,34 +27,9 @@ internal static class SubjectInfoCache
         internal SubjectInfoCacheInfo(Type subjectType, ConstructorInfo constructor, SubjectBuilderFlags builderFlags)
         {
             _constructor = constructor;
-            
-            if (HasFlag(builderFlags, SubjectBuilderFlags.Constructor))
-            {
-                foreach (var parameter in constructor.GetParameters())
-                {
-                    _parameters.Add(parameter);
-                }
-            }
-            
-            if (HasFlag(builderFlags, SubjectBuilderFlags.Property))
-            {
-                // Check: Is the constructor parameterless if we are only using property mocks?
-                if (!HasFlag(builderFlags, SubjectBuilderFlags.Constructor))
-                {
-                    if (constructor.GetParameters().Length > 0)
-                    {
-                        throw new TestException(
-                            "There is no parameterless constructor for the subject using property injection only.");
-                    }
-                }
-            
-                const BindingFlags propertyFlags = BindingFlags.Instance | BindingFlags.Public;
 
-                foreach (var property in subjectType.GetProperties(propertyFlags).Where(PropertyTypeIsInterface))
-                {
-                    _properties.Add(property);
-                }
-            }
+            AddParameters(builderFlags);
+            AddProperties(subjectType, builderFlags);
         }
 
         internal TSubject CreateSubject<TSubject>(ParameterMocks parameterMocks, PropertyMocks propertyMocks)
@@ -105,6 +80,41 @@ internal static class SubjectInfoCache
             mocks.AddRange(parameterMocks.Select(m => m.Value));
             mocks.AddRange(propertyMocks.Select(m => m.Value));
             return mocks;
+        }
+
+        private void AddParameters(SubjectBuilderFlags builderFlags)
+        {
+            if (HasFlag(builderFlags, SubjectBuilderFlags.Constructor))
+            {
+                foreach (var parameter in _constructor.GetParameters())
+                {
+                    _parameters.Add(parameter);
+                }
+            }
+        }
+
+        private void AddProperties(Type subjectType, SubjectBuilderFlags builderFlags)
+        {
+            if (HasFlag(builderFlags, SubjectBuilderFlags.Property))
+            {
+                CheckForParameterlessConstructor(builderFlags);
+            
+                const BindingFlags propertyFlags = BindingFlags.Instance | BindingFlags.Public;
+
+                foreach (var property in subjectType.GetProperties(propertyFlags).Where(PropertyTypeIsInterface))
+                {
+                    _properties.Add(property);
+                }
+            }
+        }
+
+        private void CheckForParameterlessConstructor(SubjectBuilderFlags builderFlags)
+        {
+            if (!HasFlag(builderFlags, SubjectBuilderFlags.Constructor) && _constructor.GetParameters().Length > 0)
+            {
+                throw new TestException(
+                    "There is no parameterless constructor for the subject using property injection only.");
+            }
         }
         
         private static bool HasFlag(SubjectBuilderFlags flags, SubjectBuilderFlags expectedFlag)
