@@ -1,0 +1,40 @@
+﻿using RockHopper.Assertions;
+using RockHopper.TestSupport;
+
+// ReSharper disable AccessToModifiedClosure - Deferred test setup example
+
+namespace RockHopper.XUnit.Test;
+
+public class DeferredReturnIntTests
+{
+    [Fact]
+    public void CalculateSumUsingDeferredValue_AddNumbers_ReturnsDeferredSumValue()
+    {
+        var sum = 0;
+        var calculatorService = SubjectContext.Current.CreateSubject<CalculatorService>();
+        var calculator = SubjectContext.Current.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(10, 20)).Returns(() => sum);
+        sum = 30;
+
+        var result = calculatorService.AddNumbers(10, 20);
+        
+        result.ShouldBe(sum);
+    }
+    
+    [Fact]
+    public void RepeatDeferredValue_Debit_ThrowsExceptionOnSecondReturnCall()
+    {
+        const bool canDebit = true;
+        const bool cannotDebit = false;
+        var account = new Account { Number = "12345678", Value = 50 };
+        var accountService = SubjectContext.Current.CreateSubject<AccountService>();
+        var accountManager = SubjectContext.Current.GetMock<IAccountManager>();
+        accountManager.Setup(m => m.Find(account.Number)).Returns(account, account);
+        accountManager.Setup(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
+
+        Should.NotThrow<Exception>(() => accountService.Debit(account.Number, 50));
+        
+        var exception = Should.Throw<Exception>(() => accountService.Debit(account.Number, 50));
+        exception.Message.ShouldBe("Not enough money in account to debit amount.");
+    }
+}

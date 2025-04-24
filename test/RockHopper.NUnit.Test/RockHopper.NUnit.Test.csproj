@@ -18,6 +18,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\RockHopper.Assertions\RockHopper.Assertions.csproj" />
       <ProjectReference Include="..\..\src\RockHopper\RockHopper.csproj" />
+      <ProjectReference Include="..\RockHopper.TestSupport\RockHopper.TestSupport.csproj" />
     </ItemGroup>
 
 </Project>

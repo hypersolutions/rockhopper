@@ -1,7 +1,7 @@
 using RockHopper.Assertions;
 using RockHopper.Exceptions;
 using RockHopper.Mocking.Exceptions;
-using RockHopper.XUnit.Test.TestSupport;
+using RockHopper.TestSupport;
 
 namespace RockHopper.XUnit.Test;
 

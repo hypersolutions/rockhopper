@@ -13,7 +13,7 @@ internal static class SubjectInfoCache
     internal static SubjectInfoCacheInfo Get<TSubject>(IConstructorSelector constructorSelector,
         SubjectBuilderFlags builderFlags)
     {
-        var key = $"{nameof(TSubject)}.{constructorSelector.GetType().FullName}.{builderFlags}";
+        var key = $"{typeof(TSubject).FullName}.{constructorSelector.GetType().FullName}.{builderFlags}";
         return _bag.GetOrAdd(key, _ => new SubjectInfoCacheInfo(
             typeof(TSubject), constructorSelector.GetConstructor<TSubject>(), builderFlags));
     }

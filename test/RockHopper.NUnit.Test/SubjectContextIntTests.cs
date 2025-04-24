@@ -2,7 +2,7 @@ using NUnit.Framework;
 using RockHopper.Assertions;
 using RockHopper.Exceptions;
 using RockHopper.Mocking.Exceptions;
-using RockHopper.NUnit.Test.TestSupport;
+using RockHopper.TestSupport;
 
 namespace RockHopper.NUnit.Test;
 

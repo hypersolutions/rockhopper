@@ -1,4 +1,4 @@
-﻿namespace RockHopper.NUnit.Test.TestSupport;
+﻿namespace RockHopper.TestSupport;
 
 public abstract class Calculator
 {

@@ -29,10 +29,10 @@ internal sealed class SubjectInfo
                 var parameterMocks = subjectInfoCache.BuildParameterMocks();
                 var propertyMocks = subjectInfoCache.BuildPropertyMocks();
         
-                _subject = subjectInfoCache.CreateSubject<TSubject>(parameterMocks, propertyMocks)!;
+                _subject = subjectInfoCache.CreateSubject<TSubject>(parameterMocks, propertyMocks);
                 _mocks = subjectInfoCache.BuildMocks(parameterMocks, propertyMocks);
         
-                return (TSubject)_subject;
+                return (TSubject)_subject!;
             }
             finally
             {
