@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using RockHopper.Assertions;
+using RockHopper.Builder;
 using RockHopper.Mocking;
 using RockHopper.TestSupport;
 
@@ -7,9 +8,15 @@ namespace RockHopper.NUnit.Test;
 
 public class OutAndRefParameterTests
 {
-    private readonly ConverterService _converterService = SubjectContext.Current.CreateSubject<ConverterService>();
-    private readonly Mock<IIntConverter> _intConverter = SubjectContext.Current.GetMock<IIntConverter>();
-    
+    private readonly SubjectInfo<ConverterService> _subjectInfo = SubjectBuilder.Create<ConverterService>();
+    private readonly ConverterService _converterService;
+    private readonly Mock<IIntConverter> _intConverter;
+
+    public OutAndRefParameterTests()
+    {
+        _converterService = _subjectInfo.Value;
+        _intConverter = _subjectInfo.GetMock<IIntConverter>();
+    }
     [Test]
     public void ValidIntAsString_GetValue_ReturnsIntResult()
     {
