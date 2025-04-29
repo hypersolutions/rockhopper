@@ -74,7 +74,7 @@ internal static class TestSubjectCache
             return propertyMocks;
         }
 
-        internal List<Mock> BuildMocks(ParameterMocks parameterMocks, PropertyMocks propertyMocks)
+        internal List<Mock> MergeMocks(ParameterMocks parameterMocks, PropertyMocks propertyMocks)
         {
             List<Mock> mocks = [];
             mocks.AddRange(parameterMocks.Select(m => m.Value));

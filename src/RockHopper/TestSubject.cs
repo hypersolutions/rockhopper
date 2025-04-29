@@ -28,7 +28,7 @@ public sealed class TestSubject<TSubject>
         var propertyMocks = testSubjectCache.BuildPropertyMocks();
         
         Value = testSubjectCache.CreateSubject<TSubject>(parameterMocks, propertyMocks);
-        _mocks = testSubjectCache.BuildMocks(parameterMocks, propertyMocks);
+        _mocks = testSubjectCache.MergeMocks(parameterMocks, propertyMocks);
     }
     
     /// <summary>

@@ -27,10 +27,6 @@ public sealed class Mock<T> : Mock where T : class
     public Mock()
     {
         var mockType = typeof(T);
-        
-        if (!(mockType.IsInterface || mockType.IsAbstract))
-            throw new InvalidOperationException($"Cannot create an mock for the type {mockType}");
-        
         var interceptor = new MockInterceptor(_setupInfoList);
         var proxyGenerator = new ProxyGenerator();
         Object = mockType.IsInterface

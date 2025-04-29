@@ -7,12 +7,12 @@ namespace RockHopper.Enums;
 public enum SubjectBuilderFlags
 {
     /// <summary>
-    /// Create mocks for interfaces defined in the constructor.
+    /// Create mocks for types defined in the constructor.
     /// </summary>
     Constructor = 1,
     
     /// <summary>
-    /// Create mocks for interfaces defined on any public properties that support set or init.
+    /// Create mocks for types defined on any public properties that support set or init.
     /// </summary>
     Property = 2,
     
