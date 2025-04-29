@@ -23,12 +23,12 @@ public sealed class TestSubject<TSubject>
         IConstructorSelector? constructorSelector = null)
     {
         constructorSelector ??= new DefaultConstructorSelector();
-        var subjectInfoCache = SubjectInfoCache.Get<TSubject>(constructorSelector, builderFlags);
-        var parameterMocks = subjectInfoCache.BuildParameterMocks();
-        var propertyMocks = subjectInfoCache.BuildPropertyMocks();
+        var testSubjectCache = TestSubjectCache.Get<TSubject>(constructorSelector, builderFlags);
+        var parameterMocks = testSubjectCache.BuildParameterMocks();
+        var propertyMocks = testSubjectCache.BuildPropertyMocks();
         
-        Value = subjectInfoCache.CreateSubject<TSubject>(parameterMocks, propertyMocks);
-        _mocks = subjectInfoCache.BuildMocks(parameterMocks, propertyMocks);
+        Value = testSubjectCache.CreateSubject<TSubject>(parameterMocks, propertyMocks);
+        _mocks = testSubjectCache.BuildMocks(parameterMocks, propertyMocks);
     }
     
     /// <summary>
@@ -51,8 +51,8 @@ public sealed class TestSubject<TSubject>
     }
 
     /// <summary>
-    /// Verifies all the mocks have had the setups called as per strict mock behaviour. This will also reset the visit counts
-    /// and any return/exception sequences, allowing you to reuse during the test.
+    /// Verifies all the mocks have had the setups called as per strict mock behaviour. This will also reset the visit
+    /// counts and any return/exception sequences, allowing you to reuse during the test.
     /// </summary>
     public void VerifyAll()
     {
@@ -60,7 +60,7 @@ public sealed class TestSubject<TSubject>
     }
 
     /// <summary>
-    /// Allows casting from the test subject to the subject.
+    /// Allows casting from the test subject to the subject instance.
     /// </summary>
     /// <param name="testSubject">Test subject</param>
     /// <returns>Subject being tested</returns>

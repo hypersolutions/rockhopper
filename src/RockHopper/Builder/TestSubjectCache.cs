@@ -6,7 +6,7 @@ using RockHopper.Mocking;
 
 namespace RockHopper.Builder;
 
-internal static class SubjectInfoCache
+internal static class TestSubjectCache
 {
     private static readonly ConcurrentDictionary<string, SubjectInfoCacheInfo> _bag = new();
 

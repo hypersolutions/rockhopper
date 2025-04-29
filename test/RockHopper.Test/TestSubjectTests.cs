@@ -75,6 +75,7 @@ public class TestSubjectTests
         var calculator = testSubject.GetMock<Calculator>();
         calculator.Setup(c => c.Add(1, 2)).Returns(3);
         calculator.Setup(c => c.Add(10, 20)).Returns(30);
+        
         calculatorService.AddNumbers(1, 2);
         calculatorService.AddNumbers(10, 20);
         
@@ -89,6 +90,7 @@ public class TestSubjectTests
         var calculator = testSubject.GetMock<Calculator>();
         calculator.Setup(c => c.Add(10, 20)).Returns(30);
         calculator.Setup(c => c.Add(1, 2)).Returns(30);
+        
         calculatorService.AddNumbers(10, 20);
         
         Should.Throw<VerificationException>(() => testSubject.VerifyAll());
