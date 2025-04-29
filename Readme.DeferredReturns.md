@@ -9,8 +9,9 @@ In these situations, the Returns method is overloaded to accept a Func(Of T) inp
 public void CalculateSumUsingDeferredValue_AddNumbers_ReturnsDeferredSumValue()
 {
     var sum = 0;
-    var calculatorService = SubjectContext.Current.CreateSubject<CalculatorService>();
-    var calculator = SubjectContext.Current.GetMock<Calculator>();
+    var testSubject = new TestSubject<CalculatorService>();
+    CalculatorService calculatorService = testSubject;
+    var calculator = testSubject.GetMock<Calculator>();
     calculator.Setup(c => c.Add(10, 20)).Returns(() => sum); // Set the deferred sum function
     sum = 30; // Now determine the value of sum
 
@@ -34,8 +35,9 @@ public void RepeatDeferredValue_Debit_ThrowsExceptionOnSecondReturnCall()
     const bool canDebit = true;
     const bool cannotDebit = false;
     var account = new Account { Number = "12345678", Value = 50 };
-    var accountService = SubjectContext.Current.CreateSubject<AccountService>();
-    var accountManager = SubjectContext.Current.GetMock<IAccountManager>();
+    var testSubject = new TestSubject<AccountService>();
+    AccountService accountService = testSubject;
+    var accountManager = testSubject.GetMock<IAccountManager>();
     accountManager.Setup(m => m.Find(account.Number)).Returns(account, account);
     accountManager.Setup(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
 

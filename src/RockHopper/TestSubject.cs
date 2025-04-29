@@ -1,19 +1,28 @@
+using RockHopper.Builder;
 using RockHopper.Enums;
 using RockHopper.Exceptions;
 using RockHopper.Mocking;
 
-namespace RockHopper.Builder;
+namespace RockHopper;
 
 /// <summary>
 /// Defines the subject information for creating an instance of the subject and its mock dependencies.
 /// </summary>
 /// <typeparam name="TSubject"></typeparam>
-public sealed class SubjectInfo<TSubject>
+public sealed class TestSubject<TSubject>
 {
     private readonly List<Mock>? _mocks;
 
-    internal SubjectInfo(SubjectBuilderFlags builderFlags, IConstructorSelector constructorSelector)
+    /// <summary>
+    /// Create the subject info and mock dependency information.
+    /// </summary>
+    /// <param name="builderFlags">How to construct the subject</param>
+    /// <param name="constructorSelector">How to choose the constructor - defaults to the first constructor</param>
+    public TestSubject(
+        SubjectBuilderFlags builderFlags = SubjectBuilderFlags.Constructor, 
+        IConstructorSelector? constructorSelector = null)
     {
+        constructorSelector ??= new DefaultConstructorSelector();
         var subjectInfoCache = SubjectInfoCache.Get<TSubject>(constructorSelector, builderFlags);
         var parameterMocks = subjectInfoCache.BuildParameterMocks();
         var propertyMocks = subjectInfoCache.BuildPropertyMocks();
@@ -48,5 +57,15 @@ public sealed class SubjectInfo<TSubject>
     public void VerifyAll()
     {
         _mocks?.ForEach(m => m.VerifyAll());
+    }
+
+    /// <summary>
+    /// Allows casting from the test subject to the subject.
+    /// </summary>
+    /// <param name="testSubject">Test subject</param>
+    /// <returns>Subject being tested</returns>
+    public static implicit operator TSubject(TestSubject<TSubject> testSubject)
+    {
+        return testSubject.Value;
     }
 }

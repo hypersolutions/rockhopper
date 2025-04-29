@@ -11,9 +11,9 @@ public class DeferredReturnIntTests
     public void CalculateSumUsingDeferredValue_AddNumbers_ReturnsDeferredSumValue()
     {
         var sum = 0;
-        var subjectInfo = SubjectBuilder.Create<CalculatorService>();
-        var calculatorService = subjectInfo.Value;
-        var calculator = subjectInfo.GetMock<Calculator>();
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
         calculator.Setup(c => c.Add(10, 20)).Returns(() => sum);
 
         sum = 30;
@@ -29,9 +29,9 @@ public class DeferredReturnIntTests
         const bool canDebit = true;
         const bool cannotDebit = false;
         var account = new Account { Number = "12345678", Value = 50 };
-        var subjectInfo = SubjectBuilder.Create<AccountService>();
-        var accountService = subjectInfo.Value;
-        var accountManager = subjectInfo.GetMock<IAccountManager>();
+        var testSubject = new TestSubject<AccountService>();
+        AccountService accountService = testSubject;
+        var accountManager = testSubject.GetMock<IAccountManager>();
         accountManager.Setup(m => m.Find(account.Number)).Returns(account, account);
         accountManager.Setup(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
 
