@@ -58,7 +58,7 @@ public sealed class ReturnCall<TReturn>
     /// </summary>
     /// <param name="functions">Func to call</param>
     /// <returns>Verify call</returns>
-    public VerifyCall Returns(params Func<TReturn>[] functions)
+    public VerifyCall Returns(params Func<TReturn?>[] functions)
     {
         foreach (var function in functions)
         {
@@ -73,7 +73,7 @@ public sealed class ReturnCall<TReturn>
     /// </summary>
     /// <param name="returnValues">Value to return</param>
     /// <returns>Verify call</returns>
-    public VerifyCall ReturnsAsync(params TReturn[] returnValues)
+    public VerifyCall ReturnsAsync(params TReturn?[] returnValues)
     {
         foreach (var returnValue in returnValues)
         {
