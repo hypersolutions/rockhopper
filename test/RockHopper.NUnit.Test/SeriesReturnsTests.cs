@@ -1,0 +1,65 @@
+﻿using NUnit.Framework;
+using RockHopper.Assertions;
+using RockHopper.Mocking.Exceptions;
+using RockHopper.Mocking.Parameters;
+using RockHopper.TestSupport;
+
+namespace RockHopper.NUnit.Test;
+
+public class SeriesReturnsTests
+{
+    [Test]
+    public void SequentialNumbersWithMismatchMock_AddNumberSeries_ThrowsExceptions()
+    {
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10);
+
+        var exception = Should.Throw<MockException>(() => calculatorService.AddNumberSeries(1, 2, 3, 4, 5));
+        
+        exception.Message.ShouldBe("The return value sequence exceeds the request.");
+    }
+    
+    [Test]
+    public void SequentialNumbers_AddNumberSeries_ReturnsTotal()
+    {
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+
+        var result = calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
+        
+        result.ShouldBe(15);
+        
+        testSubject.VerifyAll();
+    }
+    
+    [Test]
+    public void SequentialNumbers_AddNumberSeries_VerifiesThatAllCallsMade()
+    {
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+
+        calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
+        
+        testSubject.VerifyAll();
+    }
+    
+    [Test]
+    public void SequentialNumbersWithMissingMockCall_AddNumberSeries_ThrowsException()
+    {
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
+        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+
+        calculatorService.AddNumberSeries(1, 2, 3, 4);
+        
+        var exception = Should.Throw<VerificationException>(() => testSubject.VerifyAll());
+        exception.Message.ShouldBe("Verification mismatch: Expected 4; Actual 3");
+    }
+}

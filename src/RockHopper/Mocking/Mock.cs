@@ -84,11 +84,11 @@ public sealed class Mock<T> : Mock where T : class
     /// </summary>
     /// <param name="expression">Method expression</param>
     /// <returns>Method call behaviours</returns>
-    public MethodCall Setup(Expression<Action<T>> expression)
+    public IMethodCall Setup(Expression<Action<T>> expression)
     {
         var setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new MethodCall(setupInfo);
+        return new SetupCall<NoReturn>(setupInfo);
     }
 
     /// <summary>
@@ -97,13 +97,13 @@ public sealed class Mock<T> : Mock where T : class
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public ReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, TReturn?>> expression)
+    public IReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
         SetupInfo setupInfo = expression.IsGetPropertyExpression() 
             ? new GetPropertySetupInfo(expression)
             :  new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new ReturnCall<TReturn>(setupInfo);
+        return new SetupCall<TReturn>(setupInfo);
     }
 
     /// <summary>
@@ -112,13 +112,13 @@ public sealed class Mock<T> : Mock where T : class
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public ReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
+    public IReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
     {
         SetupInfo setupInfo = expression.IsGetPropertyExpression() 
             ? new GetPropertySetupInfo(expression)
             :  new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new ReturnCall<TReturn>(setupInfo);
+        return new SetupCall<TReturn>(setupInfo);
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <param name="expression">Set property expression</param>
     /// <param name="value">Value to set</param>
     /// <returns>Method call behaviours</returns>
-    public MethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, TValue? value)
+    public IMethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, TValue? value)
     {
         return Setup(expression, () => value);
     }
@@ -138,11 +138,11 @@ public sealed class Mock<T> : Mock where T : class
     /// <param name="expression">Set property expression</param>
     /// <param name="valueFunc">Value to set</param>
     /// <returns>Method call behaviours</returns>
-    public MethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, Func<TValue?> valueFunc)
+    public IMethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, Func<TValue?> valueFunc)
     {
         var setupInfo = new SetPropertySetupInfo<TValue>(expression, valueFunc);
         _setupInfoList.Add(setupInfo);
-        return new MethodCall(setupInfo);
+        return new SetupCall<NoReturn>(setupInfo);
     }
     
     internal override object GetInstance() => Object;
