@@ -15,7 +15,7 @@ public class DeferredReturnIntTests
         var testSubject = new TestSubject<CalculatorService>();
         CalculatorService calculatorService = testSubject;
         var calculator = testSubject.GetMock<Calculator>();
-        calculator.Setup(c => c.Add(10, 20)).Returns(() => sum);
+        calculator.Function(c => c.Add(10, 20)).Returns(() => sum);
 
         sum = 30;
 
@@ -33,8 +33,8 @@ public class DeferredReturnIntTests
         var testSubject = new TestSubject<AccountService>();
         AccountService accountService = testSubject;
         var accountManager = testSubject.GetMock<IAccountManager>();
-        accountManager.Setup(m => m.Find(account.Number)).Returns(account, account);
-        accountManager.Setup(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
+        accountManager.Function(m => m.Find(account.Number)).Returns(account, account);
+        accountManager.Function(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
 
         Should.NotThrow<Exception>(() => accountService.Debit(account.Number, 50));
         

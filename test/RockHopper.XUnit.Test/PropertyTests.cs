@@ -19,7 +19,7 @@ public class PropertyTests
     [Fact]
     public void ConvertValueToDollars_Convert_ReturnsValue()
     {
-        _currency.Setup(c => c.Units).Returns("USD");
+        _currency.GetProperty(c => c.Units).Returns("USD");
 
         var result = _currencyService.Convert(100);
         
@@ -29,7 +29,7 @@ public class PropertyTests
     [Fact]
     public void ConvertValueToDollars_Convert_ReturnsValue2()
     {
-        _currency.Setup(c => c.Units).Returns("USD");
+        _currency.GetProperty(c => c.Units).Returns("USD");
         _currency.Setup(c => c.Units, "USD").OccursOnce();
 
         _currencyService.ChangeCurrency("USD");

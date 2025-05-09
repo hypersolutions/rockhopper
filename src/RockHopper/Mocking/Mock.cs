@@ -38,89 +38,64 @@ public sealed class Mock<T> : Mock where T : class
     /// Gets the mock type instance.
     /// </summary>
     public T Object { get; }
-    /*
-    public MethodCall Method(Expression<Action<T>> expression)
-    {
-        var setupInfo = new MethodSetupInfo(expression);
-        _setupInfoList.Add(setupInfo);
-        return new MethodCall(setupInfo);
-    }
-    
-    public ReturnCall<TReturn> Function<TReturn>(Expression<Func<T, TReturn?>> expression)
-    {
-        if (expression.IsGetPropertyExpression()) throw new Exception("Todo");
-        
-        SetupInfo setupInfo = new MethodSetupInfo(expression);
-        _setupInfoList.Add(setupInfo);
-        return new ReturnCall<TReturn>(setupInfo);
-    }
-    
-    public ReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
-    {
-        if (!expression.IsGetPropertyExpression()) throw new Exception("Todo");
-        
-        SetupInfo setupInfo = new GetPropertySetupInfo(expression);
-        _setupInfoList.Add(setupInfo);
-        return new ReturnCall<TReturn>(setupInfo);
-    }
-    
-    public MethodCall SetProperty<TValue>(Expression<Func<T, TValue?>> expression, TValue? value)
-    {
-        return SetProperty(expression, () => value);
-    }
-    
-    public MethodCall SetProperty<TValue>(Expression<Func<T, TValue?>> expression, Func<TValue?> valueFunc)
-    {
-        var setupInfo = new SetPropertySetupInfo2<TValue>(expression); //, valueFunc);
-        _setupInfoList.Add(setupInfo);
-        return new MethodCall(setupInfo);
-    }
-    */
-    
-    
     
     /// <summary>
     /// Sets up the behaviour on a method.
     /// </summary>
     /// <param name="expression">Method expression</param>
     /// <returns>Method call behaviours</returns>
-    public IMethodCall Setup(Expression<Action<T>> expression)
+    public IMethodCall Method(Expression<Action<T>> expression)
     {
         var setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
         return new SetupCall<NoReturn>(setupInfo);
     }
-
+    
     /// <summary>
     /// Sets up the behaviour on a function.
     /// </summary>
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public IReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, TReturn?>> expression)
+    public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
-        SetupInfo setupInfo = expression.IsGetPropertyExpression() 
-            ? new GetPropertySetupInfo(expression)
-            :  new MethodSetupInfo(expression);
+        if (!expression.IsFunctionExpression()) throw new Exception("Todo");
+        
+        SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
         return new SetupCall<TReturn>(setupInfo);
     }
-
+    
     /// <summary>
     /// Sets up the behaviour on a function that returns a Task.
     /// </summary>
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public IReturnCall<TReturn> Setup<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
+    public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
     {
-        SetupInfo setupInfo = expression.IsGetPropertyExpression() 
-            ? new GetPropertySetupInfo(expression)
-            :  new MethodSetupInfo(expression);
+        if (!expression.IsFunctionExpression()) throw new Exception("Todo");
+        
+        SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
         return new SetupCall<TReturn>(setupInfo);
     }
-
+    
+    /// <summary>
+    /// Sets up the behaviour on a get property.
+    /// </summary>
+    /// <typeparam name="TReturn">Return type</typeparam>
+    /// <param name="expression">Get property expression</param>
+    /// <returns>Get property call behaviours</returns>
+    public IReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
+    {
+        if (!expression.IsGetPropertyExpression()) throw new Exception("Todo");
+        
+        SetupInfo setupInfo = new GetPropertySetupInfo(expression);
+        _setupInfoList.Add(setupInfo);
+        return new SetupCall<TReturn>(setupInfo);
+    }
+    
     /// <summary>
     /// Sets up the behaviour on a set property.
     /// </summary>

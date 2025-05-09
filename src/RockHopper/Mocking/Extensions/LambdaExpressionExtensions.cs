@@ -5,20 +5,26 @@ namespace RockHopper.Mocking.Extensions;
 
 internal static class LambdaExpressionExtensions
 {
+    internal static bool IsFunctionExpression(this LambdaExpression expression)
+    {
+        MethodInfo? getMethodInfo = null;
+
+        if (expression.Body is MemberExpression) return getMethodInfo is not null;
+        
+        var methodCall = expression.Body as MethodCallExpression;
+        getMethodInfo = methodCall?.Method;
+
+        return getMethodInfo is not null;
+    }
+    
     internal static bool IsGetPropertyExpression(this LambdaExpression expression)
     {
-        MethodInfo? getMethodInfo;
+        MethodInfo? getMethodInfo = null;
 
-        if (expression.Body is not MemberExpression body)
-        {
-            var methodCall = expression.Body as MethodCallExpression;
-            getMethodInfo = methodCall?.Method;
-        }
-        else
-        {
-            var propInfo = (PropertyInfo)body.Member;
-            getMethodInfo = propInfo.GetMethod;
-        }
+        if (expression.Body is not MemberExpression body) return getMethodInfo is not null;
+        
+        var propInfo = (PropertyInfo)body.Member;
+        getMethodInfo = propInfo.GetMethod;
 
         return getMethodInfo is not null;
     }

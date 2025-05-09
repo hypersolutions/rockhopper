@@ -13,7 +13,7 @@ public class SeriesReturnsTests
         var testSubject = new TestSubject<CalculatorService>();
         CalculatorService calculatorService = testSubject;
         var calculator = testSubject.GetMock<Calculator>();
-        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10);
+        calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10);
 
         var exception = Should.Throw<MockException>(() => calculatorService.AddNumberSeries(1, 2, 3, 4, 5));
         
@@ -26,7 +26,7 @@ public class SeriesReturnsTests
         var testSubject = new TestSubject<CalculatorService>();
         CalculatorService calculatorService = testSubject;
         var calculator = testSubject.GetMock<Calculator>();
-        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+        calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         var result = calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
         
@@ -41,7 +41,7 @@ public class SeriesReturnsTests
         var testSubject = new TestSubject<CalculatorService>();
         CalculatorService calculatorService = testSubject;
         var calculator = testSubject.GetMock<Calculator>();
-        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+        calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
         
@@ -54,7 +54,7 @@ public class SeriesReturnsTests
         var testSubject = new TestSubject<CalculatorService>();
         CalculatorService calculatorService = testSubject;
         var calculator = testSubject.GetMock<Calculator>();
-        calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+        calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         calculatorService.AddNumberSeries(1, 2, 3, 4);
         

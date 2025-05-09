@@ -21,7 +21,7 @@ public class OutAndRefParameterTests
     public void ValidIntAsString_GetValue_ReturnsIntResult()
     {
         var value = 123;
-        _intConverter.Setup(c => c.TryOutParse("123", out value)).Returns(true);
+        _intConverter.Function(c => c.TryOutParse("123", out value)).Returns(true);
 
         var result = _converterService.GetValue("123");
 
@@ -32,7 +32,7 @@ public class OutAndRefParameterTests
     public void ValidIntAsStringWithBaseValue_GetValue_ReturnsIntResult()
     {
         var value = 123;
-        _intConverter.Setup(c => c.TryRefParse("123", ref value)).Returns(true);
+        _intConverter.Function(c => c.TryRefParse("123", ref value)).Returns(true);
 
         var result = _converterService.GetValue("123", 100);
 
