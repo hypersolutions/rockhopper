@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using Castle.DynamicProxy;
 using RockHopper.Mocking.Behaviors;
+using RockHopper.Mocking.Exceptions;
 using RockHopper.Mocking.Extensions;
 using RockHopper.Mocking.Setup;
 
@@ -59,7 +60,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <returns>Function call behaviours</returns>
     public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
-        if (!expression.IsFunctionExpression()) throw new Exception("Todo");
+        if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a function.");
         
         SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
@@ -74,7 +75,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <returns>Function call behaviours</returns>
     public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
     {
-        if (!expression.IsFunctionExpression()) throw new Exception("Todo");
+        if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a get property.");
         
         SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
@@ -89,7 +90,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <returns>Get property call behaviours</returns>
     public IReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
-        if (!expression.IsGetPropertyExpression()) throw new Exception("Todo");
+        if (!expression.IsGetPropertyExpression()) throw new MockException("The provided expression is not a function.");
         
         SetupInfo setupInfo = new GetPropertySetupInfo(expression);
         _setupInfoList.Add(setupInfo);
