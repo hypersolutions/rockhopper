@@ -1,7 +1,10 @@
 # RockHopper
 
-Provides a simple way to build a test subject with its mock dependencies. Backed by the _Castle.Core_ assembly for proxy generation,
+Provides a simple way to build a test subject with its mock dependencies. Backed by the _Castle Core_ assembly for proxy generation,
 this framework supports both constructor and property dependencies.
+
+The mock framework supports strict mocking only. There is no support for loose mocks. This means that you _have_ to provide 
+a matching mock setup for any calls made to mocks. This is **by design** to enforce deliberate enforcement of good test practices.
 
 ## Getting Started
 

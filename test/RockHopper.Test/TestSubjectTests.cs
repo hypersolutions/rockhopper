@@ -17,7 +17,8 @@ public class TestSubjectTests
         calculatorService.ShouldNotBeNull();
     }
 
-    [Fact] public void SubjectWithDependency_Value_ReturnsNonNullInstance()
+    [Fact]
+    public void SubjectWithDependency_Value_ReturnsNonNullInstance()
     {
         var testSubject = new TestSubject<CalculatorService>();
         

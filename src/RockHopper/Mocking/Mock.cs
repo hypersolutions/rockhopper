@@ -113,6 +113,7 @@ public sealed class Mock<T> : Mock where T : class
         {
             setup.Visits.VerifyOccurs();
             setup.ReturnValues.Reset();
+            setup.Exceptions.Reset();
         }
     }
     

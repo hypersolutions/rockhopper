@@ -7,12 +7,12 @@ internal sealed class ExceptionList
     private readonly List<Exception> _exceptions = [];
     private int _index = -1;
 
+    internal bool HasExceptions => _exceptions.Count != 0;
+    
     internal void Add(Exception exception)
     {
         _exceptions.Add(exception);
     }
-
-    internal bool HasExceptions => _exceptions.Count != 0;
     
     internal Exception GetNext()
     {
