@@ -38,6 +38,46 @@ public sealed class Mock<T> : Mock where T : class
     /// Gets the mock type instance.
     /// </summary>
     public T Object { get; }
+    /*
+    public MethodCall Method(Expression<Action<T>> expression)
+    {
+        var setupInfo = new MethodSetupInfo(expression);
+        _setupInfoList.Add(setupInfo);
+        return new MethodCall(setupInfo);
+    }
+    
+    public ReturnCall<TReturn> Function<TReturn>(Expression<Func<T, TReturn?>> expression)
+    {
+        if (expression.IsGetPropertyExpression()) throw new Exception("Todo");
+        
+        SetupInfo setupInfo = new MethodSetupInfo(expression);
+        _setupInfoList.Add(setupInfo);
+        return new ReturnCall<TReturn>(setupInfo);
+    }
+    
+    public ReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
+    {
+        if (!expression.IsGetPropertyExpression()) throw new Exception("Todo");
+        
+        SetupInfo setupInfo = new GetPropertySetupInfo(expression);
+        _setupInfoList.Add(setupInfo);
+        return new ReturnCall<TReturn>(setupInfo);
+    }
+    
+    public MethodCall SetProperty<TValue>(Expression<Func<T, TValue?>> expression, TValue? value)
+    {
+        return SetProperty(expression, () => value);
+    }
+    
+    public MethodCall SetProperty<TValue>(Expression<Func<T, TValue?>> expression, Func<TValue?> valueFunc)
+    {
+        var setupInfo = new SetPropertySetupInfo2<TValue>(expression); //, valueFunc);
+        _setupInfoList.Add(setupInfo);
+        return new MethodCall(setupInfo);
+    }
+    */
+    
+    
     
     /// <summary>
     /// Sets up the behaviour on a method.
