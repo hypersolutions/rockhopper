@@ -7,6 +7,8 @@ internal sealed class ReturnValueList
     private readonly List<(dynamic? Value, bool IsDeferred)> _returns = [];
     private int _index = -1;
 
+    internal int Count => _returns.Count;
+    
     internal void Add(object? value, bool isDeferred = false)
     {
         _returns.Add((value, isDeferred));   

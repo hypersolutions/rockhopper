@@ -13,6 +13,7 @@ public class VerifyCall
     internal VerifyCall(SetupInfo setupInfo) 
     {
         _setupInfo = setupInfo;
+        _setupInfo.Visits.AddOccurs(Occurs.Exactly(_setupInfo.ReturnValues.Count));
     }
 
     /// <summary>
