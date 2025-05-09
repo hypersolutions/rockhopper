@@ -9,13 +9,14 @@ public class AsyncReturnTests
 {
     private UserService _userService;
     private Mock<IUserRepository> _userRepository;
+    private TestSubject<UserService> _testSubject;
 
     [SetUp]
     public void BeforeEachTest()
     {
-        var testSubject = new TestSubject<UserService>();
-        _userService = testSubject;
-        _userRepository = testSubject.GetMock<IUserRepository>();
+        _testSubject = new TestSubject<UserService>();
+        _userService = _testSubject;
+        _userRepository = _testSubject.GetMock<IUserRepository>();
     }
     
     [Test]
@@ -24,7 +25,7 @@ public class AsyncReturnTests
         const int userId = 1;
         _userRepository.Function(r => r.GetUserAsync(userId)).ReturnsAsync((User?)null);
 
-        var exception = await Should.ThrowAsync<Exception>(() => _userService.FindUser(userId));
+        var exception = await Should.ThrowAsync<Exception>(() => _userService.FindUserAsync(userId));
 
         exception.Message.ShouldBe($"Unable to find a user for {userId}.");
     }
@@ -35,8 +36,19 @@ public class AsyncReturnTests
         var user = new User { Id = 1, Name = "Homer Simpson" };
         _userRepository.Function(r => r.GetUserAsync(user.Id)).ReturnsAsync(user);
         
-        var foundUser = await _userService.FindUser(user.Id);
+        var foundUser = await _userService.FindUserAsync(user.Id);
 
         foundUser.ShouldBe(user);
+    }
+    
+    [Test]
+    public async Task WithUser_SaveUserAsync_CallsSaveOnRepository()
+    {
+        var user = new User { Id = 1, Name = "Homer Simpson" };
+        _userRepository.Function(r => r.SaveAsync(user)).Returns(Task.CompletedTask);
+        
+        await _userService.SaveUserAsync(user);
+
+        _testSubject.VerifyAll();
     }
 }
