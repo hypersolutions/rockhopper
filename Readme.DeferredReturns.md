@@ -12,7 +12,7 @@ public void CalculateSumUsingDeferredValue_AddNumbers_ReturnsDeferredSumValue()
     var testSubject = new TestSubject<CalculatorService>();
     CalculatorService calculatorService = testSubject;
     var calculator = testSubject.GetMock<Calculator>();
-    calculator.Setup(c => c.Add(10, 20)).Returns(() => sum); // Set the deferred sum function
+    calculator.Function(c => c.Add(10, 20)).Returns(() => sum); // Set the deferred sum function
     sum = 30; // Now determine the value of sum
 
     var result = calculatorService.AddNumbers(10, 20);
@@ -38,8 +38,8 @@ public void RepeatDeferredValue_Debit_ThrowsExceptionOnSecondReturnCall()
     var testSubject = new TestSubject<AccountService>();
     AccountService accountService = testSubject;
     var accountManager = testSubject.GetMock<IAccountManager>();
-    accountManager.Setup(m => m.Find(account.Number)).Returns(account, account);
-    accountManager.Setup(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
+    accountManager.Function(m => m.Find(account.Number)).Returns(account, account);
+    accountManager.Function(m => m.CanDebit(account, 50)).Returns(() => canDebit, () => cannotDebit);
 
     Should.NotThrow<Exception>(() => accountService.Debit(account.Number, 50));
     

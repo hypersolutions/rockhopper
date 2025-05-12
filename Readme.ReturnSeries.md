@@ -11,7 +11,7 @@ public void SequentialNumbers_AddNumberSeries_ReturnsTotal()
     var testSubject = new TestSubject<CalculatorService>();
     CalculatorService calculatorService = testSubject;
     var calculator = testSubject.GetMock<Calculator>();
-    calculator.Setup(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
+    calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
     var result = calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
     
