@@ -4,7 +4,7 @@ using RockHopper.Mocking.Verifies;
 
 namespace RockHopper.Mocking.Behaviors;
 
-internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>, ISetPropertyCall
+internal sealed class SetupCall : IReturnCall, ISetPropertyCall
 {
     private readonly SetupInfo _setupInfo;
 
@@ -27,7 +27,7 @@ internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>, ISetPropertyCal
         return this;
     }
     
-    public IVerifyCall Returns(params TReturn[] returnValues)
+    public IVerifyCall Returns<TReturn>(params TReturn[] returnValues)
     {
         foreach (var returnValue in returnValues)
         {
@@ -39,7 +39,7 @@ internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>, ISetPropertyCal
         return this;
     }
     
-    public IVerifyCall Returns(params Func<TReturn?>[] functions)
+    public IVerifyCall Returns<TReturn>(params Func<TReturn?>[] functions)
     {
         foreach (var function in functions)
         {
@@ -51,7 +51,7 @@ internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>, ISetPropertyCal
         return this;
     }
     
-    public IVerifyCall ReturnsAsync(params TReturn?[] returnValues)
+    public IVerifyCall ReturnsAsync<TReturn>(params TReturn?[] returnValues)
     {
         foreach (var returnValue in returnValues)
         {

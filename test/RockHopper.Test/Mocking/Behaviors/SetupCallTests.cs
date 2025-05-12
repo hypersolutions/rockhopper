@@ -13,7 +13,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.NeverOccurs();
         
@@ -25,7 +25,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.OccursOnce();
         
@@ -37,7 +37,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.OccursExactly(10);
         
@@ -49,7 +49,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.OccursAtLeast(2);
         
@@ -61,7 +61,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.Throws<Exception>();
 
@@ -73,7 +73,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Check(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<NoReturn>(setup);
+        var call = new SetupCall(setup);
 
         call.Throws(new Exception());
 
@@ -85,7 +85,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
 
         call.Returns(30);
 
@@ -98,7 +98,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
         call.Returns(30);
         
         call.Returns(50);
@@ -114,7 +114,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
 
         call.Returns(() => 30);
 
@@ -127,7 +127,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
 
         call.Returns(() => 30, () => 50);
 
@@ -142,7 +142,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
 
         call.ReturnsAsync(30);
 
@@ -155,7 +155,7 @@ public class SetupCallTests
     {
         Expression<Action<Helper>> expression = h => h.Add(10, 20);
         var setup = new MethodSetupInfo(expression);
-        var call = new SetupCall<int>(setup);
+        var call = new SetupCall(setup);
 
         call.ReturnsAsync(30, 50);
 

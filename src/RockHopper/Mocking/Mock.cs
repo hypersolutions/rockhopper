@@ -49,7 +49,7 @@ public sealed class Mock<T> : Mock where T : class
     {
         var setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<NoReturn>(setupInfo);
+        return new SetupCall(setupInfo);
     }
     
     /// <summary>
@@ -58,13 +58,13 @@ public sealed class Mock<T> : Mock where T : class
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, TReturn?>> expression)
+    public IReturnCall Function<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
         if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a function.");
         
         SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<TReturn>(setupInfo);
+        return new SetupCall(setupInfo);
     }
     
     /// <summary>
@@ -73,13 +73,13 @@ public sealed class Mock<T> : Mock where T : class
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Function expression</param>
     /// <returns>Function call behaviours</returns>
-    public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
+    public IReturnCall Function<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
     {
         if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a function.");
         
         SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<TReturn>(setupInfo);
+        return new SetupCall(setupInfo);
     }
     
     /// <summary>
@@ -88,13 +88,13 @@ public sealed class Mock<T> : Mock where T : class
     /// <typeparam name="TReturn">Return type</typeparam>
     /// <param name="expression">Get property expression</param>
     /// <returns>Get property call behaviours</returns>
-    public IReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
+    public IReturnCall GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
         if (!expression.IsGetPropertyExpression()) throw new MockException("The provided expression is not a get property.");
         
         SetupInfo setupInfo = new GetPropertySetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<TReturn>(setupInfo);
+        return new SetupCall(setupInfo);
     }
     
     /// <summary>
@@ -109,7 +109,7 @@ public sealed class Mock<T> : Mock where T : class
         
         SetupInfo setupInfo = new SetPropertySetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<TValue>(setupInfo);
+        return new SetupCall(setupInfo);
     }
     
     internal override object GetInstance() => Object;
