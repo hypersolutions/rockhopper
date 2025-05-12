@@ -75,7 +75,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <returns>Function call behaviours</returns>
     public IReturnCall<TReturn> Function<TReturn>(Expression<Func<T, Task<TReturn?>>> expression)
     {
-        if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a get property.");
+        if (!expression.IsFunctionExpression()) throw new MockException("The provided expression is not a function.");
         
         SetupInfo setupInfo = new MethodSetupInfo(expression);
         _setupInfoList.Add(setupInfo);
@@ -90,7 +90,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <returns>Get property call behaviours</returns>
     public IReturnCall<TReturn> GetProperty<TReturn>(Expression<Func<T, TReturn?>> expression)
     {
-        if (!expression.IsGetPropertyExpression()) throw new MockException("The provided expression is not a function.");
+        if (!expression.IsGetPropertyExpression()) throw new MockException("The provided expression is not a get property.");
         
         SetupInfo setupInfo = new GetPropertySetupInfo(expression);
         _setupInfoList.Add(setupInfo);
@@ -100,25 +100,16 @@ public sealed class Mock<T> : Mock where T : class
     /// <summary>
     /// Sets up the behaviour on a set property.
     /// </summary>
+    /// <typeparam name="TValue">Value type</typeparam>
     /// <param name="expression">Set property expression</param>
-    /// <param name="value">Value to set</param>
-    /// <returns>Method call behaviours</returns>
-    public IMethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, TValue? value)
+    /// <returns>Set property call behaviours</returns>
+    public ISetPropertyCall SetProperty<TValue>(Expression<Func<T, TValue?>> expression)
     {
-        return Setup(expression, () => value);
-    }
-    
-    /// <summary>
-    /// Sets up the behaviour on a set property.
-    /// </summary>
-    /// <param name="expression">Set property expression</param>
-    /// <param name="valueFunc">Value to set</param>
-    /// <returns>Method call behaviours</returns>
-    public IMethodCall Setup<TValue>(Expression<Func<T, TValue?>> expression, Func<TValue?> valueFunc)
-    {
-        var setupInfo = new SetPropertySetupInfo<TValue>(expression, valueFunc);
+        if (!expression.IsSetPropertyExpression()) throw new MockException("The provided expression is not a set property.");
+        
+        SetupInfo setupInfo = new SetPropertySetupInfo(expression);
         _setupInfoList.Add(setupInfo);
-        return new SetupCall<NoReturn>(setupInfo);
+        return new SetupCall<TValue>(setupInfo);
     }
     
     internal override object GetInstance() => Object;

@@ -1,12 +1,11 @@
 using System.Linq.Expressions;
 using RockHopper.Mocking.Extensions;
-using RockHopper.Mocking.Parameters;
 
 namespace RockHopper.Mocking.Setup;
 
-internal sealed class SetPropertySetupInfo<TValue> : SetupInfo
+internal sealed class SetPropertySetupInfo : SetupInfo
 {
-    internal SetPropertySetupInfo(LambdaExpression expression, Func<TValue?> valueFunc)
+    internal SetPropertySetupInfo(LambdaExpression expression)
     {
         var setMethodInfo = expression.GetMethodInfoForSet();
         
@@ -17,7 +16,5 @@ internal sealed class SetPropertySetupInfo<TValue> : SetupInfo
         {
             AddParameter(parameter);    
         }
-        
-        AddParameter(new Parameter { Matcher = ParameterMatcherFactory.Create(valueFunc), Type = ParameterType.In });
     }
 }

@@ -1,9 +1,10 @@
+using RockHopper.Mocking.Parameters;
 using RockHopper.Mocking.Setup;
 using RockHopper.Mocking.Verifies;
 
 namespace RockHopper.Mocking.Behaviors;
 
-internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>
+internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>, ISetPropertyCall
 {
     private readonly SetupInfo _setupInfo;
 
@@ -78,5 +79,19 @@ internal sealed class SetupCall<TReturn> : IReturnCall<TReturn>
     public void OccursAtLeast(int count)
     {
         _setupInfo.Visits.AddOccurs(Occurs.AtLeast(count));
+    }
+
+    public IVerifyCall WithValue<TValue>(TValue? value)
+    {
+        WithValue(() => value);
+        return this;
+    }
+    
+    public IVerifyCall WithValue<TValue>(Func<TValue?> valueFunc)
+    {
+        var parameter = new Parameter { Matcher = ParameterMatcherFactory.Create(valueFunc), Type = ParameterType.In };
+        _setupInfo.AddParameter(parameter);
+        _setupInfo.Visits.AddOccurs(Occurs.Once());
+        return this;
     }
 }

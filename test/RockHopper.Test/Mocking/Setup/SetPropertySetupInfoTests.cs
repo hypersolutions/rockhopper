@@ -16,12 +16,9 @@ public class SetPropertySetupInfoTests
     {
         Expression<Func<Helper, int>> expression = h => h.Count;
 
-        var setup = new SetPropertySetupInfo<int>(expression, ValueFunc);
+        var setup = new SetPropertySetupInfo(expression);
         
         setup.Name.ShouldBe("set_Count");
-        return;
-
-        int ValueFunc() => 10;
     }
     
     [Fact]
@@ -29,13 +26,9 @@ public class SetPropertySetupInfoTests
     {
         Expression<Func<Helper, int>> expression = h => h[0];
         
-        var setup = new SetPropertySetupInfo<int>(expression, ValueFunc);
+        var setup = new SetPropertySetupInfo(expression);
         
         setup.Name.ShouldBe("set_Item");
-        
-        return;
-
-        int ValueFunc() => 10;
     }
     
     [Fact]
@@ -43,16 +36,11 @@ public class SetPropertySetupInfoTests
     {
         Expression<Func<Helper, int>> expression = h => h[2];
         
-        var setup = new SetPropertySetupInfo<int>(expression, ValueFunc);
+        var setup = new SetPropertySetupInfo(expression);
         
         var parameters = setup.Parameters.ToArray();
-        parameters.Length.ShouldBe(2);
+        parameters.Length.ShouldBe(1);
         AssertParameter<ExactParameterMatcher>(parameters[0], 2, ParameterType.In);
-        AssertParameter<ExactParameterMatcher>(parameters[1], 10, ParameterType.In);
-        
-        return;
-
-        int ValueFunc() => 10;
     }
     
     private static void AssertParameter<TMatcher>(Parameter parameter, object? value, ParameterType parameterType)

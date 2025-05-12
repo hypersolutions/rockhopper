@@ -28,6 +28,18 @@ internal static class LambdaExpressionExtensions
 
         return getMethodInfo is not null;
     }
+    
+    internal static bool IsSetPropertyExpression(this LambdaExpression expression)
+    {
+        MethodInfo? setMethodInfo = null;
+
+        if (expression.Body is not MemberExpression body) return setMethodInfo is not null;
+        
+        var propInfo = (PropertyInfo)body.Member;
+        setMethodInfo = propInfo.SetMethod;
+
+        return setMethodInfo is not null;
+    }
 
     internal static MethodInfo GetMethodInfoForGet(this LambdaExpression expression)
     {
