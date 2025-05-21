@@ -8,6 +8,64 @@ a matching mock setup for any calls made to mocks. This is **by design** to enfo
 
 ## Getting Started
 
+You can install the NuGet package: TODO
+
+Then as a simple example, you can use your favourite unit test framework and add the following code to test:
+
+```c#
+public abstract class Calculator
+{
+    public abstract int Add(int x, int y);
+}
+
+public sealed class CalculatorService
+{
+    private readonly Calculator _calculator;
+
+    public CalculatorService(Calculator calculator)
+    {
+        _calculator = calculator;
+    }
+
+    public int AddNumbers(int x, int y)
+    {
+        return AddNumberSeries(x, y);
+    }
+}
+```
+
+and then write a test (using XUnit for example):
+
+```c#
+public class CalculatorServiceTests
+{
+    [Fact]
+    public void TwoNumbers_AddNumbers_ReturnsSum()
+    {
+        // Arrange
+        var testSubject = new TestSubject<CalculatorService>();
+        CalculatorService calculatorService = testSubject;
+        var calculator = testSubject.GetMock<Calculator>();
+        calculator.Function(c => c.Add(1, 2)).Returns(3);
+        
+        // Act
+        var sum = calculatorService.AddNumbers(1, 2);
+        
+        // Assert
+        Assert.Equal(3, sum);
+    }
+}
+```
+
+## Occurrences
+
+By default, a setup of a mock will _expect_ a single call. This can be overriden by using the setup extensions:
+
+```c#
+textLogger.Method(l => l.Log("HELLO WORLD")).OccursAtLeast(10);
+```
+
+
 ## Features
 
 Explore [Deferred Returns](Readme.DeferredReturns.md)
