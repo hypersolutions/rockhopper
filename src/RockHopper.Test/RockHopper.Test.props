@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+    <PropertyGroup>
+        <IsTestProject>true</IsTestProject>
+        <IsTestingPlatformApplication>true</IsTestingPlatformApplication>
+        <!--TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport-->
+        <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
+        <TestingPlatformCaptureOutput>false</TestingPlatformCaptureOutput>
+        <LangVersion>latest</LangVersion>
+        <OutputType>Exe</OutputType>
+        <GenerateProgramFile>false</GenerateProgramFile>
+        <GenerateTestingPlatformEntryPoint>false</GenerateTestingPlatformEntryPoint>
+    </PropertyGroup>
+
+</Project>

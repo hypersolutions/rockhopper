@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <TargetFrameworks Condition="'$(IsLibraryPackage)' == 'true'">net9.0;</TargetFrameworks>
+    <!--TargetFrameworks Condition="'$(IsLibraryTestProject)' == 'true'">net472;net8.0;net9.0</TargetFrameworks-->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(IsTestingPlatformApplication)' == 'true'">
+    <OutputType>Exe</OutputType>
+    <!--TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport-->
+    <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
+    <TestingPlatformCaptureOutput>false</TestingPlatformCaptureOutput>
+    <IsTestProject>true</IsTestProject>
+    <GenerateProgramFile>false</GenerateProgramFile>
+    <GenerateTestingPlatformEntryPoint>false</GenerateTestingPlatformEntryPoint>
+  </PropertyGroup>
+</Project>

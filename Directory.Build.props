@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <TargetFrameworks Condition="'$(SDK_VERSION)' == ''">net9.0;</TargetFrameworks>
+    <!--suppress MsbuildTargetFrameworkTagInspection -->
+    <!--TargetFrameworks Condition="'$(SDK_VERSION)' == 'net8'">net8.0</TargetFrameworks-->
+    <TargetFrameworks Condition="'$(SDK_VERSION)' == 'net9'">net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <!--NoWarn>NU1507;NU1903;CS9107</NoWarn-->
+    <BuildTransitivePath>buildTransitive/$(TargetFramework)/</BuildTransitivePath>
+    <BuildPath>build/netstandard2.0</BuildPath>
+  </PropertyGroup>
+
+  <!--
+  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('TUnit.Analyzers.Roslyn'))">
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>TUnit.Analyzers</AssemblyName>
+    <RootNamespace>TUnit.Analyzers</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(MSBuildProjectName.StartsWith('TUnit.Core.SourceGenerator.Roslyn'))">
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>TUnit.Core.SourceGenerator</AssemblyName>
+    <RootNamespace>TUnit.Core.SourceGenerator</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+  </PropertyGroup>
+  -->
+  
+  <!--
+  <PropertyGroup>
+    <CurrentYear>$([System.DateTime]::Now.ToString("yyyy"))</CurrentYear>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) Tom Longhurst $(CurrentYear)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/thomhurst/TUnit</PackageProjectUrl>
+    <Description>A .NET Testing Framework</Description>
+    <Authors>Tom Longhurst</Authors>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageIcon>logo.jpg</PackageIcon>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageTags>testing;unit;integration;component;test;assert;tester;framework</PackageTags>
+  </PropertyGroup>
+  -->
+  
+  <!--
+  <PropertyGroup>
+    <RoslynVersion Condition="'$(RoslynVersion)' == ''">4.7</RoslynVersion>
+  </PropertyGroup>
+  -->
+  
+  <PropertyGroup>
+    <IsTestingPlatformApplication Condition="'$(IsTestingPlatformApplication)' == ''">false</IsTestingPlatformApplication>
+  </PropertyGroup>
+
+  <!--
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)assets/logo.jpg" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  -->
+</Project>

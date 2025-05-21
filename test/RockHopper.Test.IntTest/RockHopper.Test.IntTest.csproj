@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsTestingPlatformApplication>true</IsTestingPlatformApplication>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Testing.Platform.MSBuild" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\RockHopper.Assertions\RockHopper.Assertions.csproj" />
+      <ProjectReference Include="..\..\src\RockHopper.Test\RockHopper.Test.csproj" />
+      <ProjectReference Include="..\..\src\RockHopper\RockHopper.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="RockHopper.Test.IntTest.testconfig.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+</Project>
