@@ -3,16 +3,12 @@
 Provides a simple way to build a test subject with its mock dependencies. Backed by the _Castle Core_ assembly for proxy generation,
 this framework supports both constructor and property dependencies.
 
-The mock framework supports strict mocking only. There is no support for loose mocks. This means that you _have_ to provide 
+The mock framework supports strict mocking only. There is no support for loose mocks. This means that you _have_ to provide
 a matching mock setup for any calls made to mocks. This is **by design** to enforce deliberate enforcement of good test practices.
 
 ## Getting Started
 
-You can find this packages via NuGet:
-
-[**RockHopper**](https://www.nuget.org/packages/RockHopper)
-
-Then as a simple example, you can use your favourite unit test framework and add the following code to test:
+For a simple example, you can use your favourite unit test framework and add the following code to test:
 
 ```c#
 public abstract class Calculator
@@ -58,24 +54,6 @@ public class CalculatorServiceTests
 }
 ```
 
-## Occurrences
-
-By default, a setup of a mock will _expect_ a single call. This can be overriden by using the setup extensions:
-
-```c#
-textLogger.Method(l => l.Log("HELLO WORLD")).OccursAtLeast(10);
-```
-
-## Features
-
-Explore [Deferred Returns](Readme.DeferredReturns.md)
-
-Explore [Out & Ref Parameters](Readme.OutAndRefParameters.md)
-
-Explore [Non-abstract Dependencies](Readme.NonAbstractClassDependencies.md)
-
-Explore [Return Series](Readme.ReturnSeries.md)
-
-## Useful
+## More
 
 1. GitHub for project: https://github.com/hypersolutions/rockhopper/

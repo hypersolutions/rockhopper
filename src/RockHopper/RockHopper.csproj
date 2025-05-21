@@ -1,4 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <PackageId>RockHopper</PackageId>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <Copyright>Copyright (c) Hypersolutions $(CurrentYear)</Copyright>
+        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/hypersolutions/rockhopper</PackageProjectUrl>
+        <Description>Test subject support for unit test frameworks</Description>
+        <Authors>Hypersolutions</Authors>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageIcon>RockHopper.png</PackageIcon>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <PackageTags>unit;test;testing;subject;mock</PackageTags>
+    </PropertyGroup>
     
     <ItemGroup>
         <PackageReference Include="Castle.Core" />
@@ -25,4 +39,12 @@
         </AssemblyAttribute>
     </ItemGroup>
 
+    <PropertyGroup>
+        <CurrentYear>$([System.DateTime]::Now.ToString("yyyy"))</CurrentYear>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="Readme.md" Pack="true" PackagePath="\"/>
+        <None Include="RockHopper.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 </Project>
