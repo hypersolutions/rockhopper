@@ -8,13 +8,11 @@ public class AsyncReturnTests
 {
     private readonly UserService _userService;
     private readonly Mock<IUserRepository> _userRepository;
-    private readonly TestSubject<UserService> _testSubject;
 
     public AsyncReturnTests()
     {
-        _testSubject = new TestSubject<UserService>();
-        _userService = _testSubject;
-        _userRepository = _testSubject.GetMock<IUserRepository>();
+        _userService = TestSubject.Create<UserService>();
+        _userRepository = _userService.GetMock<IUserRepository>();
     }
     
     [Fact]
@@ -47,6 +45,6 @@ public class AsyncReturnTests
         
         await _userService.SaveUserAsync(user);
 
-        _testSubject.VerifyAll();
+        _userService.VerifyAll();
     }
 }

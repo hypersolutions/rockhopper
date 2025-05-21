@@ -43,9 +43,8 @@ public class CalculatorServiceTests
     public void TwoNumbers_AddNumbers_ReturnsSum()
     {
         // Arrange
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(1, 2)).Returns(3);
         
         // Act
@@ -64,7 +63,6 @@ By default, a setup of a mock will _expect_ a single call. This can be overriden
 ```c#
 textLogger.Method(l => l.Log("HELLO WORLD")).OccursAtLeast(10);
 ```
-
 
 ## Features
 

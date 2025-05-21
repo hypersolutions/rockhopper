@@ -7,14 +7,13 @@ namespace RockHopper.NUnit.Test;
 
 public class OutAndRefParameterTests
 {
-    private readonly TestSubject<ConverterService> _testSubject = new();
     private readonly ConverterService _converterService;
     private readonly Mock<IIntConverter> _intConverter;
 
     public OutAndRefParameterTests()
     {
-        _converterService = _testSubject.Value;
-        _intConverter = _testSubject.GetMock<IIntConverter>();
+        _converterService = TestSubject.Create<ConverterService>();
+        _intConverter = _converterService.GetMock<IIntConverter>();
     }
     
     [Test]

@@ -6,15 +6,13 @@ namespace RockHopper.XUnit.Test;
 
 public class PropertyTests
 {
-    private readonly TestSubject<CurrencyService> _testSubject;
     private readonly CurrencyService _currencyService;
     private readonly Mock<Currency> _currency;
 
     public PropertyTests()
     {
-        _testSubject = new TestSubject<CurrencyService>();
-        _currencyService = _testSubject;
-        _currency = _testSubject.GetMock<Currency>();
+        _currencyService = TestSubject.Create<CurrencyService>();
+        _currency = _currencyService.GetMock<Currency>();
     }
 
     [Fact]
@@ -48,6 +46,6 @@ public class PropertyTests
         _currencyService.ChangeCurrency("USD");
         _ = _currencyService.Convert(100);
         
-        _testSubject.VerifyAll();
+        _currencyService.VerifyAll();
     }
 }

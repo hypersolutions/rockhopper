@@ -9,14 +9,12 @@ public class AsyncReturnTests
 {
     private UserService _userService;
     private Mock<IUserRepository> _userRepository;
-    private TestSubject<UserService> _testSubject;
 
     [SetUp]
     public void BeforeEachTest()
     {
-        _testSubject = new TestSubject<UserService>();
-        _userService = _testSubject;
-        _userRepository = _testSubject.GetMock<IUserRepository>();
+        _userService = TestSubject.Create<UserService>();
+        _userRepository = _userService.GetMock<IUserRepository>();
     }
     
     [Test]
@@ -49,6 +47,6 @@ public class AsyncReturnTests
         
         await _userService.SaveUserAsync(user);
 
-        _testSubject.VerifyAll();
+        _userService.VerifyAll();
     }
 }

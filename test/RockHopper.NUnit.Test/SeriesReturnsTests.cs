@@ -11,9 +11,8 @@ public class SeriesReturnsTests
     [Test]
     public void SequentialNumbersWithMismatchMock_AddNumberSeries_ThrowsExceptions()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10);
 
         var exception = Should.Throw<MockException>(() => calculatorService.AddNumberSeries(1, 2, 3, 4, 5));
@@ -24,42 +23,39 @@ public class SeriesReturnsTests
     [Test]
     public void SequentialNumbers_AddNumberSeries_ReturnsTotal()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         var result = calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
         
         result.ShouldBe(15);
         
-        testSubject.VerifyAll();
+        calculatorService.VerifyAll();
     }
     
     [Test]
     public void SequentialNumbers_AddNumberSeries_VerifiesThatAllCallsMade()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         calculatorService.AddNumberSeries(1, 2, 3, 4, 5);
         
-        testSubject.VerifyAll();
+        calculatorService.VerifyAll();
     }
     
     [Test]
     public void SequentialNumbersWithMissingMockCall_AddNumberSeries_ThrowsException()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(Param.IsAny<int>(), Param.IsAny<int>())).Returns(3, 6, 10, 15);
 
         calculatorService.AddNumberSeries(1, 2, 3, 4);
         
-        var exception = Should.Throw<VerificationException>(() => testSubject.VerifyAll());
+        var exception = Should.Throw<VerificationException>(() => calculatorService.VerifyAll());
         exception.Message.ShouldBe("Verification mismatch: Expected 4; Actual 3");
     }
 }

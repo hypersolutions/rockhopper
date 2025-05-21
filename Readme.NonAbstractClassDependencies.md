@@ -38,13 +38,12 @@ Then you can provide a setup for any virtual method defined on the dependency as
 [Fact]
 public void SentenceCaseText_Capitalize_LogsUppercaseText()
 {
-    var testSubject = new TestSubject<TextFormatterService>();
-    TextFormatterService textFormatterService = testSubject;
-    var textLogger = testSubject.GetMock<TextLogger>();
+    var textFormatterService = TestSubject.Create<TextFormatterService>();
+    var textLogger = textFormatterService.GetMock<TextLogger>();
     textLogger.Method(l => l.Log("HELLO WORLD")).OccursOnce();
 
     textFormatterService.Capitalize("Hello world");
     
-    testSubject.VerifyAll();
+    textFormatterService.VerifyAll();
 }
 ```

@@ -8,30 +8,28 @@ namespace RockHopper.Test;
 public class TestSubjectTests
 {
     [Fact]
-    public void SubjectWithDependency_ImplicitCast_ReturnsNonNullInstance()
+    public void SubjectWithDependency_Create_ReturnsNonNullInstance()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        
-        CalculatorService calculatorService = testSubject;
-        
-        calculatorService.ShouldNotBeNull();
-    }
-
-    [Fact]
-    public void SubjectWithDependency_Value_ReturnsNonNullInstance()
-    {
-        var testSubject = new TestSubject<CalculatorService>();
-        
-        var calculatorService = testSubject.Value;
+        var calculatorService = TestSubject.Create<CalculatorService>();
         
         calculatorService.ShouldNotBeNull();
     }
     
     [Fact]
+    public void SubjectWithDependency_Create_ReturnsDifferentInstanceEachTime()
+    {
+        var calculatorService1 = TestSubject.Create<CalculatorService>();
+
+        var calculatorService2 = TestSubject.Create<CalculatorService>();
+        
+        calculatorService1.ShouldNotBe(calculatorService2);
+    }
+    
+    [Fact]
     public void UnknownMock_GetMock_ThrowsException()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        var exception = Should.Throw<TestException>(() => testSubject.GetMock<IAccountManager>());
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var exception = Should.Throw<TestException>(() => calculatorService.GetMock<IAccountManager>());
         
         exception.Message.ShouldBe($"Unable to find a mock for {typeof(IAccountManager)}.");
     }
@@ -39,31 +37,20 @@ public class TestSubjectTests
     [Fact]
     public void SubjectWithDependency_GetMock_ReturnsNonNullMock()
     {
-        var testSubject = new TestSubject<CalculatorService>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
         
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculator = calculatorService.GetMock<Calculator>();
         
         calculator.ShouldNotBeNull();
     }
     
     [Fact]
-    public void SubjectWithDependency_Value_ReturnsSameInstanceForTest()
-    {
-        var testSubject = new TestSubject<CalculatorService>();
-        var calculatorService1 = testSubject.Value;
-
-        var calculatorService2 = testSubject.Value;
-        
-        calculatorService1.ShouldBe(calculatorService2);
-    }
-    
-    [Fact]
     public void SubjectWithDependency_GetMock_ReturnsSameInstanceForTest()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        var calculator1 = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator1 = calculatorService.GetMock<Calculator>();
         
-        var calculator2 = testSubject.GetMock<Calculator>();
+        var calculator2 = calculatorService.GetMock<Calculator>();
         
         calculator1.ShouldBe(calculator2);
     }
@@ -71,65 +58,61 @@ public class TestSubjectTests
     [Fact]
     public void AllMocksUsed_VerifyAll_CallsMockedCalculator()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(1, 2)).Returns(3);
         calculator.Function(c => c.Add(10, 20)).Returns(30);
         
         calculatorService.AddNumbers(1, 2);
         calculatorService.AddNumbers(10, 20);
         
-        Should.NotThrow<VerificationException>(() => testSubject.VerifyAll());
+        Should.NotThrow<VerificationException>(() => calculatorService.VerifyAll());
     }
     
     [Fact]
     public void UnusedMock_VerifyAll_ThrowsException()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(10, 20)).Returns(30);
         calculator.Function(c => c.Add(1, 2)).Returns(30);
         
         calculatorService.AddNumbers(10, 20);
         
-        Should.Throw<VerificationException>(() => testSubject.VerifyAll());
+        Should.Throw<VerificationException>(() => calculatorService.VerifyAll());
     }
     
     [Fact]
     public void ReusingAllMocksBetweenVerifies_VerifyAll_Succeeds()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(1, 2)).Returns(3);
         calculator.Function(c => c.Add(10, 20)).Returns(30);
         calculatorService.AddNumbers(1, 2);
         calculatorService.AddNumbers(10, 20);
         
-        testSubject.VerifyAll();
+        calculatorService.VerifyAll();
         
         calculatorService.AddNumbers(1, 2);
         calculatorService.AddNumbers(10, 20);
         
-        Should.NotThrow<VerificationException>(() => testSubject.VerifyAll());
+        Should.NotThrow<VerificationException>(() => calculatorService.VerifyAll());
     }
     
     [Fact]
     public void NotReusingAllMocksBetweenVerifies_VerifyAll_ThrowsException()
     {
-        var testSubject = new TestSubject<CalculatorService>();
-        CalculatorService calculatorService = testSubject;
-        var calculator = testSubject.GetMock<Calculator>();
+        var calculatorService = TestSubject.Create<CalculatorService>();
+        var calculator = calculatorService.GetMock<Calculator>();
         calculator.Function(c => c.Add(1, 2)).Returns(3);
         calculator.Function(c => c.Add(10, 20)).Returns(30);
         calculatorService.AddNumbers(1, 2);
         calculatorService.AddNumbers(10, 20);
-        testSubject.VerifyAll();
+        calculatorService.VerifyAll();
         
         calculatorService.AddNumbers(1, 2);
         
-        Should.Throw<VerificationException>(() => testSubject.VerifyAll());
+        Should.Throw<VerificationException>(() => calculatorService.VerifyAll());
     }
 }
