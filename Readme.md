@@ -8,6 +8,8 @@ a matching mock setup for any calls made to mocks. This is **by design** to enfo
 
 ## Status
 
+**Note** that these badges will work once the repo is public
+
 ![Build](https://img.shields.io/github/actions/workflow/status/hypersolutions/rockhopper/build-and-test.yml)![NuGet](https://www.nuget.org/packages/RockHopper/)![Stars](https://img.shields.io/github/stars/hypersolutions/rockhopper)![Closed Issues](https://img.shields.io/github/issues-closed-raw/hypersolutions/rockhopper)
 
 ## Getting Started
