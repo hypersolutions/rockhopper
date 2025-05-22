@@ -51,3 +51,5 @@ jobs:
           dotnet run --no-restore --no-build --configuration Release
           cd ../RockHopper.NUnit.Test
           dotnet run --no-restore --no-build --configuration Release
+          cd ../RockHopper.TUnit.Test
+          dotnet run --no-restore --no-build --configuration Release
