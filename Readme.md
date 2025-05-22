@@ -8,6 +8,7 @@ a matching mock setup for any calls made to mocks. This is **by design** to enfo
 
 ## Status
 
+(https://img.shields.io/github/actions/workflow/status/hypersolutions/rockhopper/build-and-test.yml) ![GitHub last commit (branch)]
 ![Building](https://github.com/hypersolutions/rockhopper/.github/workflows/build-and-test.yml/badge.svg)
 
 ## Getting Started
