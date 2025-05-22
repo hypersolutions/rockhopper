@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Reflection;
-using RockHopper.Enums;
 using RockHopper.Exceptions;
 using RockHopper.Mocking;
 
@@ -9,13 +8,14 @@ namespace RockHopper.Builder;
 internal static class TestSubjectCache
 {
     private static readonly ConcurrentDictionary<string, SubjectInfoCacheInfo> _bag = new();
-
-    internal static SubjectInfoCacheInfo Get<TSubject>(IConstructorSelector constructorSelector,
-        SubjectBuilderFlags builderFlags)
+    
+    internal static SubjectInfoCacheInfo Get<TSubject>(TestSubjectCreateOptions options)
     {
-        var key = $"{typeof(TSubject).FullName}.{constructorSelector.GetType().FullName}.{builderFlags}";
-        return _bag.GetOrAdd(key, _ => new SubjectInfoCacheInfo(
-            typeof(TSubject), constructorSelector.GetConstructor<TSubject>(), builderFlags));
+        return _bag.GetOrAdd(options.GetKey<TSubject>(), _ => new SubjectInfoCacheInfo(
+            typeof(TSubject), 
+            options.ConstructorSelector.GetConstructor<TSubject>(options.ConstructorSelectorArgs), 
+            options.MockParameters, 
+            options.MockProperties));
     }
     
     internal class SubjectInfoCacheInfo
@@ -24,12 +24,16 @@ internal static class TestSubjectCache
         private readonly List<ParameterInfo> _parameters = [];
         private readonly List<PropertyInfo> _properties = [];
         
-        internal SubjectInfoCacheInfo(Type subjectType, ConstructorInfo constructor, SubjectBuilderFlags builderFlags)
+        internal SubjectInfoCacheInfo(
+            Type subjectType, 
+            ConstructorInfo constructor, 
+            bool mockConstructorParams, 
+            bool mockProperties)
         {
             _constructor = constructor;
 
-            AddParameters(builderFlags);
-            AddProperties(subjectType, builderFlags);
+            AddParameters(mockConstructorParams);
+            AddProperties(subjectType, mockConstructorParams, mockProperties);
         }
 
         internal TSubject CreateSubject<TSubject>(ParameterMocks parameterMocks, PropertyMocks propertyMocks)
@@ -82,9 +86,9 @@ internal static class TestSubjectCache
             return mocks;
         }
 
-        private void AddParameters(SubjectBuilderFlags builderFlags)
+        private void AddParameters(bool mockConstructorParams)
         {
-            if (HasFlag(builderFlags, SubjectBuilderFlags.Constructor))
+            if (mockConstructorParams)
             {
                 foreach (var parameter in _constructor.GetParameters())
                 {
@@ -93,38 +97,28 @@ internal static class TestSubjectCache
             }
         }
 
-        private void AddProperties(Type subjectType, SubjectBuilderFlags builderFlags)
+        private void AddProperties(Type subjectType, bool mockConstructorParams, bool mockProperties)
         {
-            if (HasFlag(builderFlags, SubjectBuilderFlags.Property))
+            if (mockProperties)
             {
-                CheckForParameterlessConstructor(builderFlags);
+                CheckForParameterlessConstructor(mockConstructorParams);
             
                 const BindingFlags propertyFlags = BindingFlags.Instance | BindingFlags.Public;
 
-                foreach (var property in subjectType.GetProperties(propertyFlags).Where(PropertyTypeIsInterface))
+                foreach (var property in subjectType.GetProperties(propertyFlags).Where(p => p.CanWrite))
                 {
                     _properties.Add(property);
                 }
             }
         }
 
-        private void CheckForParameterlessConstructor(SubjectBuilderFlags builderFlags)
+        private void CheckForParameterlessConstructor(bool mockConstructorParams)
         {
-            if (!HasFlag(builderFlags, SubjectBuilderFlags.Constructor) && _constructor.GetParameters().Length > 0)
+            if (!mockConstructorParams && _constructor.GetParameters().Length > 0)
             {
                 throw new TestException(
                     "There is no parameterless constructor for the subject using property injection only.");
             }
-        }
-        
-        private static bool HasFlag(SubjectBuilderFlags flags, SubjectBuilderFlags expectedFlag)
-        {
-            return (flags & expectedFlag) == expectedFlag;
-        }
-        
-        private static bool PropertyTypeIsInterface(PropertyInfo propertyInfo)
-        {
-            return (propertyInfo.PropertyType.IsInterface || propertyInfo.PropertyType.IsAbstract) && propertyInfo.CanWrite;
         }
     }
 }

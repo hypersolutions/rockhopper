@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Frozen;
 using RockHopper.Builder;
-using RockHopper.Enums;
 using RockHopper.Exceptions;
 using RockHopper.Mocking;
 
@@ -19,25 +18,24 @@ public static class TestSubject
     {
         InitCleanupThread();
     }
-    
+
     /// <summary>
     /// Create the subject info and mock dependency information.
     /// </summary>
-    /// <param name="builderFlags">How to construct the subject</param>
-    /// <param name="constructorSelector">How to choose the constructor - defaults to the first constructor</param>
+    /// <param name="options">Test subject create options. If not provided it will default to TestSubjectCreateOptions.Default</param>
     /// <returns>Test subject</returns>
-    public static TSubject Create<TSubject>(
-        SubjectBuilderFlags builderFlags = SubjectBuilderFlags.Constructor, 
-        IConstructorSelector? constructorSelector = null) where TSubject : notnull
+    public static TSubject Create<TSubject>(TestSubjectCreateOptions? options = null) where TSubject : notnull
     {
-        constructorSelector ??= new DefaultConstructorSelector();
-        var testSubjectCache = TestSubjectCache.Get<TSubject>(constructorSelector, builderFlags);
+        options ??= TestSubjectCreateOptions.Default;
+        var testSubjectCache = TestSubjectCache.Get<TSubject>(options);
         var parameterMocks = testSubjectCache.BuildParameterMocks();
         var propertyMocks = testSubjectCache.BuildPropertyMocks();
 
         var subject = testSubjectCache.CreateSubject<TSubject>(parameterMocks, propertyMocks);
         var mocks = testSubjectCache.MergeMocks(parameterMocks, propertyMocks);
+        
         Track(subject, mocks);
+        
         return subject;
     }
     

@@ -1,3 +1,5 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global - Test support
+
 namespace RockHopper.TestSupport;
 
 public sealed class User
