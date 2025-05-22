@@ -1,4 +1,4 @@
-using RockHopper.TestSupport;
+using RockHopper.TestSupport.Formatting;
 
 namespace RockHopper.TUnit.Test;
 

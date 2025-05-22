@@ -1,6 +1,6 @@
 ﻿using RockHopper.Assertions;
 using RockHopper.Mocking;
-using RockHopper.TestSupport;
+using RockHopper.TestSupport.Finance;
 
 namespace RockHopper.TUnit.Test;
 

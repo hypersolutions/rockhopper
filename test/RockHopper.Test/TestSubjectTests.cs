@@ -3,7 +3,10 @@ using RockHopper.Assertions;
 using RockHopper.Builder;
 using RockHopper.Exceptions;
 using RockHopper.Mocking.Exceptions;
-using RockHopper.TestSupport;
+using RockHopper.TestSupport.Banking;
+using RockHopper.TestSupport.Calculation;
+using RockHopper.TestSupport.Conversion;
+using RockHopper.TestSupport.Formatting;
 
 namespace RockHopper.Test;
 

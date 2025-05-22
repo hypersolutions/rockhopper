@@ -1,5 +1,6 @@
 ﻿using RockHopper.Assertions;
-using RockHopper.TestSupport;
+using RockHopper.TestSupport.Banking;
+using RockHopper.TestSupport.Calculation;
 
 // ReSharper disable AccessToModifiedClosure - Deferred test setup example
 

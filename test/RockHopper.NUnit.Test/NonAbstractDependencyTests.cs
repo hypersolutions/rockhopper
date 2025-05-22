@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using RockHopper.TestSupport;
+using RockHopper.TestSupport.Formatting;
 
 namespace RockHopper.NUnit.Test;
 

@@ -1,4 +1,4 @@
-namespace RockHopper.TestSupport;
+namespace RockHopper.TestSupport.Users;
 
 public sealed class UserService
 {

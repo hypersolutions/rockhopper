@@ -1,4 +1,4 @@
-namespace RockHopper.TestSupport;
+namespace RockHopper.TestSupport.Formatting;
 
 public class TextLogger
 {

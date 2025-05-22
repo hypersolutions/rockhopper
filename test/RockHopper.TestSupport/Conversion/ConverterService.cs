@@ -1,4 +1,4 @@
-﻿namespace RockHopper.TestSupport;
+﻿namespace RockHopper.TestSupport.Conversion;
 
 public class ConverterService
 {

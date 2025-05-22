@@ -1,4 +1,4 @@
-﻿namespace RockHopper.TestSupport;
+﻿namespace RockHopper.TestSupport.Finance;
 
 public sealed class CurrencyService
 {
