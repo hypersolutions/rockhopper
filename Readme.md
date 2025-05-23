@@ -76,6 +76,8 @@ textLogger.Method(l => l.Log("HELLO WORLD")).OccursAtLeast(10);
 
 Explore [Deferred Returns](Readme.DeferredReturns.md)
 
+Explore [Async Returns](Readme.AsyncReturns.md)
+
 Explore [Out & Ref Parameters](Readme.OutAndRefParameters.md)
 
 Explore [Non-abstract Dependencies](Readme.NonAbstractClassDependencies.md)

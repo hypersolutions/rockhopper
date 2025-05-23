@@ -1,4 +1,4 @@
-﻿using VerificationException = RockHopper.Mocking.Exceptions.VerificationException;
+﻿using RockHopper.Mocking.Exceptions;
 
 namespace RockHopper.Mocking.Verifies;
 
@@ -8,9 +8,10 @@ internal class ExactOccurs : Occurs
     {
     }
 
-    internal override void Assert(int actualCount)
+    internal override void Assert(string target, int actualCount)
     {
         if (Count != actualCount)
-            throw new VerificationException($"Verification mismatch: Expected {Count}; Actual {actualCount}");
+            throw new VerificationException(
+                $"Verification mismatch: Expected {Count}; Actual {actualCount} for {target}.");
     }
 }

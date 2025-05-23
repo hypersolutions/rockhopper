@@ -11,7 +11,7 @@ public class OccursTests
     {
         var occurred = Occurs.Never();
         
-        Should.NotThrow<VerificationException>(() => occurred.Assert(0));
+        Should.NotThrow<VerificationException>(() => occurred.Assert("Test", 0));
     }
     
     [Fact]
@@ -19,7 +19,7 @@ public class OccursTests
     {
         var occurred = Occurs.Never();
         
-        Should.Throw<VerificationException>(() => occurred.Assert(1));
+        Should.Throw<VerificationException>(() => occurred.Assert("Test", 1));
     }
     
     [Fact]
@@ -27,7 +27,7 @@ public class OccursTests
     {
         var occurred = Occurs.Once();
 
-        Should.NotThrow<VerificationException>(() => occurred.Assert(1));
+        Should.NotThrow<VerificationException>(() => occurred.Assert("Test", 1));
     }
     
     [Theory]
@@ -37,7 +37,7 @@ public class OccursTests
     {
         var occurred = Occurs.Once();
         
-        Should.Throw<VerificationException>(() => occurred.Assert(count));
+        Should.Throw<VerificationException>(() => occurred.Assert("Test", count));
     }
     
     [Theory]
@@ -47,7 +47,7 @@ public class OccursTests
     {
         var occurred = Occurs.Exactly(count);
         
-        Should.NotThrow<VerificationException>(() => occurred.Assert(count));
+        Should.NotThrow<VerificationException>(() => occurred.Assert("Test", count));
     }
     
     [Theory]
@@ -57,7 +57,7 @@ public class OccursTests
     {
         var occurred = Occurs.Exactly(count);
         
-        Should.Throw<VerificationException>(() => occurred.Assert(count + 1));
+        Should.Throw<VerificationException>(() => occurred.Assert("Test", count + 1));
     }
     
     [Theory]
@@ -67,7 +67,7 @@ public class OccursTests
     {
         var occurred = Occurs.AtLeast(2);
         
-        Should.NotThrow<VerificationException>(() => occurred.Assert(count));
+        Should.NotThrow<VerificationException>(() => occurred.Assert("Test", count));
     }
     
     [Fact]
@@ -75,6 +75,6 @@ public class OccursTests
     {
         var occurred = Occurs.AtLeast(2);
         
-        Should.Throw<VerificationException>(() => occurred.Assert(1));
+        Should.Throw<VerificationException>(() => occurred.Assert("Test", 1));
     }
 }

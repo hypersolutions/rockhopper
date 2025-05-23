@@ -19,12 +19,4 @@ public interface IReturnCall : IMethodCall
     /// <param name="functions">Func to call</param>
     /// <returns>Verify call</returns>
     IVerifyCall Returns<TReturn>(params Func<TReturn?>[] functions);
-
-    /// <summary>
-    /// The mocked type returns the async values as a sequence.
-    /// </summary>
-    /// <typeparam name="TReturn">Return type</typeparam>
-    /// <param name="returnValues">Value to return</param>
-    /// <returns>Verify call</returns>
-    IVerifyCall ReturnsAsync<TReturn>(params TReturn?[] returnValues);
 }

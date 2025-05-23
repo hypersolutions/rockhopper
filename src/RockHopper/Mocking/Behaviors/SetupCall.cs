@@ -29,12 +29,26 @@ internal sealed class SetupCall : IReturnCall, ISetPropertyCall
     
     public IVerifyCall Returns<TReturn>(params TReturn[] returnValues)
     {
+        var isTaskReturn = _setupInfo is MethodSetupInfo { ReturnTypeIsTask: true };
+        var isValueTaskReturn = _setupInfo is MethodSetupInfo { ReturnTypeIsValueTask: true };
+        
         foreach (var returnValue in returnValues)
         {
-            _setupInfo.ReturnValues.Add(returnValue);
+            if (isTaskReturn)
+            {
+                _setupInfo.ReturnValues.Add(Task.FromResult(returnValue));
+            }
+            else if (isValueTaskReturn)
+            {
+                _setupInfo.ReturnValues.Add(ValueTask.FromResult(returnValue));
+            }
+            else
+            {
+                _setupInfo.ReturnValues.Add(returnValue);
+            }
         }
 
-        _setupInfo.Visits.AddOccurs(Occurs.Exactly(_setupInfo.ReturnValues.Count));
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Exactly(_setupInfo.ReturnValues.Count));
         
         return this;
     }
@@ -46,39 +60,29 @@ internal sealed class SetupCall : IReturnCall, ISetPropertyCall
             _setupInfo.ReturnValues.Add(function, true);
         }
         
-        _setupInfo.Visits.AddOccurs(Occurs.Exactly(_setupInfo.ReturnValues.Count));
-        
-        return this;
-    }
-    
-    public IVerifyCall ReturnsAsync<TReturn>(params TReturn?[] returnValues)
-    {
-        foreach (var returnValue in returnValues)
-        {
-            _setupInfo.ReturnValues.Add(Task.FromResult(returnValue));
-        }
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Exactly(_setupInfo.ReturnValues.Count));
         
         return this;
     }
     
     public void NeverOccurs()
     {
-        _setupInfo.Visits.AddOccurs(Occurs.Never());
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Never());
     }
 
     public void OccursOnce()
     {
-        _setupInfo.Visits.AddOccurs(Occurs.Once());
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Once());
     }
 
     public void OccursExactly(int count)
     {
-        _setupInfo.Visits.AddOccurs(Occurs.Exactly(count));
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Exactly(count));
     }
 
     public void OccursAtLeast(int count)
     {
-        _setupInfo.Visits.AddOccurs(Occurs.AtLeast(count));
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.AtLeast(count));
     }
 
     public IVerifyCall WithValue<TValue>(TValue? value)
@@ -91,7 +95,7 @@ internal sealed class SetupCall : IReturnCall, ISetPropertyCall
     {
         var parameter = new Parameter { Matcher = ParameterMatcherFactory.Create(valueFunc), Type = ParameterType.In };
         _setupInfo.AddParameter(parameter);
-        _setupInfo.Visits.AddOccurs(Occurs.Once());
+        _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Once());
         return this;
     }
 }

@@ -55,6 +55,6 @@ public class SeriesReturnsTests
         calculatorService.AddNumberSeries(1, 2, 3, 4);
         
         var exception = Should.Throw<VerificationException>(() => calculatorService.VerifyAll());
-        exception.Message.ShouldBe("Verification mismatch: Expected 4; Actual 3");
+        exception.Message.ShouldBe("Verification mismatch: Expected 4; Actual 3 for Calculator.Add(Int32, Int32).");
     }
 }

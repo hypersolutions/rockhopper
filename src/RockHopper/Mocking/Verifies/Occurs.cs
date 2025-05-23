@@ -12,5 +12,5 @@ internal abstract class Occurs(int count)
 
     internal static Occurs AtLeast(int count) => new CountOrMoreOccurs(count);
 
-    internal abstract void Assert(int actualCount);
+    internal abstract void Assert(string target, int actualCount);
 }

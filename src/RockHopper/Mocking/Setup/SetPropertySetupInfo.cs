@@ -12,6 +12,8 @@ internal sealed class SetPropertySetupInfo : SetupInfo
         // Special-case for indexers
         Name = setMethodInfo.Name.Replace("get_Item", "set_Item");
         
+        FullName = $"{setMethodInfo.DeclaringType!.Name}.{Name.Replace("set_", string.Empty)}";
+        
         foreach (var parameter in BuildParameters(expression))
         {
             AddParameter(parameter);    

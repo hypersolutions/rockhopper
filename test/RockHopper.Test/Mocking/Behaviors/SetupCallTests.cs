@@ -138,26 +138,26 @@ public class SetupCallTests
     }
     
     [Fact]
-    public async Task SingleAsyncReturnValue_ReturnsAsync_AddsAsyncReturnValueToSetup()
+    public async Task SingleAsyncReturnValue_Returns_AddsAsyncReturnValueToSetup()
     {
-        Expression<Action<Helper>> expression = h => h.Add(10, 20);
+        Expression<Action<Helper>> expression = h => h.AddAsync(10, 20);
         var setup = new MethodSetupInfo(expression);
         var call = new SetupCall(setup);
 
-        call.ReturnsAsync(30);
+        call.Returns(30);
 
         var result = await (Task<int>)setup.ReturnValues.GetNext()!;
         result.ShouldBe(30);
     }
     
     [Fact]
-    public async Task MultipleAsyncReturnValue_ReturnsAsync_AddsAsyncReturnValuesToSetup()
+    public async Task MultipleAsyncReturnValue_Returns_AddsAsyncReturnValuesToSetup()
     {
-        Expression<Action<Helper>> expression = h => h.Add(10, 20);
+        Expression<Action<Helper>> expression = h => h.AddAsync(10, 20);
         var setup = new MethodSetupInfo(expression);
         var call = new SetupCall(setup);
 
-        call.ReturnsAsync(30, 50);
+        call.Returns(30, 50);
 
         var result = await (Task<int>)setup.ReturnValues.GetNext()!;
         result.ShouldBe(30);
@@ -173,5 +173,7 @@ public class SetupCallTests
         }
         
         public int Add(int x, int y) => x + y;
+        
+        public Task<int> AddAsync(int x, int y) => Task.FromResult(x + y);
     }
 }

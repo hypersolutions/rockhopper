@@ -11,6 +11,8 @@ internal sealed class GetPropertySetupInfo : SetupInfo
 
         Name = getMethodInfo.Name;
 
+        FullName = $"{getMethodInfo.DeclaringType!.Name}.{Name.Replace("get_", string.Empty)}";
+
         foreach (var parameter in BuildParameters(expression))
         {
             AddParameter(parameter);    

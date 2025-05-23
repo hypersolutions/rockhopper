@@ -9,6 +9,11 @@ public sealed class UserService
         _userRepository = userRepository;
     }
 
+    public async ValueTask<bool> UserExistsAsync(int id)
+    {
+        return await _userRepository.UserExistsAsync(id);
+    }
+    
     public async Task<User> FindUserAsync(int id)
     {
         var user = await _userRepository.GetUserAsync(id);

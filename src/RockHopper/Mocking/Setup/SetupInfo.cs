@@ -13,6 +13,8 @@ public abstract class SetupInfo
     public IEnumerable<Parameter> Parameters => _parameters.AsReadOnly();
     
     internal string Name { get; init; } = null!;
+
+    internal string FullName { get; init; } = null!;
     
     [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Stops debugger inspection incrementing value
     internal ReturnValueList ReturnValues { get; } = new();
