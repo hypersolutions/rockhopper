@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using RockHopper.Mocking.Extensions;
 
 namespace RockHopper.Mocking.Setup;
 
@@ -10,6 +11,8 @@ internal sealed class MethodSetupInfo : SetupInfo
     {
         if (expression.Body is not MethodCallExpression body)
             throw new ArgumentException("Unable to get method/function from expression.");
+
+        body.Method.CheckMethodIsOverridable();
         
         Name = body.Method.Name;
 

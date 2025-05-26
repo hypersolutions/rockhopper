@@ -9,6 +9,8 @@ internal sealed class SetPropertySetupInfo : SetupInfo
     {
         var setMethodInfo = expression.GetMethodInfoForSet();
         
+        setMethodInfo.CheckMethodIsOverridable();
+        
         // Special-case for indexers
         Name = setMethodInfo.Name.Replace("get_Item", "set_Item");
         

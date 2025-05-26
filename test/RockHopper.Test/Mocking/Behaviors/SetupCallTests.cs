@@ -2,6 +2,7 @@
 using RockHopper.Assertions;
 using RockHopper.Mocking.Behaviors;
 using RockHopper.Mocking.Setup;
+
 // ReSharper disable UnusedMethodReturnValue.Local - Part of test pattern
 
 namespace RockHopper.Test.Mocking.Behaviors;
@@ -167,13 +168,13 @@ public class SetupCallTests
     
     private class Helper
     {
-        public void Check(int x, int y)
+        public virtual void Check(int x, int y)
         {
             Console.WriteLine($"{x} and {y}");
         }
         
-        public int Add(int x, int y) => x + y;
+        public virtual int Add(int x, int y) => x + y;
         
-        public Task<int> AddAsync(int x, int y) => Task.FromResult(x + y);
+        public virtual Task<int> AddAsync(int x, int y) => Task.FromResult(x + y);
     }
 }

@@ -9,6 +9,8 @@ internal sealed class GetPropertySetupInfo : SetupInfo
     {
         var getMethodInfo = expression.GetMethodInfoForGet();
 
+        getMethodInfo.CheckMethodIsOverridable();
+        
         Name = getMethodInfo.Name;
 
         FullName = $"{getMethodInfo.DeclaringType!.Name}.{Name.Replace("get_", string.Empty)}";

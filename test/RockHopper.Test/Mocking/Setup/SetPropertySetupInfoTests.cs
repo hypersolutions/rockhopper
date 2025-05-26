@@ -3,6 +3,7 @@ using RockHopper.Assertions;
 using RockHopper.Mocking.Parameters;
 using RockHopper.Mocking.Setup;
 
+// ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable UnusedMember.Local
 // ReSharper disable ClassNeverInstantiated.Local
@@ -11,6 +12,16 @@ namespace RockHopper.Test.Mocking.Setup;
 
 public class SetPropertySetupInfoTests 
 {
+    [Fact]
+    public void NonOverridableProperty_Ctor_ThrowsException()
+    {
+        Expression<Func<Helper, bool>> expression = h => h.CountGreaterThanZero;
+    
+        var exception = Should.Throw<ArgumentException>(() => _ = new SetPropertySetupInfo(expression));
+        
+        exception.Message.ShouldBe("Provided method or property CountGreaterThanZero is not virtual or abstract.");
+    }
+    
     [Fact]
     public void FromProperty_Ctor_SetsName()
     {
@@ -51,11 +62,13 @@ public class SetPropertySetupInfoTests
         parameter.Matcher.ShouldBeOfType<TMatcher>();
     }
     
-    private class Helper
+    private abstract class Helper
     {
-        public int Count { get; set; }
+        public abstract int Count { get; set; }
+        
+        public bool CountGreaterThanZero { get; set; }
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => index;
             set => _ = value;

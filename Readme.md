@@ -69,7 +69,7 @@ public class CalculatorServiceTests
 By default, a setup of a mock will _expect_ a single call. This can be overriden by using the setup extensions:
 
 ```c#
-textLogger.Method(l => l.Log("HELLO WORLD")).OccursAtLeast(10);
+textLogger.Method(l => l.Log("Hello World")).OccursAtLeast(10);
 ```
 
 ## Features

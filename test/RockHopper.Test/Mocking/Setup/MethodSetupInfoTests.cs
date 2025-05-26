@@ -3,10 +3,22 @@ using RockHopper.Assertions;
 using RockHopper.Mocking.Parameters;
 using RockHopper.Mocking.Setup;
 
+// ReSharper disable UnusedMethodReturnValue.Local
+
 namespace RockHopper.Test.Mocking.Setup;
 
 public class MethodSetupInfoTests 
 {
+    [Fact]
+    public void NonOverridableMethod_Ctor_ThrowsException()
+    {
+        Expression<Action<Helper>> expression = h => h.IsPositive(10);
+
+        var exception = Should.Throw<ArgumentException>(() => _ = new MethodSetupInfo(expression));
+        
+        exception.Message.ShouldBe("Provided method or property IsPositive is not virtual or abstract.");
+    }
+    
     [Fact]
     public void FromMethod_Ctor_SetsName()
     {
@@ -63,14 +75,19 @@ public class MethodSetupInfoTests
 
     private class Helper
     {
-        public void Check(int x, int y)
+        public virtual void Check(int x, int y)
         {
             Console.WriteLine($"{x} and {y}");
         }
         
-        public int Add(int x, int y)
+        public virtual int Add(int x, int y)
         {
             return x + y;
+        }
+
+        public bool IsPositive(int x)
+        {
+            return x >= 0;
         }
     }
 }
