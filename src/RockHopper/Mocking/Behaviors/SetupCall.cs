@@ -57,7 +57,7 @@ internal sealed class SetupCall : IReturnCall, ISetPropertyCall
     {
         foreach (var function in functions)
         {
-            _setupInfo.ReturnValues.Add(function, true);
+            _setupInfo.ReturnValues.Add(function);
         }
         
         _setupInfo.Visits.AddOccurs(_setupInfo.FullName, Occurs.Exactly(_setupInfo.ReturnValues.Count));

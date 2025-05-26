@@ -89,7 +89,7 @@ public class SetupCallTests
 
         call.Returns(30);
 
-        var result = (int)setup.ReturnValues.GetNext()!;
+        var result = setup.ReturnValues.GetNext();
         result.ShouldBe(30);
     }
     
@@ -103,9 +103,9 @@ public class SetupCallTests
         
         call.Returns(50);
 
-        var result = (int)setup.ReturnValues.GetNext()!;
+        var result = setup.ReturnValues.GetNext();
         result.ShouldBe(30);
-        result = (int)setup.ReturnValues.GetNext()!;
+        result = setup.ReturnValues.GetNext();
         result.ShouldBe(50);
     }
     
@@ -118,7 +118,7 @@ public class SetupCallTests
 
         call.Returns(() => 30);
 
-        var result = (int)setup.ReturnValues.GetNext()!;
+        var result = setup.ReturnValues.GetNext();
         result.ShouldBe(30);
     }
     
@@ -131,9 +131,9 @@ public class SetupCallTests
 
         call.Returns(() => 30, () => 50);
 
-        var result = (int)setup.ReturnValues.GetNext()!;
+        var result = setup.ReturnValues.GetNext();
         result.ShouldBe(30);
-        result = (int)setup.ReturnValues.GetNext()!;
+        result = setup.ReturnValues.GetNext();
         result.ShouldBe(50);
     }
     

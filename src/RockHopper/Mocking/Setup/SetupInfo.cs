@@ -25,7 +25,7 @@ public abstract class SetupInfo
     [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Stops debugger inspection incrementing value
     internal ExceptionList Exceptions { get; } = new();
     
-    public TReturn? HandleResponse<TReturn>(object?[]? args)
+    public object? HandleResponse(object?[]? args)
     {
         Visits.Increment();
         

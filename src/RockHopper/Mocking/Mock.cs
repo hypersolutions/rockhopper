@@ -136,7 +136,7 @@ public sealed class Mock<T> : Mock where T : class
         public void Intercept(IInvocation invocation)
         {
             var setupInfo = _setupInfoList.FindBy(invocation.Method, invocation.Arguments);
-            invocation.ReturnValue = setupInfo.HandleResponse<object?>(invocation.Arguments);
+            invocation.ReturnValue = setupInfo.HandleResponse(invocation.Arguments);
         }
     }
 }

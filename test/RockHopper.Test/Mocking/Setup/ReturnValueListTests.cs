@@ -13,7 +13,7 @@ public class ReturnValueListTests
     {
         _returnValueList.Add(10);
         
-        object? value = _returnValueList.GetNext();
+        var value = _returnValueList.GetNext();
         
         value.ShouldBe(10);
     }
@@ -21,7 +21,7 @@ public class ReturnValueListTests
     [Fact]
     public void NoValues_GetNext_ReturnsNull()
     {
-        object? value = _returnValueList.GetNext();
+        var value = _returnValueList.GetNext();
 
         value.ShouldBeNull();
     }

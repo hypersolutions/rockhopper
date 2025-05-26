@@ -4,17 +4,17 @@ namespace RockHopper.Mocking.Setup;
 
 internal sealed class ReturnValueList
 {
-    private readonly List<(dynamic? Value, bool IsDeferred)> _returns = [];
+    private readonly List<object?> _returns = [];
     private int _index = -1;
 
     internal int Count => _returns.Count;
     
-    internal void Add(object? value, bool isDeferred = false)
+    internal void Add<TReturn>(TReturn? value)
     {
-        _returns.Add((value, isDeferred));   
+        _returns.Add(value);   
     }
 
-    internal dynamic? GetNext()
+    internal object? GetNext()
     {
         if (_returns.Count == 0) return null;
 
@@ -22,11 +22,21 @@ internal sealed class ReturnValueList
             throw new MockException("The return value sequence exceeds the request.");
 
         var currentReturn = _returns[++_index];
-        return currentReturn.IsDeferred ? currentReturn.Value() : currentReturn.Value;
+        return GetValue(currentReturn);
     }
 
     internal void Reset()
     {
         _index = -1;
+    }
+
+    private static object? GetValue(object? currentReturn)
+    {
+        if (currentReturn is Delegate func)
+        {
+            return func.DynamicInvoke();
+        }
+        
+        return currentReturn;
     }
 }
