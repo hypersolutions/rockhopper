@@ -4,18 +4,18 @@ namespace RockHopper.Mocking.Parameters;
 
 internal class PredicateParameterMatcher : ParameterMatcher
 {
-    private readonly dynamic _predicate;
+    private readonly Delegate _predicate;
 
     internal PredicateParameterMatcher(Delegate predicate)
     {
-        _predicate = predicate.DynamicInvoke()!;
+        _predicate = (Delegate)predicate.DynamicInvoke()!;
     }
     
     public override bool IsMatch(object? actual)
     {
         try
         {
-            return (bool)_predicate.DynamicInvoke(actual);
+            return (bool)_predicate.DynamicInvoke(actual)!;
         }
         catch (Exception error)
         {
