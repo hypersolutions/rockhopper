@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using RockHopper.Mocking.Exceptions;
 
 namespace RockHopper.Mocking.Extensions;
 
@@ -29,7 +30,7 @@ internal static class MethodInfoExtensions
                 methodName = Indexer;
             }
             
-            throw new ArgumentException($"Provided method or property {methodName} is not virtual or abstract.");
+            throw new MockException($"Provided method or property {methodName} is not virtual or abstract.");
         }
     }
 }

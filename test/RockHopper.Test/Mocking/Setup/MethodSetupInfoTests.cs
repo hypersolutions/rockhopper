@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using RockHopper.Assertions;
+using RockHopper.Mocking.Exceptions;
 using RockHopper.Mocking.Parameters;
 using RockHopper.Mocking.Setup;
 
@@ -14,7 +15,7 @@ public class MethodSetupInfoTests
     {
         Expression<Action<Helper>> expression = h => h.IsPositive(10);
 
-        var exception = Should.Throw<ArgumentException>(() => _ = new MethodSetupInfo(expression));
+        var exception = Should.Throw<MockException>(() => _ = new MethodSetupInfo(expression));
         
         exception.Message.ShouldBe("Provided method or property IsPositive is not virtual or abstract.");
     }

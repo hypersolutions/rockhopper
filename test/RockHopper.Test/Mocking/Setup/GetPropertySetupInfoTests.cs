@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using RockHopper.Assertions;
+using RockHopper.Mocking.Exceptions;
 using RockHopper.Mocking.Parameters;
 using RockHopper.Mocking.Setup;
 
@@ -17,7 +18,7 @@ public class GetPropertySetupInfoTests
     {
         Expression<Func<Helper, bool>> expression = h => h.CountGreaterThanZero;
     
-        var exception = Should.Throw<ArgumentException>(() => _ = new GetPropertySetupInfo(expression));
+        var exception = Should.Throw<MockException>(() => _ = new GetPropertySetupInfo(expression));
         
         exception.Message.ShouldBe("Provided method or property CountGreaterThanZero is not virtual or abstract.");
     }
