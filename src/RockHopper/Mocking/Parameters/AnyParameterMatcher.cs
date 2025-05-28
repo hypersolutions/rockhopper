@@ -6,4 +6,8 @@ internal class AnyParameterMatcher : ParameterMatcher
     {
         return true;
     }
+
+    public override void SetValue(Delegate? predicate)
+    {
+    }
 }

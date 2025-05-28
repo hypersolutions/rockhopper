@@ -8,7 +8,8 @@ public class PredicateParameterMatcherTests
     [Fact]
     public void ValidCondition_IsMatch_ReturnsTrue()
     {
-        var matcher = new PredicateParameterMatcher(() => new Func<int, bool>(p => p < 10));
+        var matcher = new PredicateParameterMatcher();
+        matcher.SetValue(() => new Func<int, bool>(p => p < 10));
         
         var matches = matcher.IsMatch(9);
         
@@ -18,7 +19,8 @@ public class PredicateParameterMatcherTests
     [Fact]
     public void InvalidCondition_IsMatch_ReturnsFalse()
     {
-        var matcher = new PredicateParameterMatcher(() => new Func<int, bool>(p => p < 10));
+        var matcher = new PredicateParameterMatcher();
+        matcher.SetValue(() => new Func<int, bool>(p => p < 10));
         
         var matches = matcher.IsMatch(11);
         

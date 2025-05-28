@@ -2,13 +2,20 @@ namespace RockHopper.Mocking.Parameters;
 
 internal class ExactParameterMatcher : ParameterMatcher
 {
-    internal ExactParameterMatcher(object? expected = null)
-    {
-        Value = expected;
-    }
+    private object? _value;
     
     public override bool IsMatch(object? actual)
     {
-        return Equals(Value, actual);
+        return Equals(_value, actual);
+    }
+
+    public object? GetValue()
+    {
+        return _value;
+    }
+    
+    public override void SetValue(Delegate? predicate)
+    {
+        _value = predicate?.DynamicInvoke();
     }
 }

@@ -19,7 +19,8 @@ public class ExactParameterMatcherTests
     public void NonNullMatch_IsMatch_ReturnsTrue()
     {
         var value = new object();
-        var matcher = new ExactParameterMatcher(value);
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => value);
         
         var matches = matcher.IsMatch(value);
 
@@ -29,7 +30,8 @@ public class ExactParameterMatcherTests
     [Fact]
     public void NonNullMisMatch_IsMatch_ReturnsFalse()
     {
-        var matcher = new ExactParameterMatcher(new object());
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => new object());
 
         var matches = matcher.IsMatch(new object());
 
@@ -39,7 +41,8 @@ public class ExactParameterMatcherTests
     [Fact]
     public void IntMatch_IsMatch_ReturnsTrue()
     {
-        var matcher = new ExactParameterMatcher(10);
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => 10);
 
         var matches = matcher.IsMatch(10);
 
@@ -49,7 +52,8 @@ public class ExactParameterMatcherTests
     [Fact]
     public void IntMisMatch_IsMatch_ReturnsFalse()
     {
-        var matcher = new ExactParameterMatcher(10);
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => 10);
 
         var matches = matcher.IsMatch(20);
 
@@ -59,7 +63,8 @@ public class ExactParameterMatcherTests
     [Fact]
     public void StringMatch_IsMatch_ReturnsTrue()
     {
-        var matcher = new ExactParameterMatcher("Homer");
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => "Homer");
 
         var matches = matcher.IsMatch("Homer");
 
@@ -69,8 +74,9 @@ public class ExactParameterMatcherTests
     [Fact]
     public void StringMisMatch_IsMatch_ReturnsFalse()
     {
-        var matcher = new ExactParameterMatcher("Homer");
-
+        var matcher = new ExactParameterMatcher();
+        matcher.SetValue(() => "Homer");
+        
         var matches = matcher.IsMatch("Marge");
 
         matches.ShouldBeFalse();

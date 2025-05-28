@@ -84,6 +84,8 @@ Explore [Non-abstract Dependencies](Readme.NonAbstractClassDependencies.md)
 
 Explore [Return Series](Readme.ReturnSeries.md)
 
+Explore [Extensions](Readme.Extensions.md)
+
 ## Useful
 
 1. GitHub for project: https://github.com/hypersolutions/rockhopper/

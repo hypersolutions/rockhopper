@@ -1,17 +1,21 @@
 namespace RockHopper.Mocking.Parameters;
 
 [AttributeUsage(AttributeTargets.Method)]
-internal class ParameterMatcherAttribute : Attribute
+public sealed class ParameterMatcherAttribute : Attribute
 {
-    private static readonly Type _parameterMatcherType = typeof(ParameterMatcher);
+    private readonly Type _parameterMatcherType;
+    private static readonly Type _parameterMatcherBaseType = typeof(ParameterMatcher);
     
-    internal ParameterMatcherAttribute(Type type)
+    public ParameterMatcherAttribute(Type type)
     {
-        if (!_parameterMatcherType.IsAssignableFrom(type))
+        if (!_parameterMatcherBaseType.IsAssignableFrom(type))
             throw new ArgumentException($"Type {type} is not derived from ParameterMatcher.");
 
-        ParameterMatcherType = type;
+        _parameterMatcherType = type;
     }
 
-    internal Type ParameterMatcherType { get; }
+    internal ParameterMatcher Create()
+    {
+        return (ParameterMatcher)Activator.CreateInstance(_parameterMatcherType)!;
+    }
 }

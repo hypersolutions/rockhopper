@@ -41,8 +41,11 @@ public abstract class SetupInfo
 
         foreach (var outAndRefParam in outAndRefParams)
         {
+            if (outAndRefParam.Matcher is not ExactParameterMatcher exactParameterMatcher)
+                throw new NotSupportedException("Out and ref parameters do not support non-exact matching pattern.");
+            
             var index = Array.IndexOf(parameters, outAndRefParam);
-            args[index] = outAndRefParam.Matcher.Value;
+            args[index] = exactParameterMatcher.GetValue();
         }
 
         return returnValue;

@@ -14,7 +14,8 @@ public class RegexParameterMatcherTests
     [InlineData("123456789")]
     public void InvalidPatterMatch_IsMatch_ReturnsFalse(string? text)
     {
-        var matcher = new RegexParameterMatcher(() => "^[0-9]{8}$");
+        var matcher = new RegexParameterMatcher();
+        matcher.SetValue(() => "^[0-9]{8}$");
 
         var matches = matcher.IsMatch(text);
         
@@ -24,8 +25,9 @@ public class RegexParameterMatcherTests
     [Fact]
     public void ValidPatterMatch_IsMatch_ReturnsTrue()
     {
-        var matcher = new RegexParameterMatcher(() => "^[0-9]{8}$");
-
+        var matcher = new RegexParameterMatcher();
+        matcher.SetValue(() => "^[0-9]{8}$");
+        
         var matches = matcher.IsMatch("12345678");
         
         matches.ShouldBeTrue();

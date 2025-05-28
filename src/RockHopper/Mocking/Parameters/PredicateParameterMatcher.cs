@@ -4,13 +4,8 @@ namespace RockHopper.Mocking.Parameters;
 
 internal class PredicateParameterMatcher : ParameterMatcher
 {
-    private readonly Delegate _predicate;
+    private Delegate _predicate = () => {};
 
-    internal PredicateParameterMatcher(Delegate predicate)
-    {
-        _predicate = (Delegate)predicate.DynamicInvoke()!;
-    }
-    
     public override bool IsMatch(object? actual)
     {
         try
@@ -19,7 +14,13 @@ internal class PredicateParameterMatcher : ParameterMatcher
         }
         catch (Exception error)
         {
-            throw new MockException("Unable to invoke the predicate inside the PredicateParameterMatcher.", error);
+            throw new MockException(
+                $"Unable to invoke the predicate inside the {nameof(PredicateParameterMatcher)}.", error);
         }
+    }
+    
+    public override void SetValue(Delegate? predicate)
+    {
+        _predicate = (Delegate)predicate?.DynamicInvoke()!;
     }
 }
