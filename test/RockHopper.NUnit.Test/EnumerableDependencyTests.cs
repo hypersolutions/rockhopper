@@ -29,7 +29,7 @@ public class EnumerableDependencyTests
         step1.Function(f => f.Process("HEAD")).Returns("head");
         var step2 = new Mock<IProcessStep>();
         step2.Function(f => f.Process("head")).Returns("<head/>");
-        List<IProcessStep> stepList = [step1.Object, step2.Object];
+        List<IProcessStep> stepList = [step1.Value, step2.Value];
         processSteps.Function(s => s.GetEnumerator()).Returns(stepList.GetEnumerator());
 
         var result = textToTag.Process("HEAD");

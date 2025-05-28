@@ -30,7 +30,7 @@ public sealed class Mock<T> : Mock where T : class
         var mockType = typeof(T);
         var interceptor = new MockInterceptor(_setupInfoList);
         var proxyGenerator = new ProxyGenerator();
-        Object = mockType.IsInterface
+        Value = mockType.IsInterface
             ? proxyGenerator.CreateInterfaceProxyWithoutTarget<T>(interceptor)
             : proxyGenerator.CreateClassProxy<T>(interceptor);
     }
@@ -38,7 +38,7 @@ public sealed class Mock<T> : Mock where T : class
     /// <summary>
     /// Gets the mock type instance.
     /// </summary>
-    public T Object { get; }
+    public T Value { get; }
     
     /// <summary>
     /// Sets up the behaviour on a method.
@@ -112,7 +112,7 @@ public sealed class Mock<T> : Mock where T : class
         return new SetupCall(setupInfo);
     }
     
-    internal override object GetInstance() => Object;
+    internal override object GetInstance() => Value;
     
     internal override void VerifyAll()
     {

@@ -129,7 +129,7 @@ public class TestSubjectTests
         var textFormatterService = TestSubject.Create<TextFormatterService>(options);
         
         var textLogger = textFormatterService.GetMock<TextLogger>();
-        textFormatterService.Logger.ShouldBe(textLogger.Object);
+        textFormatterService.Logger.ShouldBe(textLogger.Value);
     }
 
     [Fact]
