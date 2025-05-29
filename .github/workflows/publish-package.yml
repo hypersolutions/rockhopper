@@ -59,4 +59,4 @@ jobs:
         shell: bash
         run: |
           package_path=${{ env.PUBLISH_DIR }}/RockHopper.${{ steps.package-project.outputs.package_version }}.nupkg
-          nuget push $package_path -ApiKey ${{ secrets.NUGET_API_KEY }} -SkipDuplicate
+          nuget push $package_path -source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_API_KEY }} -SkipDuplicate
