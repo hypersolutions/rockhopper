@@ -38,10 +38,14 @@ jobs:
       #  shell: bash
       #  run: dotnet restore
 #
-      #- name: Build Project
-      #  shell: bash
-      #  run: dotnet build --configuration Release --no-restore
+      - name: Build Project (net8.0)
+        shell: bash
+        run: dotnet build -p:TargetFramework=net8.0 --configuration Release
 
+      - name: Build Project (net9.0)
+        shell: bash
+        run: dotnet build -p:TargetFramework=net9.0 --configuration Release
+        
       - name: Package Project
         shell: bash
         run: |
