@@ -41,6 +41,5 @@ jobs:
         shell: bash
         run: |
           tag=${{ github.ref }}
-          version="${tag##*/v}"
-          echo "$version"          
-          # dotnet pack -p:PackageVersion= --configuration Release
+          version="${tag##*/v}"        
+          dotnet pack -p:PackageVersion=$version --configuration Release --no-build --no-restore
