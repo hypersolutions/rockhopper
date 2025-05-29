@@ -4,7 +4,7 @@ Provides a simple way to build a test subject with its mock dependencies. Backed
 this framework supports both constructor and property dependencies.
 
 The mock framework supports strict mocking only. There is no support for loose mocks. This means that you _have_ to provide 
-a matching mock setup for any calls made to mocks. This is **by design** to enforce deliberate enforcement of good test practices.
+a matching mock setup for any calls made to mocks. This is **by design** for deliberate enforcement of good test practices.
 
 ## Status
 
