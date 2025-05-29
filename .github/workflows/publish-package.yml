@@ -59,6 +59,8 @@ jobs:
         shell: bash
         run: |
           echo "Package version is"
-          echo ${{ steps.package-project.outputs.package_version }}
+          # echo ${{ steps.package-project.outputs.package_version }}
+          package_path=${{ env.PUBLISH_DIR }}/RockHopper.${{ steps.package-project.outputs.package_version }}.nupkg
+          echo $package_path
           # '/home/runner/work/rockhopper/rockhopper/src/RockHopper/bin/Release/RockHopper.0.1.0.nupkg'
           # nuget push -ApiKey ${{ secrets.NUGET_API_KEY }} -help
