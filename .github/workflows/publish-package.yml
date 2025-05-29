@@ -41,5 +41,5 @@ jobs:
         shell: bash
         run: |
           ver=${{ github.ref }}
-          echo "${ver//refs//tags//v/}"
+          echo "${ver\/refs\/tags\/v/}"
           # dotnet pack -p:PackageVersion= --configuration Release
