@@ -40,6 +40,6 @@ jobs:
       - name: Package Project
         shell: bash
         run: |
-          $ver=${{ github.ref }}
-          echo $ver
-          #dotnet pack -p:PackageVersion= --configuration Release
+          ver=${{ github.ref }}
+          echo ver
+          # dotnet pack -p:PackageVersion= --configuration Release
