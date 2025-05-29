@@ -10,6 +10,8 @@ jobs:
     name: Package & Publish NuGet Package
     runs-on: ubuntu-22.04
     environment: nuget
+    env:
+      PUBLISH_DIR: ${{ github.workspace }}/rockhopper/out
 
     steps:
       - name: Checkout Repository
@@ -44,14 +46,19 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Package Project
+        id: package-project
         shell: bash
         run: |
           tag=${{ github.ref }}
-          version="${tag##*/v}"   
+          version="${tag##*/v}"
+          echo "package_version=$version" >> $GITHUB_OUTPUT
           cd src/RockHopper
-          dotnet pack -p:PackageVersion=$version --configuration Release
+          dotnet pack -p:PackageVersion=$version --p:PublishDir=${{ env.PUBLISH_DIR }} --configuration Release
           
       - name: Publish Package
         shell: bash
         run: |
-          nuget push -ApiKey ${{ secrets.NUGET_API_KEY }} -help
+          echo "Package version is"
+          echo ${{ steps.package-project.outputs.package_version }}
+          # '/home/runner/work/rockhopper/rockhopper/src/RockHopper/bin/Release/RockHopper.0.1.0.nupkg'
+          # nuget push -ApiKey ${{ secrets.NUGET_API_KEY }} -help
