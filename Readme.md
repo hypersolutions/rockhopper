@@ -37,7 +37,7 @@ public sealed class CalculatorService
 
     public int AddNumbers(int x, int y)
     {
-        return AddNumberSeries(x, y);
+        return _calculator.Add(x, y);
     }
 }
 ```
