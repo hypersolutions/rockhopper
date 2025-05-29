@@ -53,7 +53,7 @@ jobs:
           version="${tag##*/v}"
           echo "package_version=$version" >> $GITHUB_OUTPUT
           cd src/RockHopper
-          dotnet pack -p:PackageVersion=$version --p:PublishDir=${{ env.PUBLISH_DIR }} --configuration Release
+          dotnet pack -p:PackageVersion=$version --output=${{ env.PUBLISH_DIR }} --configuration Release
           
       - name: Publish Package
         shell: bash
