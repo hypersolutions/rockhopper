@@ -14,10 +14,6 @@ jobs:
       PUBLISH_DIR: ${{ github.workspace }}/rockhopper/out
 
     steps:
-      - name: Check for Main Branch
-        if: github.event.base_ref == 'refs/heads/main'
-        run: exit -1
-        
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
