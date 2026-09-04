@@ -12,6 +12,8 @@ jobs:
     environment: nuget
     env:
       PUBLISH_DIR: ${{ github.workspace }}/rockhopper/out
+    permissions:
+      id-token: write  
 
     steps:
       - name: Checkout Repository
