@@ -63,9 +63,12 @@ jobs:
           echo "package_version=$version" >> $GITHUB_OUTPUT
           cd src/RockHopper
           dotnet pack -p:PackageVersion=$version --output=${{ env.PUBLISH_DIR }} --configuration Release
-          
+
+      - name: NuGet Login
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      
       - name: Publish Package
-        shell: bash
-        run: |
-          package_path=${{ env.PUBLISH_DIR }}/RockHopper.${{ steps.package-project.outputs.package_version }}.nupkg
-          nuget push $package_path -source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_API_KEY }} -SkipDuplicate
+        run: dotnet nuget push ${{ env.PUBLISH_DIR }}/RockHopper.${{ steps.package-project.outputs.package_version }}.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
