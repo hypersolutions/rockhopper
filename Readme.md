@@ -85,6 +85,17 @@ Explore [Return Series](Readme.ReturnSeries.md)
 
 Explore [Extensions](Readme.Extensions.md)
 
+## Publishing
+
+This repository uses NuGet trusted publising where it gets an OIDC token by authenticating with NuGet from thew workflow
+to publish packages when a tag is pushed on the _main_ branch.
+
+Things to note:
+
+- The trusted publisher is setup in NuGet
+- The _environment_ **must** match the one defined in GitHub
+- The GitHub has a secret called _NUGET_USER_ which matches the username in NuGet
+
 ## Useful
 
 1. GitHub for project: https://github.com/hypersolutions/rockhopper/
