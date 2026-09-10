@@ -161,6 +161,28 @@ public class TestSubjectTests
         currencyService.ShouldNotBeNull();
     }
     
+    [Fact]
+    public void InvalidMockIndex_GetMock_ThrowsException()
+    {
+        var textFormatterService = TestSubject.Create<AltTextFormatterService>();
+
+        var exception = Should.Throw<TestException>(
+            () => textFormatterService.GetMockAt<ITextFormater>(MockIndexTypes.Third));
+        
+        exception.Message.ShouldBe("The index 2 is out of range for the number of mocks 2.");
+    }
+    
+    [Fact]
+    public void CtorHasSameType_GetMock_ReturnsDifferentMockInstanceForEach()
+    {
+        var textFormatterService = TestSubject.Create<AltTextFormatterService>();
+        
+        var formater1 = textFormatterService.GetMockAt<ITextFormater>(MockIndexTypes.First);
+        var formater2 = textFormatterService.GetMockAt<ITextFormater>(MockIndexTypes.Second);
+        
+        formater1.ShouldNotBe(formater2);
+    }
+    
     private class SingleParamConstructorSelector : IConstructorSelector
     {
         public ConstructorInfo GetConstructor<TSubject>(params Type[] parameterTypes)
