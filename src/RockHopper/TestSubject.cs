@@ -43,6 +43,7 @@ public static class TestSubject
     /// Find a mock dependency injected into the subject instance.
     /// </summary>
     /// <typeparam name="TMock">Mock type</typeparam>
+    /// <param name="testSubject">Test subject instance</param>
     /// <returns>Mock instance if found</returns>
     /// <exception cref="TestException">Unable to find the mock type</exception>
     public static Mock<TMock> GetMock<TMock>(this object testSubject) where TMock : class
@@ -51,6 +52,32 @@ public static class TestSubject
         var mock = testSubjectInfo.Mocks.FirstOrDefault(m => m.GetInstance() is TMock) 
                    ?? throw new TestException($"Unable to find a mock for {typeof(TMock)}.");
         return (Mock<TMock>)mock;
+    }
+
+    /// <summary>
+    /// Find a specific instance of the same type of mock dependency injected into the subject instance.
+    /// </summary>
+    /// <typeparam name="TMock">Mock type</typeparam>
+    /// <param name="testSubject">Test subject instance</param>
+    /// <param name="index">Index of mock type to resolve</param>
+    /// <returns>Mock instance if found</returns>
+    /// <exception cref="TestException">Unable to find the mock type or length/index invalid</exception>
+    public static Mock<TMock> GetMockAt<TMock>(this object testSubject, MockIndexTypes index) where TMock : class
+    {
+        var testSubjectInfo = GetTestSubjectInfo(testSubject);
+        var mocks = testSubjectInfo.Mocks.Where(m => m.GetInstance() is TMock).ToArray();
+
+        if (mocks.Length == 0)
+        {
+            throw new TestException($"Unable to find a mock for {typeof(TMock)}.");
+        }
+
+        if ((int)index >= mocks.Length)
+        {
+            throw new TestException($"The index {(int)index} is out of range for the number of mocks {mocks.Length}.");
+        }
+        
+        return (Mock<TMock>)mocks[(int)index];
     }
     
     /// <summary>
